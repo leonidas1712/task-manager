@@ -6,6 +6,7 @@ import  Categories from './features/Categories';
 import Sidebar from './features/sidebar/Sidebar';
 import { Container } from 'react-bootstrap';
 import { sidebarWidth } from './Constants';
+import { Outlet } from 'react-router-dom';
 
 
 
@@ -14,7 +15,7 @@ function App() {
     <div className="App">
       <Sidebar/>
       <Container style={{marginLeft: sidebarWidth}}>
-      Hello
+        <Outlet />
       </Container>
     </div>
   );

@@ -5,15 +5,21 @@ import App from './App';
 import { store } from './app/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter,Routes, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import Category from "./features/Category";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <App />
+        <Routes>
+          <Route path="/" element={<App/>}>
+            <Route path="cat1" element={<Category name="cat1"/>}/>
+            <Route path="cat2" element={<Category name="cat2"/>}/>
+          </Route>
+        </Routes>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,
