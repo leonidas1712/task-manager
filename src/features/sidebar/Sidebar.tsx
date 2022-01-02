@@ -22,12 +22,14 @@ function Sidebar() {
                 <Nav 
                  variant="pills" 
                  defaultActiveKey="cat1" 
-                 className="flex-column" 
-                 onSelect={(key)=> { if (key != null) {console.log(key); navigate(key)} }}
+                 className="flex-column px-2" 
+                 onSelect={(key)=> { if (key != null) {console.log(key); navigate("categories/" + key)} }}
                  >
-
+                     <h3 className="text-center mt-2">Task Manager</h3>
+                     <div className="mt-3"></div>
+                    <CategoryNav name="Inbox" route="inbox"></CategoryNav>
+                    <hr className="mt-0"></hr>
                     <CategoryNav name="Cat 1" route="cat1"/>
-
                     <Nav.Item>
                         <Nav.Link eventKey="cat2" className="text-white">Cat 2</Nav.Link>
                     </Nav.Item>
