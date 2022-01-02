@@ -1,40 +1,86 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { ListGroup, Nav, Navbar } from "react-bootstrap";
 import { Link, useNavigate} from "react-router-dom";
 import { sidebarWidth } from "../../Constants";
 import "./Sidebar.css";
 
-function CategoryNav(props: {name: string; route: string}) {
+interface CategoryData {
+    name:string;
+    route:string;
+}
+
+function getCategoryData(): CategoryData[] {
+    return [
+        {
+            name: "Inbox",
+            route:"1"
+        },
+
+        {
+            name: "Cat1",
+            route:"2"
+        },
+
+        {
+            name: "Cat2",
+            route:"3"
+        }
+    ]
+}
+
+function CategoryNav(props: {name: string; route: string, setActive:React.Dispatch<React.SetStateAction<string>> }) {
     return (
-        <Nav.Item> 
+        <Nav.Item onClick={() => props.setActive(props.route)}> 
             <Nav.Link eventKey={props.route} className="text-white">
-                {/* <Link to={props.name}>{props.name}</Link> */}
                 {props.name}
             </Nav.Link>
         </Nav.Item>
+
     )
+}
+
+function datumToCategoryNav(datum: CategoryData, setActive:React.Dispatch<React.SetStateAction<string>>) {
+    return <CategoryNav key={datum.route} name={datum.name} route={datum.route} setActive={setActive}/>
 }
 
 function Sidebar() {
     const navigate = useNavigate();
+    const [active, setActive] = useState<string>("inbox");
+    const [data, setData] = useState<CategoryData[]>([]);
+    
+    // every refresh it navigates to the active URL
+    // TODO: change navigation logic to be through updating active category ID in redux store
+    useEffect(() => {
+        const data = getCategoryData();
+        setData(data);
+        navigate("categories/" + active);
+    }, [active])
+
+    // const onSelect = (key: string | null) => {
+    //     if (key == null) {
+    //         console.log("Key was null");
+    //     } else {
+    //         console.log(key);
+    //         navigate("categories/" + key);
+    //         //setActive(key);
+    //     }
+    // };
+
     return (
         <div className="sidebar" style={{width: sidebarWidth}}> 
                 <Nav 
                  variant="pills" 
-                 defaultActiveKey="cat1" 
+                 defaultActiveKey="inbox" 
                  className="flex-column px-2" 
-                 onSelect={(key)=> { if (key != null) {console.log(key); navigate("categories/" + key)} }}
                  >
                      <h3 className="text-center mt-2">Task Manager</h3>
                      <div className="mt-3"></div>
-                    <CategoryNav name="Inbox" route="inbox"></CategoryNav>
-                    <hr className="mt-0"></hr>
-                    <CategoryNav name="Cat 1" route="cat1"/>
-                    <Nav.Item>
-                        <Nav.Link eventKey="cat2" className="text-white">Cat 2</Nav.Link>
-                    </Nav.Item>
 
-                    {/* <Nav.Item> <Link to="cat1">Hello</Link></Nav.Item> */}
+                    {data.length === 0 ? "Loading" : datumToCategoryNav(data[0], setActive)}
+
+                    <hr className="mt-0"></hr>
+
+                    {data.slice(1).map((datum) => datumToCategoryNav(datum, setActive)) }
                 </Nav>
         </div>
     )

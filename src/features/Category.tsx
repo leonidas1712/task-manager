@@ -8,7 +8,7 @@ interface CategoryProps {
 function Category(props:{}) {
     const params = useParams();
     return (
-        <h1>{params.categoryId}</h1>
+        <h1>Category: {params.categoryId}</h1>
     )
 }
 
