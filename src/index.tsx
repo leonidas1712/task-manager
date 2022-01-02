@@ -22,6 +22,7 @@ ReactDOM.render(
         <Routes>
           <Route path="/" element={<App/>}>
             <Route path="categories">
+              <Route index element={<h2>Please select a category</h2>}></Route>
               <Route path=":categoryId" element={<Category/>} />
             </Route>
           </Route>

@@ -45,7 +45,7 @@ function datumToCategoryNav(datum: CategoryData, setActive:React.Dispatch<React.
 
 function Sidebar() {
     const navigate = useNavigate();
-    const [active, setActive] = useState<string>("inbox");
+    const [active, setActive] = useState<string>("");
     const [data, setData] = useState<CategoryData[]>([]);
     
     // every refresh it navigates to the active URL
@@ -70,7 +70,7 @@ function Sidebar() {
         <div className="sidebar" style={{width: sidebarWidth}}> 
                 <Nav 
                  variant="pills" 
-                 defaultActiveKey="inbox" 
+                //  defaultActiveKey="inbox" 
                  className="flex-column px-2" 
                  >
                      <h3 className="text-center mt-2">Task Manager</h3>
