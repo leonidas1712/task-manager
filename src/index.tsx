@@ -10,14 +10,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Category from "./features/Category";
 
+function Inbox() {
+  return (
+    <h1>Inbox</h1>
+  )
+}
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<App/>}>
-            <Route path="cat1" element={<Category name="cat1"/>}/>
-            <Route path="cat2" element={<Category name="cat2"/>}/>
+            <Route path="categories">
+              <Route path=":categoryId" element={<Category/>} />
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>

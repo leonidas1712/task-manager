@@ -1,12 +1,14 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 
 interface CategoryProps {
-    name: string
+   
 }
 
-function Category(props:CategoryProps) {
+function Category(props:{}) {
+    const params = useParams();
     return (
-        <h1>{props.name}</h1>
+        <h1>{params.categoryId}</h1>
     )
 }
 
