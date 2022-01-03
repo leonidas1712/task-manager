@@ -14,7 +14,9 @@ const categoriesAdapter = createEntityAdapter<Category>({
 
 });
 
-const url = "http://localhost:3001/categories";
+const { REACT_APP_API_URL:API_URL } = process.env;
+
+const url = API_URL + "categories";
 function delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
