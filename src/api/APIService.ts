@@ -6,15 +6,18 @@ import axios from 'axios';
 const { REACT_APP_API_URL:API_URL } = process.env;
 const CATEGORIES = API_URL + "categories";
 
+// to test loading/spinners
 function delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+// GET categories/
 async function getCategories(): Promise<Category[]> {
     const res = await axios.get<Category[]>(CATEGORIES);
     return res.data;
 }
 
+// POST categories/, body: { name: string }
 async function addCategory(name: string): Promise<Category> {
     const res = await axios.post<Category>(CATEGORIES, { name });
     return res.data;
