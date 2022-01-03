@@ -8,6 +8,8 @@ import * as Yup from 'yup';
 import { addCategory } from '../../api/APIService';
 import { addNewCategory, selectAllCategories } from './categoriesSlice';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { isValidCategory } from './Validation';
+
 
 
 
@@ -33,9 +35,6 @@ function AddCategory() {
     //TODO: move the validation functions into a new file so can be re-used for rename category
     // TODO: find a way to re-use modal logic
 
-    const isValidCategory = (name:string) => {
-        return !(categories.map((cat) => cat.name).includes(name));
-    }
     
     const validation = Yup.object({
         name: Yup.string().required("Category name can't be blank")
@@ -45,7 +44,7 @@ function AddCategory() {
                     return false;
                 }
 
-                return isValidCategory(val);
+                return isValidCategory(val, categories);
             })
     });
 
