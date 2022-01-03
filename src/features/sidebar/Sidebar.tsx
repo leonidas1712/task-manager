@@ -30,12 +30,15 @@ function getCategoryData(): CategoryData[] {
 
 function CategoryNav(props: {name: string; route: string, setActive:React.Dispatch<React.SetStateAction<string>> }) {
     return (
-        <Nav.Item onClick={() => props.setActive(props.route)}> 
-            <Nav.Link eventKey={props.route} className="text-white">
-                {props.name}
-            </Nav.Link>
-        </Nav.Item>
+        <div className="d-inline-flex align-items-center justify-content-between">
+            <Nav.Item onClick={() => props.setActive(props.route)} style={{width:"100%"}} > 
+                <Nav.Link eventKey={props.route} className="text-white">
+                    {props.name}
+                </Nav.Link>
+                
+            </Nav.Item>  
 
+        </div>
     )
 }
 

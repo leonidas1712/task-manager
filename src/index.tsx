@@ -5,7 +5,7 @@ import App from './App';
 import { store } from './app/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter,Routes, Route } from "react-router-dom";
+import { BrowserRouter,Routes, Route, Navigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Category from "./features/Category";
@@ -19,14 +19,18 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
+
         <Routes>
           <Route path="/" element={<App/>}>
             <Route path="categories">
               <Route index element={<h2>Please select a category</h2>}></Route>
               <Route path=":categoryId" element={<Category/>} />
             </Route>
+
+            <Route path="*" element= {<Navigate to= "/categories"/>}/>
           </Route>
         </Routes>
+
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,
