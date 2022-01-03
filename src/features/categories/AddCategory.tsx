@@ -5,7 +5,7 @@ import { PlusLg } from 'react-bootstrap-icons'
 
 function AddCategory() {
     const [show, setShow] = useState<boolean>(false);
-    // modal backdrop=true keyboard=true, closeButton=true, other btns disabled = false when modal is closable
+    // modal backdrop=true keyboard=true, closeButton=true, other closable btns disabled = false when modal is closable
     // not closable: invert above properties, backdrop="static"
     const [canClose, setCanClose] = useState<boolean>(true);
 
@@ -26,7 +26,7 @@ function AddCategory() {
             <span className="lead">Add Category</span>
         </Button>
 
-        <Modal show={show} onHide={handleClose} backdrop={canClose ? canClose : "static"} keyboard={canClose}>
+        <Modal show={show} onHide={handleClose} backdrop={canClose || 'static'} keyboard={canClose}>
             <Modal.Header closeButton={canClose}>
                 <Modal.Title>Add Category</Modal.Title>
             </Modal.Header>
@@ -34,8 +34,8 @@ function AddCategory() {
             <Modal.Body> Modal Body</Modal.Body>
 
             <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose} disabled={!canClose}>Close</Button>
-                <Button variant="primary" onClick={handleClose} disabled={!canClose}> Save Changes</Button>
+                <Button variant="secondary" onClick={handleClose} disabled={!canClose}>Cancel</Button>
+                <Button variant="primary" onClick={handleClose} disabled={!canClose}> Add category </Button>
                 <Button variant="danger" onClick={disableClose}>Disable close</Button>
             </Modal.Footer>
         </Modal>
