@@ -32,6 +32,7 @@ function AddCategory() {
     // This does not work on IE11: https://stackoverflow.com/questions/49525057/react-formik-use-submitform-outside-formik
     const id = "add-category-form";
 
+    // useFormik instead of Formik component so I can access resetForm in handleClose
     const formik = useFormik({
         initialValues: {
             name: ''
@@ -63,48 +64,26 @@ function AddCategory() {
             </Modal.Header>
 
             <Modal.Body> 
-            <Form id={id} noValidate onSubmit={handleSubmit}>
-                <Row>
-                    <Form.Group>
-                        <Form.Label>Name: </Form.Label>
-                        <Form.Control
-                            type="text"
-                            isValid={touched.name && !errors.name}
-                            isInvalid={!!errors.name}
-                            {...formik.getFieldProps("name")}
-                        />
-                        <Form.Control.Feedback>Looks good</Form.Control.Feedback>
-                        <Form.Control.Feedback type="invalid">{errors.name}</Form.Control.Feedback>
-                        {/* <Button variant="primary" type="submit" disabled={!canClose} form={id}> Add category </Button> */}
-                    </Form.Group>
-                </Row>
-            </Form>
-
-                {/* <Formik 
-                    initialValues={{
-                        name: ''
-                    }}
-                    validationSchema={validation}
-                    onSubmit={(values) => console.log("Add cat ", values)}
-                >
-                    {/* <Form>
-                        <label htmlFor="name">Category name: </label>
-                        <Field name="name" type="text"></Field>
-                        <ErrorMessage name="name" />
-                    </Form> */}
-{/* 
-                    {
-                        ({handleSubmit, handleChange, handleBlur, values, touched, isValid, errors}) => (
-                            
-                        )
-                    }
-                </Formik> */}
+                <Form id={id} noValidate onSubmit={handleSubmit}>
+                    <Row>
+                        <Form.Group>
+                            <Form.Label>Name: </Form.Label>
+                            <Form.Control
+                                type="text"
+                                isValid={touched.name && !errors.name}
+                                isInvalid={!!errors.name}
+                                {...formik.getFieldProps("name")}
+                            />
+                            <Form.Control.Feedback>Looks good</Form.Control.Feedback>
+                            <Form.Control.Feedback type="invalid">{errors.name}</Form.Control.Feedback>
+                        </Form.Group>
+                    </Row>
+                </Form>
             </Modal.Body>
 
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose} disabled={!canClose}>Cancel</Button>
                 <Button variant="primary" type="submit" disabled={!canClose} form={id}> Add category </Button>
-
                 <Button variant="danger" onClick={disableClose}>Disable close</Button>
             </Modal.Footer>
         </Modal>
