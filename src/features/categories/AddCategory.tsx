@@ -6,6 +6,9 @@ import { useFormik } from 'formik';
 
 import * as Yup from 'yup';
 import { addCategory } from '../../api/APIService';
+import { selectAllCategories } from './categoriesSlice';
+import { useAppSelector } from '../../app/hooks';
+
 
 //const { addCategory } = APIService;
 
@@ -14,6 +17,8 @@ function AddCategory() {
     // modal backdrop=true keyboard=true, closeButton=true, other closable btns disabled = false when modal is closable
     // not closable: invert above properties, backdrop="static"
     const [canClose, setCanClose] = useState<boolean>(true);
+    
+    const categories = useAppSelector(selectAllCategories);
 
     const handleShow = () => setShow(true);
 
@@ -22,11 +27,20 @@ function AddCategory() {
 
         setTimeout(() => setCanClose(true), 2000);
     }
+
+    const isValidCategory = (name:string) => {
+        return !(categories.map((cat) => cat.name).includes(name));
+    }
     
     const validation = Yup.object({
         name: Yup.string().required("Category name can't be blank")
-            .test('is valid category', 'Category must be valid', (val) => {
-                return val !== "Error";
+            .test('is valid category', 'Category must have a name that does not exist ', (val) => {
+                //return val !== "Error";
+                if (val === undefined) {
+                    return false;
+                }
+
+                return isValidCategory(val);
             })
     });
 

@@ -43,5 +43,5 @@ export const errorCategory = (): Category => {
 // Selectors
 export const {
     selectAll: selectAllCategories,
-    selectById: selectCategoryById
+    selectById: selectCategoryById,
 } = categoriesAdapter.getSelectors((state: RootState) => state.categories);
