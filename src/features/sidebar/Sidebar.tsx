@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { ListGroup, Nav, Navbar, Spinner } from "react-bootstrap";
+import {  Nav } from "react-bootstrap";
 import { Link, useNavigate} from "react-router-dom";
 import { useAppSelector } from "../../app/hooks";
 import { sidebarWidth } from "../../Constants";
@@ -7,6 +7,8 @@ import { selectAllCategories } from "../categories/categoriesSlice";
 import "./Sidebar.css";
 import { Category } from '../../Types';
 import CategoryList from "../categories/CategoryList";
+import AddCategory from "../categories/AddCategory";
+
 
 function CategoryNav(props: {name: string; route: string, setActive:React.Dispatch<React.SetStateAction<string>> }) {
     return (
@@ -53,6 +55,8 @@ function Sidebar() {
                     <CategoryList categories={allCategories} setActive={setActive} />
 
                 </Nav>
+            
+                <AddCategory />
         </div>
     )
 }
