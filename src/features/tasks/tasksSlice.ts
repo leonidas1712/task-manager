@@ -18,6 +18,8 @@ const tasksSlice = createSlice({
     initialState: tasksAdapter.getInitialState(),
     reducers: {},
     extraReducers: (builder) => {
-        
+        builder.addCase(getTasks.fulfilled, tasksAdapter.upsertMany)
     }
 })
+
+export default tasksSlice.reducer;

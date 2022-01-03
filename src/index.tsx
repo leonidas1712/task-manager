@@ -10,8 +10,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Category from "./features/categories/CategoryPage";
 import { getCategories } from './features/categories/categoriesSlice';
+import { getTasks } from './features/tasks/tasksSlice';
+
 
 store.dispatch(getCategories());
+store.dispatch(getTasks())
 
 function Inbox() {
   return (
