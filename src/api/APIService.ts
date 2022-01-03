@@ -1,10 +1,11 @@
-import { Category } from "../Types";
+import { Category, Task } from "../Types";
 import axios from 'axios';
 
 // Assume all inputs have been sanitised at this point
 
 const { REACT_APP_API_URL:API_URL } = process.env;
 const CATEGORIES = API_URL + "categories";
+const TASKS = API_URL + "tasks"
 
 // to test loading/spinners
 function delay(ms: number) {
@@ -23,9 +24,16 @@ async function addCategory(name: string): Promise<Category> {
     return res.data;
 }
 
+// GET tasks/
+async function getTasks(): Promise<Task[]> {
+    const res = await axios.get<Task[]>(TASKS);
+    return res.data;
+}
+
 export {
     getCategories,
-    addCategory
+    addCategory,
+    getTasks
 }
 
 
