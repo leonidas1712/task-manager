@@ -4,9 +4,12 @@ import axios from 'axios';
 import { Category } from "../../Types";
 import APIService from "../../api/APIService";
 
-
 const categoriesAdapter = createEntityAdapter<Category>({
-
+    sortComparer: (fst, snd) => {
+        // earliest created comes first
+        // JS allows date subtraction but typescript needs numeric values
+        return new Date(fst.created_at).getTime() - new Date(snd.created_at).getTime()
+    }
 });
 
 const { REACT_APP_API_URL:API_URL } = process.env;
