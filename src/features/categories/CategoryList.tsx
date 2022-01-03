@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { ListGroup, Nav, Navbar, Spinner } from "react-bootstrap";
 import { Link, useNavigate} from "react-router-dom";
-import { Category } from '../categories/categoriesSlice';
+import { Category } from "../../Types";
 
 
 type SetActive = React.Dispatch<React.SetStateAction<string>>;

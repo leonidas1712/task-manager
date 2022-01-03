@@ -5,7 +5,7 @@ import { useAppSelector } from "../../app/hooks";
 import { sidebarWidth } from "../../Constants";
 import { selectAllCategories } from "../categories/categoriesSlice";
 import "./Sidebar.css";
-import { Category } from '../categories/categoriesSlice';
+import { Category } from '../../Types';
 import CategoryList from "../categories/CategoryList";
 
 

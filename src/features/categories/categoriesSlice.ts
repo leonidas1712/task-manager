@@ -1,14 +1,7 @@
 import { createSlice, createEntityAdapter, createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 import axios from 'axios';
-
-export type Category = {
-    id: number,
-    name: string,
-    created_at: string,
-    updated_at: string
-}
-
+import { Category } from "../../Types";
 
 const categoriesAdapter = createEntityAdapter<Category>({
 
