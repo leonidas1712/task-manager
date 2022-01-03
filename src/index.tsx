@@ -8,7 +8,7 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter,Routes, Route, Navigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Category from "./features/Category";
+import Category from "./features/categories/Category";
 
 function Inbox() {
   return (

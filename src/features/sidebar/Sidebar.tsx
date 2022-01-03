@@ -57,6 +57,8 @@ function Sidebar() {
         const data = getCategoryData();
         setData(data);
         navigate("categories/" + active);
+
+
     }, [active])
 
     // const onSelect = (key: string | null) => {
