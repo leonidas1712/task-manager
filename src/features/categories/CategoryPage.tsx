@@ -5,7 +5,7 @@ interface CategoryProps {
    
 }
 
-function Category(props:{}) {
+function CategoryPage(props:{}) {
     const params = useParams();
     const [show, setShow] = useState<boolean>(false);
 
@@ -29,4 +29,4 @@ function Category(props:{}) {
     )
 }
 
-export default Category;
+export default CategoryPage;

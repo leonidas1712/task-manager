@@ -5,7 +5,8 @@ import { useAppSelector } from "../../app/hooks";
 import { sidebarWidth } from "../../Constants";
 import { selectAllCategories } from "../categories/categoriesSlice";
 import "./Sidebar.css";
-
+import { Category } from '../categories/categoriesSlice';
+import CategoryList from "../categories/CategoryList";
 
 
 
@@ -47,28 +48,25 @@ function CategoryNav(props: {name: string; route: string, setActive:React.Dispat
     )
 }
 
-function datumToCategoryNav(datum: CategoryData, setActive:React.Dispatch<React.SetStateAction<string>>) {
-    return <CategoryNav key={datum.route} name={datum.name} route={datum.route} setActive={setActive}/>
+function datumToCategoryNav(datum: Category, setActive:React.Dispatch<React.SetStateAction<string>>) {
+    return <CategoryNav key={datum.id} name={datum.name} route={datum.id+""} setActive={setActive}/>
 }
+
+// function datumToCategoryNav(datum: Category, setActive:React.Dispatch<React.SetStateAction<string>>) {
+//     return <CategoryNav key={datum.id} name={datum.name} route={datum.id} setActive={setActive}/>
+// }
 
 function Sidebar() {
     const navigate = useNavigate();
     const [active, setActive] = useState<string>("");
-    const [data, setData] = useState<CategoryData[]>([]);
 
     const allCategories = useAppSelector(selectAllCategories);
 
-    const Spin = <Spinner animation="border" role="status">
-    <span className="visually-hidden">Loading...</span>
-  </Spinner>;
-    
     // every refresh it navigates to the active URL
     // TODO: change navigation logic to be through updating active category ID in redux store
     useEffect(() => {
         const data = getCategoryData();
-        setData(data);
         navigate("categories/" + active);
-
 
     }, [active])
 
@@ -92,14 +90,13 @@ function Sidebar() {
                      <h3 className="text-center mt-2">Task Manager</h3>
                      <div className="mt-3"></div>
 
-                    {data.length === 0 ? "Loading" : datumToCategoryNav(data[0], setActive)}
+                    {/* {data.length === 0 ? "Loading" : datumToCategoryNav(data[0], setActive)} */}
+                    <CategoryList categories={allCategories} setActive={setActive} />
 
-                    <hr className="mt-0"></hr>
-
-                    {data.slice(1).map((datum) => datumToCategoryNav(datum, setActive)) }
+                    {/* {data.slice(1).map((datum) => datumToCategoryNav(datum, setActive)) } */}
                 </Nav>
 
-                {allCategories.length == 0 ? Spin : allCategories.toString()}
+                {/* {allCategories.length == 0 ? Spin : allCategories.toString()} */}
         </div>
     )
 }

@@ -2,7 +2,7 @@ import { createSlice, createEntityAdapter, createAsyncThunk } from "@reduxjs/too
 import { RootState } from "../../app/store";
 import axios from 'axios';
 
-type Category = {
+export type Category = {
     id: number,
     name: string,
     created_at: string,
@@ -21,7 +21,7 @@ function delay(ms: number) {
 
 
 export const getCategories  = createAsyncThunk('categories/getCategories', async() => {
-    const res = await delay(2000).then(() => axios.get<Category[]>(url));
+    const res = await delay(400).then(() => axios.get<Category[]>(url));
     return res.data;
 });
 
