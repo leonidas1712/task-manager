@@ -3,16 +3,17 @@ import { RootState } from "../../app/store";
 import axios from 'axios';
 import { Category } from "../../Types";
 import { getCategories as getCategoriesFromAPI, addCategory } from "../../api/APIService";
+import { sortComparer } from "../../Constants";
 
 const categoriesAdapter = createEntityAdapter<Category>({
-    sortComparer: (fst, snd) => {
-        // earliest created comes first
-        // JS allows date subtraction but typescript needs numeric values
-        return new Date(fst.created_at).getTime() - new Date(snd.created_at).getTime()
-    }
-});
+    // sortComparer: (fst, snd) => {
+    //     // earliest created comes first
+    //     // JS allows date subtraction but typescript needs numeric values
+    //     return new Date(fst.created_at).getTime() - new Date(snd.created_at).getTime()
+    // }
 
-const { REACT_APP_API_URL:API_URL } = process.env;
+    sortComparer
+});
 
 export const getCategories  = createAsyncThunk('categories/getCategories', async() => {
     return getCategoriesFromAPI();
