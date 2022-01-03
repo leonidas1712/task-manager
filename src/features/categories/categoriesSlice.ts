@@ -1,4 +1,5 @@
 import { createSlice, createEntityAdapter, createAsyncThunk } from "@reduxjs/toolkit";
+import { RootState } from "../../app/store";
 import axios from 'axios';
 
 type Category = {
@@ -14,8 +15,13 @@ const categoriesAdapter = createEntityAdapter<Category>({
 });
 
 const url = "http://localhost:3001/categories";
+function delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+
 export const getCategories  = createAsyncThunk('categories/getCategories', async() => {
-    const res = await axios.get<Category[]>(url);
+    const res = await delay(2000).then(() => axios.get<Category[]>(url));
     return res.data;
 });
 
@@ -31,3 +37,8 @@ const categoriesSlice = createSlice({
 })
 
 export default categoriesSlice.reducer;
+
+// Selectors
+export const {
+    selectAll: selectAllCategories
+} = categoriesAdapter.getSelectors((state: RootState) => state.categories);

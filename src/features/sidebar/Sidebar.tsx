@@ -1,8 +1,13 @@
 import React, {useState, useEffect} from "react";
-import { ListGroup, Nav, Navbar } from "react-bootstrap";
+import { ListGroup, Nav, Navbar, Spinner } from "react-bootstrap";
 import { Link, useNavigate} from "react-router-dom";
+import { useAppSelector } from "../../app/hooks";
 import { sidebarWidth } from "../../Constants";
+import { selectAllCategories } from "../categories/categoriesSlice";
 import "./Sidebar.css";
+
+
+
 
 interface CategoryData {
     name:string;
@@ -50,6 +55,12 @@ function Sidebar() {
     const navigate = useNavigate();
     const [active, setActive] = useState<string>("");
     const [data, setData] = useState<CategoryData[]>([]);
+
+    const allCategories = useAppSelector(selectAllCategories);
+
+    const Spin = <Spinner animation="border" role="status">
+    <span className="visually-hidden">Loading...</span>
+  </Spinner>;
     
     // every refresh it navigates to the active URL
     // TODO: change navigation logic to be through updating active category ID in redux store
@@ -87,6 +98,8 @@ function Sidebar() {
 
                     {data.slice(1).map((datum) => datumToCategoryNav(datum, setActive)) }
                 </Nav>
+
+                {allCategories.length == 0 ? Spin : allCategories.toString()}
         </div>
     )
 }
