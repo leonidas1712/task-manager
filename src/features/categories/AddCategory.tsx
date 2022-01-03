@@ -4,11 +4,13 @@ import { Button, Form, Modal, Row } from 'react-bootstrap';
 import { PlusLg } from 'react-bootstrap-icons'
 import { useFormik } from 'formik';
 
-import * as Yup from 'yup';
+//import * as Yup from 'yup';
+import useYup from './Validation';
+
 import { addCategory } from '../../api/APIService';
 import { addNewCategory, selectAllCategories } from './categoriesSlice';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { isValidCategory } from './Validation';
+import { isNewCategory } from './Validation';
 
 
 
@@ -34,18 +36,22 @@ function AddCategory() {
 
     //TODO: move the validation functions into a new file so can be re-used for rename category
     // TODO: find a way to re-use modal logic
-
     
-    const validation = Yup.object({
-        name: Yup.string().required("Category name can't be blank")
-            .test('is valid category', 'Category must have a name that does not exist ', (val) => {
-                //return val !== "Error";
-                if (val === undefined) {
-                    return false;
-                }
+    // working
+    // const validation = Yup.object({
+    //     name: Yup.string().required("Category name can't be blank")
+    //         .test('is valid category', 'Category must have a name that does not exist ', (val) => {
+    //             //return val !== "Error";
+    //             if (val === undefined) {
+    //                 return false;
+    //             }
 
-                return isValidCategory(val, categories);
-            })
+    //             return isNewCategory(val, categories);
+    //         })
+    // });
+    const yup:any = useYup();
+    const validation = yup.object({
+        name: yup.string().required("Category name can't be blank").isValidCategory()
     });
 
     // I can have a submit button outside the form by setting button form prop to id, and form id to id
