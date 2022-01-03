@@ -38,7 +38,17 @@ const categoriesSlice = createSlice({
 
 export default categoriesSlice.reducer;
 
+export const errorCategory = (): Category => {
+    return {
+        id: -1,
+        name: "Unknown category",
+        created_at: "",
+        updated_at: ""
+    }
+}
+
 // Selectors
 export const {
-    selectAll: selectAllCategories
+    selectAll: selectAllCategories,
+    selectById: selectCategoryById
 } = categoriesAdapter.getSelectors((state: RootState) => state.categories);
