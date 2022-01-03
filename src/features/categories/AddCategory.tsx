@@ -1,10 +1,13 @@
 import { findAllByDisplayValue } from '@testing-library/react';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button, Form, Modal, Row } from 'react-bootstrap';
 import { PlusLg } from 'react-bootstrap-icons'
-//import { Formik, Field, Form, ErrorMessage } from 'formik';
-import { Formik, useFormik } from 'formik';
+import { useFormik } from 'formik';
+
 import * as Yup from 'yup';
+import { addCategory } from '../../api/APIService';
+
+//const { addCategory } = APIService;
 
 function AddCategory() {
     const [show, setShow] = useState<boolean>(false);
@@ -12,7 +15,6 @@ function AddCategory() {
     // not closable: invert above properties, backdrop="static"
     const [canClose, setCanClose] = useState<boolean>(true);
 
-    
     const handleShow = () => setShow(true);
 
     const disableClose = () => {

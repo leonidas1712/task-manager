@@ -2,7 +2,7 @@ import { createSlice, createEntityAdapter, createAsyncThunk } from "@reduxjs/too
 import { RootState } from "../../app/store";
 import axios from 'axios';
 import { Category } from "../../Types";
-import APIService from "../../api/APIService";
+import { getCategories as getCategoriesFromAPI } from "../../api/APIService";
 
 const categoriesAdapter = createEntityAdapter<Category>({
     sortComparer: (fst, snd) => {
@@ -15,7 +15,7 @@ const categoriesAdapter = createEntityAdapter<Category>({
 const { REACT_APP_API_URL:API_URL } = process.env;
 
 export const getCategories  = createAsyncThunk('categories/getCategories', async() => {
-    return APIService.getCategories();
+    return getCategoriesFromAPI();
 });
 
 const categoriesSlice = createSlice({
