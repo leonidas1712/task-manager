@@ -6,8 +6,9 @@ import { useFormik } from 'formik';
 
 import * as Yup from 'yup';
 import { addCategory } from '../../api/APIService';
-import { selectAllCategories } from './categoriesSlice';
-import { useAppSelector } from '../../app/hooks';
+import { addNewCategory, selectAllCategories } from './categoriesSlice';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+
 
 
 //const { addCategory } = APIService;
@@ -19,6 +20,7 @@ function AddCategory() {
     const [canClose, setCanClose] = useState<boolean>(true);
     
     const categories = useAppSelector(selectAllCategories);
+    const dispatch = useAppDispatch();
 
     const handleShow = () => setShow(true);
 
@@ -27,6 +29,9 @@ function AddCategory() {
 
         setTimeout(() => setCanClose(true), 2000);
     }
+
+    //TODO: move the validation functions into a new file so can be re-used for rename category
+    // TODO: find a way to re-use modal logic
 
     const isValidCategory = (name:string) => {
         return !(categories.map((cat) => cat.name).includes(name));
@@ -53,8 +58,11 @@ function AddCategory() {
         initialValues: {
             name: ''
         },
-        onSubmit: (values, {resetForm}) => {
+        onSubmit: async (values, {resetForm}) => {
             console.log(JSON.stringify(values));
+            setCanClose(false);
+            await dispatch(addNewCategory(values.name));
+            setCanClose(true);
             resetForm();
             handleClose();
         },
@@ -88,6 +96,7 @@ function AddCategory() {
                                 type="text"
                                 isValid={touched.name && !errors.name}
                                 isInvalid={!!errors.name}
+                                // this passes in: value, name, onChange, onBlur
                                 {...formik.getFieldProps("name")}
                             />
                             <Form.Control.Feedback>Looks good</Form.Control.Feedback>
@@ -100,7 +109,7 @@ function AddCategory() {
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose} disabled={!canClose}>Cancel</Button>
                 <Button variant="primary" type="submit" disabled={!canClose} form={id}> Add category </Button>
-                <Button variant="danger" onClick={disableClose}>Disable close</Button>
+                {/* <Button variant="danger" onClick={disableClose}>Disable close</Button> */}
             </Modal.Footer>
         </Modal>
         </>
