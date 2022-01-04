@@ -1,6 +1,7 @@
 //import { useAppSelector } from '../../app/hooks';
 import { Card, ToggleButton, FormCheck} from 'react-bootstrap';
 import { Task } from '../../Types';
+import Checkbox from '@mui/material/Checkbox';
 //import { errorTask, selectTaskById } from './tasksSlice';
 
 
@@ -11,9 +12,10 @@ function TaskCard({ task }:TaskCardProps) {
             <Card className= "mb-3 border border-secondary shadow-sm">
                 <Card.Body>
                     <Card.Title className="d-flex align-items-center"> 
-                        <FormCheck></FormCheck>
                         <span> {task.name} </span>
+                        <Checkbox/>
                     </Card.Title>
+                        
                     <Card.Text>{task.description || "Some desc"} </Card.Text>
                 </Card.Body>
             </Card>
