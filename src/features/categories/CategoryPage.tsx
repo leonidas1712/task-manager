@@ -21,7 +21,7 @@ function CategoryPage(props:{}) {
     // category page in charge of default msg
     const displayTasks = () => {
         if (categoryTasks.length == 0) {
-            return <div className="lead"> No tasks in this category! </div>
+            return <div className="lead"> No tasks in this category! Well done. </div>
         } 
         
         return <TasksList categoryId={id}/>
