@@ -43,6 +43,10 @@ function DueDate(props: DueDateProps) {
     );
 }
 
+function DisplayDueDate({ dueDate }: DueDateProps) {
+    return dueDate ? <DueDate dueDate={dueDate} /> : <p className="text-muted">No due date</p>;
+}
+
 // TODO: add MUI spinner in place of or next to checkbox when await dispatch
 type TaskCardProps = { task:Task }
 function TaskCard({ task }:TaskCardProps) {
@@ -76,7 +80,7 @@ function TaskCard({ task }:TaskCardProps) {
                         </Col>
 
                         <Col md={6} className="d-flex align-items-start flex-column justify-content-center">
-                            {task.due_date ? <DueDate dueDate={task.due_date} /> : <p></p>}
+                            <DisplayDueDate dueDate={task.due_date}/>
                             <Button variant="success">Edit</Button>
                         </Col>
                     </Row>
