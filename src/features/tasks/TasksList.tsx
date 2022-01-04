@@ -15,7 +15,6 @@ function TasksList(props: TaskListProps) {
 
     return (
         <div>
-            From taskslist
             { tasks.map((task) => <TaskCard key={task.id} task={task}/>) }
         </div>
     )

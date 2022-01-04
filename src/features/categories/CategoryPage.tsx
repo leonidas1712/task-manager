@@ -30,10 +30,10 @@ function CategoryPage(props:{}) {
     category = category ? category : errorCategory();
  
     return (
-        <Container>
-            <div >
-                <div className="d-flex align-items-center">
-                    <h1>Category: {category.name}</h1>
+        <div className="w-75 px-3 py-3">
+            <div>
+                <div className="d-flex align-items-center mb-2">
+                    <h2>Category: {category.name}</h2>
                     <Button variant="primary mx-3" onClick={() => setShow(true)}> Rename </Button>
                     <Button variant="danger"> Delete </Button>
                 </div>
@@ -53,7 +53,7 @@ function CategoryPage(props:{}) {
             </div>
 
             
-        </Container>
+        </div>
     )
 }
 

@@ -43,7 +43,7 @@ function Sidebar() {
     }, [active])
 
     return (
-        <div className="sidebar" style={{width: sidebarWidth}}> 
+        <div className="sidebar pt-2" style={{width: sidebarWidth}}> 
             
             <Nav 
                 variant="pills" 
