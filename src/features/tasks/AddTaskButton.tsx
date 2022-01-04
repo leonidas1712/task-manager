@@ -8,7 +8,7 @@ import DatePicker from '@mui/lab/DatePicker';
 import { TextField } from '@mui/material';
 import { TaskValidationProps, validateTaskFields } from './Validation';
 import { convertTaskFormToPostObject } from './ConvertTaskPayload';
-import { addTask } from '../../api/APIService';
+import { addTask, TaskPostArg } from './tasksSlice';
 
 // props: category id to automatically set
 type AddTaskButtonProps = {
@@ -40,13 +40,16 @@ function AddTaskButton({ categoryId }: AddTaskButtonProps) {
         },
         
         onSubmit: async (values:TaskValidationProps, {resetForm}) => {
+            setCanClose(false);
             console.log("Add task form");
             console.log("Values before: ", values);
             const postObj = convertTaskFormToPostObject(values)
             console.log("Values after", postObj);
-
-            const t = await addTask(categoryId, postObj);
-            console.log("Task returned: ", t);
+            const taskPostArg:TaskPostArg = {category_id: categoryId, ...postObj};
+            await dispatch(addTask(taskPostArg));
+            setCanClose(true);
+            handleClose();
+            console.log("Dispatch done");
         },
         validate: validateTaskFields
     });

@@ -3,8 +3,12 @@ import { RootState } from "../../app/store";
 import axios from 'axios';
 import { Task } from "../../Types";
 import { sortComparer } from "../../Constants";
-import { getTasks as getTasksFromAPI, 
-    deleteTask as deleteTaskFromAPI } from "../../api/APIService";
+import { 
+    getTasks as getTasksFromAPI, 
+    deleteTask as deleteTaskFromAPI,
+    addTask as addTaskToAPI
+} from "../../api/APIService";
+import { convertTaskFormToPostObject } from "./ConvertTaskPayload";
 
 
 const tasksAdapter = createEntityAdapter<Task>({
@@ -17,6 +21,22 @@ export const getTasks = createAsyncThunk('tasks/getTasks', async() => {
 
 export const deleteTask = createAsyncThunk('tasks/deleteTask', async(id:number) => {
     return deleteTaskFromAPI(id);
+});
+
+// TODO: find out how to re-use members of one type in another
+export type TaskPostArg = {
+    category_id:number;
+    name: string;
+    description?: string | null;
+    due_date?:string | null 
+    priority?: string | null
+}
+
+export const addTask = createAsyncThunk('tasks/addTask', async(arg: TaskPostArg) => {
+    const {category_id, ...body} = arg;
+    console.log("CategoryId", category_id);
+    console.log("Body: ", body);
+    addTaskToAPI(category_id, body);
 });
 
 const tasksSlice = createSlice({
