@@ -4,8 +4,11 @@ import axios from 'axios';
 // Assume all inputs have been sanitised at this point
 
 const { REACT_APP_API_URL:API_URL } = process.env;
-const CATEGORIES = API_URL + "categories";
-const TASKS = API_URL + "tasks"
+const CATEGORIES_NAME = "categories";
+const TASKS_NAME = "tasks";
+
+const CATEGORIES = API_URL + CATEGORIES_NAME;
+const TASKS = API_URL + TASKS_NAME;
 
 // to test loading/spinners
 function delay(ms: number) {
@@ -37,6 +40,15 @@ async function deleteTask(id: number): Promise<number> {
     return res.data.id;
 }
 
+// POST /categories/:id/tasks
+// TODO: refactor API to expose POST /tasks with body including category id
+async function addTask(category_id:number): Promise<Task> {
+    const url = `${CATEGORIES}/${category_id}/${TASKS_NAME}`;
+    console.log(url);
+    const res = await axios.post<Task>(url);
+    return res.data;
+}
+
 // object for use in POST request to add task
 export type TaskPostObject = {
     name: string;
@@ -49,7 +61,8 @@ export {
     getCategories,
     addCategory,
     getTasks,
-    deleteTask
+    deleteTask,
+    addTask
 }
 
 

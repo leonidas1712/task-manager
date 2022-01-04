@@ -59,7 +59,7 @@ function convertToDueDate(dateStr:string, timeStr:string):string | null {
             dueDate = dateTimeInputsToDate(dateStr, timeStr);
         }
 
-        dueDate = dueDate.toISOString();
+        dueDate = dueDate.toISOString(); // !important
     }
 
     return dueDate;

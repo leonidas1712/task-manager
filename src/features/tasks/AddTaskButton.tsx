@@ -6,7 +6,8 @@ import * as yup from 'yup';
 import { useFormik } from 'formik';
 import DatePicker from '@mui/lab/DatePicker';
 import { TextField } from '@mui/material';
-import { validateTaskFields } from './Validation';
+import { TaskValidationProps, validateTaskFields } from './Validation';
+import { convertTaskFormToPostObject } from './ConvertTaskPayload';
 
 // props: category id to automatically set
 type AddTaskButtonProps = {
@@ -37,9 +38,10 @@ function AddTaskButton({ categoryId }: AddTaskButtonProps) {
             time: ''
         },
         
-        onSubmit: async (values, {resetForm}) => {
+        onSubmit: async (values:TaskValidationProps, {resetForm}) => {
             console.log("Add task form");
-            console.log(values);
+            console.log("Values before: ", values);
+            console.log("Values after", convertTaskFormToPostObject(values))
         },
         validate: validateTaskFields
     });
