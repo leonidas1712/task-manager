@@ -42,10 +42,10 @@ async function deleteTask(id: number): Promise<number> {
 
 // POST /categories/:id/tasks
 // TODO: refactor API to expose POST /tasks with body including category id
-async function addTask(category_id:number): Promise<Task> {
+async function addTask(category_id:number, body: TaskPostObject): Promise<Task> {
     const url = `${CATEGORIES}/${category_id}/${TASKS_NAME}`;
     console.log(url);
-    const res = await axios.post<Task>(url);
+    const res = await axios.post<Task>(url, body);
     return res.data;
 }
 
@@ -53,7 +53,7 @@ async function addTask(category_id:number): Promise<Task> {
 export type TaskPostObject = {
     name: string;
     description?: string | null;
-    due_date?:string | null // ISO string !important TOOD: find out if TS has ISO String type
+    due_date?:string | null // ISO string !important TODO: find out if TS has ISO String type
     priority?: string | null
 }
 
