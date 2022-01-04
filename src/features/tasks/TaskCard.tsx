@@ -7,13 +7,18 @@ import { Tooltip } from '@mui/material';
 import { deleteTask } from './tasksSlice';
 import { useAppDispatch } from '../../app/hooks';
 
+type DescProps = {
+    desc: string
+}
 
+type DueDateProps = {
+    dueDate: string
+}
 
-//import { errorTask, selectTaskById } from './tasksSlice';
-function Description(props: {desc: string}) {
+function Description({ desc }: DescProps) {
     return ( 
         <Card.Text>
-            { props.desc }
+            { desc }
         </Card.Text>
     );
 };
@@ -22,7 +27,11 @@ function EmptyDescription() {
     return <Card.Text className="text-muted m-0">No description</Card.Text>
 };
 
-function DueDate(props: {dueDate: string}) {
+function DisplayDescription({ desc }:DescProps) {
+    return desc ? < Description desc={desc}/> : <EmptyDescription/>
+}
+
+function DueDate(props: DueDateProps) {
     const { dueDate } = props;
     return (
         <Card.Text>
@@ -53,7 +62,7 @@ function TaskCard({ task }:TaskCardProps) {
                             <Checkbox onClick={checkboxDelete} disabled={checkboxDisabled}/>
                         </Tooltip>
                     </Card.Title>
-                    {task.description ? <Description desc={task.description}/> : <EmptyDescription/>}
+                    <DisplayDescription desc={task.description}/>
                     {!task.due_date || <DueDate dueDate={task.due_date} /> }
                 </Card.Body>
             </Card>
