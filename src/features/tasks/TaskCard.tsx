@@ -51,11 +51,11 @@ function DisplayDueDate({ dueDate }: DueDateProps) {
 // TODO: add MUI spinner in place of or next to checkbox when await dispatch
 type TaskCardProps = { task:Task }
 function TaskCard({ task }:TaskCardProps) {
-    const [checkboxDisabled, setCheckboxDisabled] = useState<boolean>(false);
+    const [buttonsDisabled, setButtonsDisabled] = useState<boolean>(false);
     const dispatch = useAppDispatch();
 
     const checkboxDelete = async () => {
-        setCheckboxDisabled(true);
+        setButtonsDisabled(true);
         await dispatch(deleteTask(task.id));
         console.log("Task deleted")
     }
@@ -70,7 +70,7 @@ function TaskCard({ task }:TaskCardProps) {
                                 
                                 <Tooltip title="Complete task" placement="top-start">
                                     {/* Checkbox default creates extra unecc. space, set w,h to 0 to take it out */}
-                                    <Checkbox onClick={checkboxDelete} disabled={checkboxDisabled}
+                                    <Checkbox onClick={checkboxDelete} disabled={buttonsDisabled}
                                     sx={{width:0, height:0, marginRight: "0.7rem"}}
                                     />
                                 </Tooltip>
@@ -82,7 +82,7 @@ function TaskCard({ task }:TaskCardProps) {
 
                         <Col md={6} className="d-flex align-items-start flex-column justify-content-center">
                             <DisplayDueDate dueDate={task.due_date}/>
-                            <Button variant="success">Edit</Button>
+                            <Button variant="success" disabled={buttonsDisabled}>Edit</Button>
                         </Col>
                     </Row>
                 </Card.Body>

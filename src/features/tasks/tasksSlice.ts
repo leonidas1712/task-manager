@@ -36,7 +36,7 @@ export const addTask = createAsyncThunk('tasks/addTask', async(arg: TaskPostArg)
     const {category_id, ...body} = arg;
     console.log("CategoryId", category_id);
     console.log("Body: ", body);
-    addTaskToAPI(category_id, body);
+    return addTaskToAPI(category_id, body);
 });
 
 const tasksSlice = createSlice({
@@ -46,6 +46,7 @@ const tasksSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(getTasks.fulfilled, tasksAdapter.upsertMany)
         .addCase(deleteTask.fulfilled, tasksAdapter.removeOne)
+        .addCase(addTask.fulfilled, tasksAdapter.addOne)
     }
 })
 

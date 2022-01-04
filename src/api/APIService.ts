@@ -44,7 +44,6 @@ async function deleteTask(id: number): Promise<number> {
 // TODO: refactor API to expose POST /tasks with body including category id
 async function addTask(category_id:number, body: TaskPostObject): Promise<Task> {
     const url = `${CATEGORIES}/${category_id}/${TASKS_NAME}`;
-    console.log(url);
     const res = await axios.post<Task>(url, body);
     return res.data;
 }

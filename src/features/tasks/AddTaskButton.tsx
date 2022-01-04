@@ -41,15 +41,11 @@ function AddTaskButton({ categoryId }: AddTaskButtonProps) {
         
         onSubmit: async (values:TaskValidationProps, {resetForm}) => {
             setCanClose(false);
-            console.log("Add task form");
-            console.log("Values before: ", values);
             const postObj = convertTaskFormToPostObject(values)
-            console.log("Values after", postObj);
             const taskPostArg:TaskPostArg = {category_id: categoryId, ...postObj};
             await dispatch(addTask(taskPostArg));
             setCanClose(true);
             handleClose();
-            console.log("Dispatch done");
         },
         validate: validateTaskFields
     });
