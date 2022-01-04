@@ -6,6 +6,7 @@ import { selectTasksByCategory } from "../common/joinSelectors";
 import { selectAllTasks } from "../tasks/tasksSlice";
 import { errorCategory, selectCategoryById } from "./categoriesSlice";
 import TasksList from  '../tasks/TasksList';
+import AddTaskButton from "../tasks/AddTaskButton";
 
 function CategoryPage(props:{}) {
     const params = useParams();
@@ -38,8 +39,9 @@ function CategoryPage(props:{}) {
                     <Button variant="danger"> Delete </Button>
                 </div>
 
-                <hr className="mt-0"></hr>
+                <hr className="mt-0 mb-0"></hr>
 
+                <AddTaskButton categoryId={id} />
                 { displayTasks() }
                 
                 <Modal show={show} onHide={() => setShow(false)}>
