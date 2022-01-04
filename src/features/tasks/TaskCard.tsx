@@ -10,11 +10,28 @@ import { useAppDispatch } from '../../app/hooks';
 
 
 //import { errorTask, selectTaskById } from './tasksSlice';
-
-function EmptyDescription() {
-    return <p className="text-muted m-0">No description</p>
+function Description(props: {desc: string}) {
+    return ( 
+        <Card.Text>
+            { props.desc }
+        </Card.Text>
+    );
 };
 
+function EmptyDescription() {
+    return <Card.Text className="text-muted m-0">No description</Card.Text>
+};
+
+function DueDate(props: {dueDate: string}) {
+    const { dueDate } = props;
+    return (
+        <Card.Text>
+            { dueDate }
+        </Card.Text>
+    );
+}
+
+// TODO: add MUI spinner in place of or next to checkbox when await dispatch
 type TaskCardProps = { task:Task }
 function TaskCard({ task }:TaskCardProps) {
     const [checkboxDisabled, setCheckboxDisabled] = useState<boolean>(false);
@@ -36,7 +53,8 @@ function TaskCard({ task }:TaskCardProps) {
                             <Checkbox onClick={checkboxDelete} disabled={checkboxDisabled}/>
                         </Tooltip>
                     </Card.Title>
-                    <Card.Text>{task.description || <EmptyDescription/>} </Card.Text>
+                    {task.description ? <Description desc={task.description}/> : <EmptyDescription/>}
+                    {!task.due_date || <DueDate dueDate={task.due_date} /> }
                 </Card.Body>
             </Card>
         </div>
