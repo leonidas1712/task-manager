@@ -6,9 +6,7 @@ import * as yup from 'yup';
 import { useFormik } from 'formik';
 import DatePicker from '@mui/lab/DatePicker';
 import { TextField } from '@mui/material';
-import { format } from 'date-fns';
 
-const DATE_PICKER_FORMAT = "yyyy-MM-dd";
 
 
 // props: category id to automatically set
