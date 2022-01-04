@@ -3,7 +3,9 @@ import { RootState } from "../../app/store";
 import axios from 'axios';
 import { Task } from "../../Types";
 import { sortComparer } from "../../Constants";
-import { getTasks as getTasksFromAPI } from "../../api/APIService";
+import { getTasks as getTasksFromAPI, 
+    deleteTask as deleteTaskFromAPI } from "../../api/APIService";
+
 
 const tasksAdapter = createEntityAdapter<Task>({
     sortComparer
@@ -13,6 +15,9 @@ export const getTasks = createAsyncThunk('tasks/getTasks', async() => {
     return getTasksFromAPI();
 });
 
+export const deleteTask = createAsyncThunk('tasks/deleteTask', async(id:number) => {
+    return deleteTaskFromAPI(id);
+});
 
 const tasksSlice = createSlice({
     name: 'tasks',
@@ -20,6 +25,7 @@ const tasksSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(getTasks.fulfilled, tasksAdapter.upsertMany)
+        .addCase(deleteTask.fulfilled, tasksAdapter.removeOne)
     }
 })
 

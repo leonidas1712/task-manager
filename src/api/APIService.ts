@@ -40,7 +40,8 @@ async function deleteTask(id: number): Promise<number> {
 export {
     getCategories,
     addCategory,
-    getTasks
+    getTasks,
+    deleteTask
 }
 
 
