@@ -1,4 +1,7 @@
 import { CreatedAt } from "./Types";
+import { format } from 'date-fns';
+import React from 'react';
+
 
 export const sidebarWidth = "15rem";
 
@@ -7,4 +10,17 @@ export const sidebarWidth = "15rem";
 export const sortComparer = (fst:CreatedAt, snd:CreatedAt) => {
     return new Date(fst.created_at).getTime() - new Date(snd.created_at).getTime()
 };
+
+// convert datetime string from DB to formatted display string for use in TaskCard
+export const DueDateStr = (props: {dateStr: string}) => {
+    const FORMAT_DATE = "d MMM R";
+    const FORMAT_TIME = "h:mmbbb";
+    const dateObj = new Date(props.dateStr);
+    
+    return (
+        <>
+            due <b>{format(dateObj, FORMAT_DATE)}</b> at <b>{format(dateObj, FORMAT_TIME)}</b>
+        </>
+    );
+}
 

@@ -6,6 +6,8 @@ import Checkbox from '@mui/material/Checkbox';
 import { Tooltip } from '@mui/material';
 import { deleteTask } from './tasksSlice';
 import { useAppDispatch } from '../../app/hooks';
+import { format } from 'date-fns';
+import { DueDateStr } from '../../Constants';
 
 
 type DescProps = {
@@ -36,7 +38,7 @@ function DueDate(props: DueDateProps) {
     const { dueDate } = props;
     return (
         <Card.Text>
-            { dueDate }
+            <DueDateStr dateStr={dueDate}/>
         </Card.Text>
     );
 }
