@@ -14,7 +14,7 @@ import { getTasks } from './features/tasks/tasksSlice';
 
 
 store.dispatch(getCategories());
-store.dispatch(getTasks())
+store.dispatch(getTasks());
 
 function Inbox() {
   return (
