@@ -6,10 +6,7 @@ import * as yup from 'yup';
 import { useFormik } from 'formik';
 import DatePicker from '@mui/lab/DatePicker';
 import { TextField } from '@mui/material';
-import { format } from 'date-fns';
-
-const DATE_PICKER_FORMAT = "yyyy-MM-dd";
-
+import { validateTaskFields } from './Validation';
 
 // props: category id to automatically set
 type AddTaskButtonProps = {
@@ -25,25 +22,24 @@ function AddTaskButton({ categoryId }: AddTaskButtonProps) {
 
     const handleShow = () => setShow(true);
 
-    const validation = yup.object({
-        title: yup.string().required("Title can't be blank"),
-        description: yup.string().max(100, "Description should be shorter than 100 characters"),
-        date: yup.date().min(new Date(), "Can't use a date before today"),
-        text: yup.string()
-    });
+
+    // const validation = yup.object({
+    //     title: yup.string().required("Title can't be blank"),
+    //     description: yup.string().max(100, "Description should be shorter than 100 characters"),
+    //     date: yup.date().min(new Date(), "Can't use a date before today"),
+    // });
 
     const formik = useFormik({
         initialValues: {
             title: '',
             description: '',
             date: '',
-            text: ''
         },
         onSubmit: async (values, {resetForm}) => {
             console.log("Add task form");
             console.log(values);
         },
-        validationSchema: validation
+        validate: validateTaskFields
     });
 
     const { handleSubmit, handleChange, handleBlur, values, touched, errors, resetForm, setFieldValue } = formik;
@@ -106,47 +102,12 @@ function AddTaskButton({ categoryId }: AddTaskButtonProps) {
                             <Form.Control type="date" {...formik.getFieldProps("date")} 
                                 isValid={touched.date && !errors.date }
                                 isInvalid={!!errors.date}
+                                onKeyDown={() => false}
                             />
                             <Form.Control.Feedback></Form.Control.Feedback>
                             <Form.Control.Feedback type="invalid">{errors.date}</Form.Control.Feedback>
                         </Form.Group>
-                        {/* <Form.Group> */}
-                            {/* <Form.Label>Description: </Form.Label> */}
-                            {/* <Form.Control
-                                as={<DatePicker label="Test" renderInput={(params) => <TextField {...params} />} {...formik.getFieldProps("date")}/>}
-                                isValid={touched.description && !errors.description}
-                                isInvalid={!!errors.description}
-                                {...formik.getFieldProps("description")}
-                            > */}
-
-                            {/* DatePicker!! */}
-                            {/* DatePicker from MUI has weird behavior. onChange doesn't take event, no name attr, etc. */}
-                            {/* <DatePicker label="Pick due date" renderInput={(params) => <TextField {...params} />} 
-                                value= { values.date }
-                                onChange= {(val) =>  setFieldValue("date", val)}
-                                minDate = {new Date()}
-                                clearable
-                            /> */}
-                            
-                            {/* </Form.Control> */}
-                            {/* <Form.Control.Feedback></Form.Control.Feedback>
-                            <Form.Control.Feedback type="invalid">{errors.description}</Form.Control.Feedback> */}
-                        {/* </Form.Group> */}
-                    </Row>
-
-                    <Row>
-                        <Form.Group>
-                            <Form.Label> Test </Form.Label>
-                            <Form.Control
-                                type="text"
-                                value={values.text}
-                                name="text"
-                                onChange={handleChange}
-                            >
-
-                                
-                            </Form.Control>
-                        </Form.Group>
+                        
                     </Row>
                 </Form>
             </Modal.Body>
@@ -155,6 +116,7 @@ function AddTaskButton({ categoryId }: AddTaskButtonProps) {
                 <Button variant="secondary" onClick={handleClose} disabled={!canClose}>Cancel</Button>
                 <Button variant="primary" type="submit" disabled={!canClose} form={id}> Add task </Button>
             </Modal.Footer>
+            <pre>{JSON.stringify(values)}</pre>
         </Modal>
         </div>
     );

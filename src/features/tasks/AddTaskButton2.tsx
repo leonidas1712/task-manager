@@ -98,17 +98,26 @@ function AddTaskButton({ categoryId }: AddTaskButtonProps) {
                         </Form.Group>
                     </Row>
 
-                    <Row className="mb-3">
-                        <Form.Group>
-                            <Form.Label>Date(optional):</Form.Label>
-                            <Form.Control type="date" {...formik.getFieldProps("date")} 
-                                isValid={touched.date && !errors.date }
-                                isInvalid={!!errors.date}
-                            />
-                            <Form.Control.Feedback></Form.Control.Feedback>
-                            <Form.Control.Feedback type="invalid">{errors.date}</Form.Control.Feedback>
-                        </Form.Group>
-                        {/* <Form.Group> */}
+                 
+
+                </Form>
+            </Modal.Body>
+
+            <pre>{JSON.stringify(errors)}</pre>
+
+            <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose} disabled={!canClose}>Cancel</Button>
+                <Button variant="primary" type="submit" disabled={!canClose} form={id}> Add task </Button>
+            </Modal.Footer>
+        </Modal>
+        </div>
+    );
+}
+
+export default AddTaskButton;
+
+// DatePicker from MUI
+{/* <Form.Group> */}
                             {/* <Form.Label>Description: </Form.Label> */}
                             {/* <Form.Control
                                 as={<DatePicker label="Test" renderInput={(params) => <TextField {...params} />} {...formik.getFieldProps("date")}/>}
@@ -130,32 +139,3 @@ function AddTaskButton({ categoryId }: AddTaskButtonProps) {
                             {/* <Form.Control.Feedback></Form.Control.Feedback>
                             <Form.Control.Feedback type="invalid">{errors.description}</Form.Control.Feedback> */}
                         {/* </Form.Group> */}
-                    </Row>
-
-                    <Row>
-                        <Form.Group>
-                            <Form.Label> Test </Form.Label>
-                            <Form.Control
-                                type="text"
-                                value={values.text}
-                                name="text"
-                                onChange={handleChange}
-                            >
-
-                                
-                            </Form.Control>
-                        </Form.Group>
-                    </Row>
-                </Form>
-            </Modal.Body>
-            <pre>{JSON.stringify(errors)}</pre>
-            <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose} disabled={!canClose}>Cancel</Button>
-                <Button variant="primary" type="submit" disabled={!canClose} form={id}> Add task </Button>
-            </Modal.Footer>
-        </Modal>
-        </div>
-    );
-}
-
-export default AddTaskButton;
