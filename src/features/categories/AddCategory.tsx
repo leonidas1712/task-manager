@@ -1,4 +1,3 @@
-import { findAllByDisplayValue } from '@testing-library/react';
 import React, { useState } from 'react';
 import { Button, Form, Modal, Row } from 'react-bootstrap';
 import { PlusLg } from 'react-bootstrap-icons'
@@ -7,15 +6,8 @@ import { useFormik } from 'formik';
 //import * as Yup from 'yup';
 import useYup from './Validation';
 
-import { addCategory } from '../../api/APIService';
 import { addNewCategory, selectAllCategories } from './categoriesSlice';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { isNewCategory } from './Validation';
-
-
-
-
-//const { addCategory } = APIService;
 
 function AddCategory() {
     const [show, setShow] = useState<boolean>(false);
@@ -23,16 +15,15 @@ function AddCategory() {
     // not closable: invert above properties, backdrop="static"
     const [canClose, setCanClose] = useState<boolean>(true);
     
-    const categories = useAppSelector(selectAllCategories);
     const dispatch = useAppDispatch();
 
     const handleShow = () => setShow(true);
 
-    const disableClose = () => {
-        setCanClose(false);
+    // const disableClose = () => {
+    //     setCanClose(false);
 
-        setTimeout(() => setCanClose(true), 2000);
-    }
+    //     setTimeout(() => setCanClose(true), 2000);
+    // }
 
     //TODO: move the validation functions into a new file so can be re-used for rename category
     // TODO: find a way to re-use modal logic

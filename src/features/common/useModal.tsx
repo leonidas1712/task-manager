@@ -36,14 +36,14 @@ function useModal() {
     const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
 
-    const modal = <CustomModal show={show} canClose={canClose} handleClose={handleClose} />
+    const Modal = (props:any) => <CustomModal {...props} show={show} canClose={canClose} handleClose={handleClose} />
 
     return {
-        Modal: modal,
+        CustomModal: Modal,
         show,
         canClose,
-        handleShow,
-        handleClose
+        setShow,
+        setCanClose,
     };
 }
 
