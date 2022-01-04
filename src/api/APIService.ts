@@ -37,6 +37,14 @@ async function deleteTask(id: number): Promise<number> {
     return res.data.id;
 }
 
+// object for use in POST request to add task
+export type TaskPostObject = {
+    name: string;
+    description?: string | null;
+    due_date?:string | null // ISO string !important TOOD: find out if TS has ISO String type
+    priority?: string | null
+}
+
 export {
     getCategories,
     addCategory,

@@ -8,12 +8,12 @@ import { errorCategory, selectCategoryById } from "./categoriesSlice";
 import TasksList from  '../tasks/TasksList';
 import AddTaskButton from "../tasks/AddTaskButton";
 
+// TODO: everytime I switch categories, it should make a network request to update all tasks
+
 function CategoryPage(props:{}) {
     const params = useParams();
     const [show, setShow] = useState<boolean>(false);
-
     
-
     const id = Number(params.categoryId);
 
     const categoryTasks = useAppSelector(state => selectTasksByCategory(state, id));

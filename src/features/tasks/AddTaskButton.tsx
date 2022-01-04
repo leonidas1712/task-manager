@@ -6,7 +6,7 @@ import * as yup from 'yup';
 import { useFormik } from 'formik';
 import DatePicker from '@mui/lab/DatePicker';
 import { TextField } from '@mui/material';
-import { validateTaskFields, dateTimeInputsToDate } from './Validation';
+import { validateTaskFields } from './Validation';
 
 // props: category id to automatically set
 type AddTaskButtonProps = {
