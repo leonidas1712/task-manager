@@ -50,4 +50,5 @@ export const errorCategory = (): Category => {
 export const {
     selectAll: selectAllCategories,
     selectById: selectCategoryById,
+    selectIds: selectAllCategoryIds
 } = categoriesAdapter.getSelectors((state: RootState) => state.categories);
