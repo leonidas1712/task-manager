@@ -34,6 +34,7 @@ function DisplayDescription({ desc }:DescProps) {
     return desc ? < Description desc={desc}/> : <EmptyDescription/>
 }
 
+// TODO: Put due-date str into Edit and Add task forms
 function DueDate(props: DueDateProps) {
     const { dueDate } = props;
     return (

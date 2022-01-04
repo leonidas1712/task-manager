@@ -6,7 +6,7 @@ import * as yup from 'yup';
 import { useFormik } from 'formik';
 import DatePicker from '@mui/lab/DatePicker';
 import { TextField } from '@mui/material';
-import { validateTaskFields } from './Validation';
+import { validateTaskFields, dateTimeInputsToDate } from './Validation';
 
 // props: category id to automatically set
 type AddTaskButtonProps = {
@@ -34,7 +34,9 @@ function AddTaskButton({ categoryId }: AddTaskButtonProps) {
             title: '',
             description: '',
             date: '',
+            time: ''
         },
+        
         onSubmit: async (values, {resetForm}) => {
             console.log("Add task form");
             console.log(values);
@@ -102,12 +104,23 @@ function AddTaskButton({ categoryId }: AddTaskButtonProps) {
                             <Form.Control type="date" {...formik.getFieldProps("date")} 
                                 isValid={touched.date && !errors.date }
                                 isInvalid={!!errors.date}
-                                onKeyDown={() => false}
                             />
-                            <Form.Control.Feedback></Form.Control.Feedback>
+                            <Form.Control.Feedback>Note: incomplete dates are ignored</Form.Control.Feedback>
                             <Form.Control.Feedback type="invalid">{errors.date}</Form.Control.Feedback>
                         </Form.Group>
-                        
+                    </Row>
+
+                    <Row className="mb-3">
+                        <Form.Group>
+                            <Form.Label>Time</Form.Label>
+                            <Form.Control type="time"
+                                isValid={touched.time && !errors.time}
+                                isInvalid={!!errors.time}
+                                {...formik.getFieldProps("time")}
+                            />
+                            <Form.Control.Feedback>Note: incomplete times are ignored</Form.Control.Feedback>
+                            <Form.Control.Feedback type="invalid">{errors.time}</Form.Control.Feedback>
+                        </Form.Group>
                     </Row>
                 </Form>
             </Modal.Body>
@@ -116,7 +129,7 @@ function AddTaskButton({ categoryId }: AddTaskButtonProps) {
                 <Button variant="secondary" onClick={handleClose} disabled={!canClose}>Cancel</Button>
                 <Button variant="primary" type="submit" disabled={!canClose} form={id}> Add task </Button>
             </Modal.Footer>
-            <pre>{JSON.stringify(values)}</pre>
+            {/* <pre>{JSON.stringify(values)}</pre> */}
         </Modal>
         </div>
     );

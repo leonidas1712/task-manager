@@ -12,6 +12,7 @@ export const sortComparer = (fst:CreatedAt, snd:CreatedAt) => {
 };
 
 // convert datetime string from DB to formatted display string for use in TaskCard
+// assumes dateStr is a date ISO string e.g '2022-01-04T15:11:34.056Z'
 export const DueDateStr = (props: {dateStr: string}) => {
     const FORMAT_DATE = "d MMM R";
     const FORMAT_TIME = "h:mmbbb";
