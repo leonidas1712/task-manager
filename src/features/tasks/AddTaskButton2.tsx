@@ -150,7 +150,7 @@ function AddTaskButton({ categoryId }: AddTaskButtonProps) {
                     </Row>
                 </Form>
             </Modal.Body>
-
+            <pre>{JSON.stringify(errors)}</pre>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose} disabled={!canClose}>Cancel</Button>
                 <Button variant="primary" type="submit" disabled={!canClose} form={id}> Add task </Button>
