@@ -2,6 +2,8 @@
 import { Card, ToggleButton, FormCheck} from 'react-bootstrap';
 import { Task } from '../../Types';
 import Checkbox from '@mui/material/Checkbox';
+import { Tooltip } from '@mui/material';
+
 //import { errorTask, selectTaskById } from './tasksSlice';
 
 
@@ -13,9 +15,10 @@ function TaskCard({ task }:TaskCardProps) {
                 <Card.Body>
                     <Card.Title className="d-flex align-items-center"> 
                         <span> {task.name} </span>
-                        <Checkbox/>
+                        <Tooltip title="Complete task" placement="right-start">
+                            <Checkbox/>
+                        </Tooltip>
                     </Card.Title>
-                        
                     <Card.Text>{task.description || "Some desc"} </Card.Text>
                 </Card.Body>
             </Card>
