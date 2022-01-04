@@ -30,6 +30,13 @@ async function getTasks(): Promise<Task[]> {
     return res.data;
 }
 
+// DELETE tasks/:id
+async function deleteTask(id: number): Promise<number> {
+    const url = `${TASKS}/${id}`;
+    const res = await axios.delete<Task>(url);
+    return res.data.id;
+}
+
 export {
     getCategories,
     addCategory,

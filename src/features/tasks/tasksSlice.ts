@@ -13,6 +13,7 @@ export const getTasks = createAsyncThunk('tasks/getTasks', async() => {
     return getTasksFromAPI();
 });
 
+
 const tasksSlice = createSlice({
     name: 'tasks',
     initialState: tasksAdapter.getInitialState(),
