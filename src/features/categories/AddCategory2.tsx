@@ -3,7 +3,6 @@ import { Button, Form, Modal, Row } from 'react-bootstrap';
 import { PlusLg } from 'react-bootstrap-icons'
 import { useFormik } from 'formik';
 
-//import * as Yup from 'yup';
 import useYup from './Validation';
 
 import { addNewCategory, selectAllCategories } from './categoriesSlice';
@@ -49,8 +48,6 @@ function useForm(show:any, setShow:any, canClose:any, setCanClose:any, formId: s
 
     const handleClose = () => { resetForm(); setShow(false); }
 
-    // abstract out by letting useForm take a function (formik) => returns the form stuff,
-    // so useForm just has to pass the formik object in
     const form = () => (<Form id={id} noValidate onSubmit={handleSubmit}>
         <Row>
             <Form.Group>

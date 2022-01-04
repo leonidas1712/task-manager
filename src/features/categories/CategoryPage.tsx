@@ -1,9 +1,11 @@
 import React, {useState} from "react";
-import { Container, Button, Row, Modal, } from "react-bootstrap";
+import { Container, Button, Row, Col, Modal, } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useAppSelector } from "../../app/hooks";
+import { selectTasksByCategory } from "../common/joinSelectors";
 import { selectAllTasks } from "../tasks/tasksSlice";
 import { errorCategory, selectCategoryById } from "./categoriesSlice";
+
 
 
 interface CategoryProps {
@@ -18,10 +20,7 @@ function CategoryPage(props:{}) {
 
     const id = Number(params.categoryId);
 
-    const categoryTasks = useAppSelector(state => 
-        selectAllTasks(state)
-        .filter((task) => task.category_id == id)
-    );
+    const categoryTasks = useAppSelector(state => selectTasksByCategory(state, id));
 
     const displayTasks = () => {
         if (categoryTasks.length == 0) {
@@ -64,6 +63,8 @@ function CategoryPage(props:{}) {
                     <Modal.Body> Body text</Modal.Body>
                 </Modal>
             </div>
+
+            
         </Container>
     )
 }
