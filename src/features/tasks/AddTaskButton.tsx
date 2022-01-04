@@ -26,7 +26,8 @@ function AddTaskButton({ categoryId }: AddTaskButtonProps) {
 
     const formik = useFormik({
         initialValues: {
-            title: ''
+            title: '',
+            description: '',
         },
         onSubmit: async (values, {resetForm}) => {
             console.log("Add task form");
@@ -57,7 +58,7 @@ function AddTaskButton({ categoryId }: AddTaskButtonProps) {
 
             <Modal.Body> 
                 <Form id={id} noValidate onSubmit={handleSubmit}>
-                    <Row>
+                    <Row className="mb-3">
                         <Form.Group>
                             <Form.Label>Title: </Form.Label>
                             <Form.Control
@@ -69,6 +70,23 @@ function AddTaskButton({ categoryId }: AddTaskButtonProps) {
                             />
                             <Form.Control.Feedback>Looks good</Form.Control.Feedback>
                             <Form.Control.Feedback type="invalid">{errors.title}</Form.Control.Feedback>
+                        </Form.Group>
+                    </Row>
+
+                    <Row className="mb-3">
+                        <Form.Group>
+                            <Form.Label>Description: </Form.Label>
+                            <Form.Control
+                                as="textarea"
+                                placeholder="This is optional"
+                                isValid={touched.description && !errors.description}
+                                isInvalid={!!errors.description}
+                                {...formik.getFieldProps("description")}
+                            >
+                            
+                            </Form.Control>
+                            <Form.Control.Feedback></Form.Control.Feedback>
+                            <Form.Control.Feedback type="invalid">{errors.description}</Form.Control.Feedback>
                         </Form.Group>
                     </Row>
                 </Form>
