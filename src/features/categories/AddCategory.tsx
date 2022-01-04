@@ -50,6 +50,7 @@ function AddCategory() {
     const id = "add-category-form";
 
     // useFormik instead of Formik component so I can access resetForm in handleClose
+    // TODO: after add category, navigate to the new category and set the active nav somehow
     const formik = useFormik({
         initialValues: {
             name: ''

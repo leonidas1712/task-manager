@@ -11,6 +11,9 @@ import { useAppDispatch } from '../../app/hooks';
 
 //import { errorTask, selectTaskById } from './tasksSlice';
 
+function EmptyDescription() {
+    return <p className="text-muted m-0">No description</p>
+};
 
 type TaskCardProps = { task:Task }
 function TaskCard({ task }:TaskCardProps) {
@@ -33,7 +36,7 @@ function TaskCard({ task }:TaskCardProps) {
                             <Checkbox onClick={checkboxDelete} disabled={checkboxDisabled}/>
                         </Tooltip>
                     </Card.Title>
-                    <Card.Text>{task.description || "Some desc"} </Card.Text>
+                    <Card.Text>{task.description || <EmptyDescription/>} </Card.Text>
                 </Card.Body>
             </Card>
         </div>

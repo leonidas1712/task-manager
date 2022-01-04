@@ -45,6 +45,8 @@ interface CategoryListProps {
     categories: Category[];
     setActive:SetActive;
 }
+
+// TODO: use category status in category slice to show 'No categories' if there are none
 function CategoryList(props: CategoryListProps) {
    const { categories, setActive } = props; 
 
