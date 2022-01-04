@@ -1,6 +1,6 @@
 //import { useAppSelector } from '../../app/hooks';
 import { useState } from 'react';
-import { Card, ToggleButton, FormCheck} from 'react-bootstrap';
+import { Card, Row, Col } from 'react-bootstrap';
 import { Task } from '../../Types';
 import Checkbox from '@mui/material/Checkbox';
 import { Tooltip } from '@mui/material';
@@ -54,16 +54,28 @@ function TaskCard({ task }:TaskCardProps) {
 
     return (
         <div>
-            <Card className= "mb-3 border border-secondary shadow-sm">
+            <Card className= "mb-3 p-1 border border-secondary shadow-sm">
                 <Card.Body>
-                    <Card.Title className="d-flex align-items-center"> 
-                        <span> {task.name} </span>
-                        <Tooltip title="Complete task" placement="right-start">
-                            <Checkbox onClick={checkboxDelete} disabled={checkboxDisabled}/>
-                        </Tooltip>
-                    </Card.Title>
-                    <DisplayDescription desc={task.description}/>
-                    {!task.due_date || <DueDate dueDate={task.due_date} /> }
+                    <Row>
+                        <Col md={6}>
+                            <Card.Title className="d-flex align-items-center"> 
+                                
+                                <Tooltip title="Complete task" placement="right-start">
+                                    {/* Checkbox default creates extra unecc. space, set w,h to 0 to take it out */}
+                                    <Checkbox onClick={checkboxDelete} disabled={checkboxDisabled}
+                                    sx={{width:0, height:0, marginRight: "0.7rem"}}
+                                    />
+                                </Tooltip>
+                                <span> {task.name} </span>
+                            </Card.Title>
+
+                            <DisplayDescription desc={task.description}/>
+                        </Col>
+
+                        <Col md={6}>
+                            {!task.due_date || <DueDate dueDate={task.due_date} /> }
+                        </Col>
+                    </Row>
                 </Card.Body>
             </Card>
         </div>
