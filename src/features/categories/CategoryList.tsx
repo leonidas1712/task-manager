@@ -3,6 +3,7 @@ import { ListGroup, Nav, Navbar, Spinner } from "react-bootstrap";
 import { Category } from "../../Types";
 
 
+
 type SetActive = React.Dispatch<React.SetStateAction<string>>;
 
 interface CategoryNavProps {

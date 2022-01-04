@@ -44,19 +44,20 @@ function Sidebar() {
 
     return (
         <div className="sidebar" style={{width: sidebarWidth}}> 
-                <Nav 
-                 variant="pills" 
-                //  defaultActiveKey="inbox" 
-                 className="flex-column px-2" 
-                 >
-                     <h3 className="text-center mt-2">Task Manager</h3>
-                     <div className="mt-3"></div>
-
-                    <CategoryList categories={allCategories} setActive={setActive} />
-
-                </Nav>
             
-                <AddCategory />
+            <Nav 
+                variant="pills" 
+            //  defaultActiveKey="inbox" 
+                className="flex-column px-2" 
+                >
+                    <h3 className="text-center mt-2">Task Manager</h3>
+                    <div className="mt-3"></div>    
+                {/* <AddCategory /> */}
+                <CategoryList categories={allCategories} setActive={setActive} />
+                
+
+            </Nav>
+            <AddCategory />
         </div>
     )
 }
