@@ -5,12 +5,7 @@ import { useAppSelector } from "../../app/hooks";
 import { selectTasksByCategory } from "../common/joinSelectors";
 import { selectAllTasks } from "../tasks/tasksSlice";
 import { errorCategory, selectCategoryById } from "./categoriesSlice";
-
-
-
-interface CategoryProps {
-   
-}
+import TasksList from  '../tasks/TasksList';
 
 function CategoryPage(props:{}) {
     const params = useParams();
@@ -22,20 +17,13 @@ function CategoryPage(props:{}) {
 
     const categoryTasks = useAppSelector(state => selectTasksByCategory(state, id));
 
+    // category page in charge of default msg
     const displayTasks = () => {
         if (categoryTasks.length == 0) {
-            return <div> No tasks in this category! </div>
+            return <div className="lead"> No tasks in this category! </div>
         } 
         
-        return (
-            <ul>
-                { categoryTasks.map( (task) =>
-                    <li key={task.id}>
-                        {task.name} 
-                    </li>
-                ) }
-            </ul>
-        );
+        return <TasksList categoryId={id}/>
     }
 
     let category = useAppSelector((state) => selectCategoryById(state, id));

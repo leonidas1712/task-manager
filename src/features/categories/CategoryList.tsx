@@ -32,6 +32,7 @@ function Upcoming(props: {setActive:SetActive}) {
     return <CategoryNav name="Upcoming" route="upcoming" setActive={props.setActive}/>;
 }
 
+// TODO: move to common
 function StandardSpin() {
     return (
     <Spinner animation="border" role="status">

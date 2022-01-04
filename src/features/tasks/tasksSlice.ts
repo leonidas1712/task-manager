@@ -25,5 +25,20 @@ const tasksSlice = createSlice({
 export default tasksSlice.reducer;
 
 export const {
-    selectAll: selectAllTasks
+    selectAll: selectAllTasks,
+    selectById: selectTaskById,
 } = tasksAdapter.getSelectors((state:RootState) => state.tasks)
+
+export const errorTask = ():Task => {
+    return {
+        id: -1,
+        name: "Error",
+        description: "",
+        due_date: "",
+        priority: "",
+        category_id: -1,
+        created_at: "",
+        updated_at: "",
+    }
+    
+}

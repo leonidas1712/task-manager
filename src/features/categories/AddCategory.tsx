@@ -19,12 +19,6 @@ function AddCategory() {
 
     const handleShow = () => setShow(true);
 
-    // const disableClose = () => {
-    //     setCanClose(false);
-
-    //     setTimeout(() => setCanClose(true), 2000);
-    // }
-
     //TODO: move the validation functions into a new file so can be re-used for rename category
     // TODO: find a way to re-use modal logic
     
@@ -105,7 +99,6 @@ function AddCategory() {
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose} disabled={!canClose}>Cancel</Button>
                 <Button variant="primary" type="submit" disabled={!canClose} form={id}> Add category </Button>
-                {/* <Button variant="danger" onClick={disableClose}>Disable close</Button> */}
             </Modal.Footer>
         </Modal>
         </>
