@@ -1,11 +1,12 @@
 //import { useAppSelector } from '../../app/hooks';
 import { useState } from 'react';
-import { Card, Row, Col } from 'react-bootstrap';
+import { Card, Row, Col, Button } from 'react-bootstrap';
 import { Task } from '../../Types';
 import Checkbox from '@mui/material/Checkbox';
 import { Tooltip } from '@mui/material';
 import { deleteTask } from './tasksSlice';
 import { useAppDispatch } from '../../app/hooks';
+
 
 type DescProps = {
     desc: string
@@ -60,7 +61,7 @@ function TaskCard({ task }:TaskCardProps) {
                         <Col md={6}>
                             <Card.Title className="d-flex align-items-center"> 
                                 
-                                <Tooltip title="Complete task" placement="right-start">
+                                <Tooltip title="Complete task" placement="top-start">
                                     {/* Checkbox default creates extra unecc. space, set w,h to 0 to take it out */}
                                     <Checkbox onClick={checkboxDelete} disabled={checkboxDisabled}
                                     sx={{width:0, height:0, marginRight: "0.7rem"}}
@@ -72,8 +73,9 @@ function TaskCard({ task }:TaskCardProps) {
                             <DisplayDescription desc={task.description}/>
                         </Col>
 
-                        <Col md={6}>
-                            {!task.due_date || <DueDate dueDate={task.due_date} /> }
+                        <Col md={6} className="d-flex align-items-start flex-column justify-content-center">
+                            {task.due_date ? <DueDate dueDate={task.due_date} /> : <p></p>}
+                            <Button variant="success">Edit</Button>
                         </Col>
                     </Row>
                 </Card.Body>
