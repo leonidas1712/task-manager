@@ -3,6 +3,7 @@ import { Modal, Button } from 'react-bootstrap'
 import { useAppDispatch } from '../../app/hooks';
 import { Category } from '../../Types';
 import { deleteCategory } from './categoriesSlice';
+import { useNavigate } from 'react-router-dom';
 
 
 type DeleteCategoryProps = {
@@ -16,12 +17,15 @@ function DeleteCategory({ category }: DeleteCategoryProps) {
 
     const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
+    const navigate = useNavigate();
 
+    // TODO: navigate to first category or /categories if there are none left
     const handleDelete = async () => {
         setCanClose(false);
         await dispatch(deleteCategory({ categoryId: category.id }))
         setCanClose(true);
         handleClose();
+        navigate('/categories');
     }
 
     return (

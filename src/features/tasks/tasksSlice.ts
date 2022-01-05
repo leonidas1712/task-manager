@@ -14,6 +14,8 @@ import {
 import { convertTaskFormToPostObject } from "./ConvertTaskPayload";
 import { EntityState, EntityId } from "@reduxjs/toolkit";
 import { Category } from "../../Types";
+import { deleteCategory } from "../categories/categoriesSlice";
+
 
 const tasksAdapter = createEntityAdapter<Task>({
     sortComparer
@@ -50,6 +52,10 @@ export const addTask = createAsyncThunk('tasks/addTask', async(arg: TaskPostArg)
     return addTaskToAPI(category_id, body);
 });
 
+// For local selectors that operate on state.tasks only.
+// Selectors at the bottom of the file operate on root state instead, to use in useAppSelector
+const { selectAll:selectAllTasksLocal } = tasksAdapter.getSelectors();
+
 const tasksSlice = createSlice({
     name: 'tasks',
     initialState: tasksAdapter.getInitialState(),
@@ -67,6 +73,18 @@ const tasksSlice = createSlice({
             };
 
             tasksAdapter.updateOne(state, update);
+        })
+        .addCase(deleteCategory.fulfilled, (state, action) => {
+            console.log(action);
+            const { id: idDeleted } = action.payload;
+            const tasks = selectAllTasksLocal(state);
+
+            const tasksToDelete = tasks
+            .filter((task) => task.category_id == idDeleted)
+            .map((task) => task.id);
+            console.log(tasksToDelete);
+
+            tasksAdapter.removeMany(state, tasksToDelete);
         });
     }
 })

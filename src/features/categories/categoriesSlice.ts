@@ -79,6 +79,7 @@ export const errorCategory = (): Category => {
     }
 }
 
+
 // Selectors //
 export const {
     selectAll: selectAllCategories,
