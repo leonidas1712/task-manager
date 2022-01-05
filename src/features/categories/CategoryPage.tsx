@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Container, Button, Row, Col, Modal, } from "react-bootstrap";
+import { Container, Button, Row, Col, Modal, DropdownButton, Dropdown} from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useAppSelector } from "../../app/hooks";
 import { selectTasksByCategory } from "../common/joinSelectors";
@@ -33,13 +33,15 @@ function CategoryPage(props:{}) {
     category = category ? category : errorCategory();
  
     return (
-        // <div className="w-75 px-3 py-3">
             <div>
                 <div className="d-flex align-items-center mb-2">
                     <h2>{category.name}</h2>
-                    {/* <Button variant="primary mx-3" onClick={() => setShow(true)}> Rename </Button> */}
                     <RenameCategory category={category}/>    
                     <DeleteCategory category={category} />
+
+                    <DropdownButton style={{marginLeft:"auto"}} variant="info" title="Sort by" onSelect={(val) => console.log(val)}>
+                        <Dropdown.Item eventKey="alpha">A-Z</Dropdown.Item>
+                    </DropdownButton>
                 </div>
 
                 <hr className="mt-0 mb-0"></hr>
@@ -48,9 +50,6 @@ function CategoryPage(props:{}) {
                 { displayTasks() }
             
             </div>
-
-            
-        // </div>
     )
 }
 

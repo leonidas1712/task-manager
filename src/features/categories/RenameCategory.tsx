@@ -51,7 +51,7 @@ function RenameCategory({ category }: { category: Category }) {
     return (
         <>
 
-        <Button variant="primary mx-3" onClick={handleShow}> Rename </Button>
+        <Button variant="primary mx-4" onClick={handleShow}> Rename </Button>
 
         <Modal show={show} onHide={handleClose} backdrop={canClose || 'static'} keyboard={canClose}>
             <Modal.Header closeButton={canClose}>
