@@ -4,23 +4,23 @@ import { Task } from '../../Types';
 type TaskSorter = (a: Task, b:Task) => number
 
 const sortByAlphaAsc:TaskSorter = (a,b) => {
-    return 1;
+    return a.name.localeCompare(b.name);
 }
 
 const sortByAlphaDesc:TaskSorter = (a,b) => {
-    return 1;
+    return -1 * sortByAlphaAsc(a, b);
 }
 
 const sortByNewestFirst:TaskSorter = (a,b) => {
-    return 1;
+    return 3;
 }
 
 const sortByOldestFirst:TaskSorter = (a,b) => {
-    return 1;
+    return 4;
 }
 
 const sortByDueDate:TaskSorter = (a,b) => {
-    return 1;
+    return 5;
 }
 
 const SORT_OPTIONS: Record<string, TaskSorter> = {
@@ -32,6 +32,10 @@ const SORT_OPTIONS: Record<string, TaskSorter> = {
 }
 
 export const OPTION_NAMES = Object.keys(SORT_OPTIONS);
+
+export const sortTasks = (tasks: Task[], sortBy: string):Task[] => {
+    return [];
+} 
 
 let arr:Task[] = [];
 // title, due date, default

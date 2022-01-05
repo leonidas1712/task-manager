@@ -9,7 +9,7 @@ import TasksList from  '../tasks/TasksList';
 import AddTaskButton from "../tasks/AddTaskButton";
 import RenameCategory from "./RenameCategory";
 import DeleteCategory from "./DeleteCategory";
-import { OPTION_NAMES } from "../tasks/taskSorter";
+import { OPTION_NAMES, sortTasks } from "../tasks/taskSorter";
 
 // TODO: everytime I switch categories, it should make a network request to update all tasks
 
