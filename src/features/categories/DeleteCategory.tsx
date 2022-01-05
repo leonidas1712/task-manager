@@ -33,7 +33,7 @@ function DeleteCategory({ category }: DeleteCategoryProps) {
 
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose} disabled={!canClose}>Cancel</Button>
-                <Button variant="danger" type="submit" disabled={!canClose}> Delete category </Button>
+                <Button variant="danger" type="submit" disabled={!canClose} onClick={handleDelete}> Delete category </Button>
             </Modal.Footer>
         </Modal>
         

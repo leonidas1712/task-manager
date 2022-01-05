@@ -79,6 +79,15 @@ async function editCategory(params: EditCategoryParams, body: CategoryPostObject
     return res.data;
 }
 
+// DELETE /categories/:id
+// return category that was deleted
+async function deleteCategory(params: EditCategoryParams):Promise<Category> {
+    const { categoryId } = params;
+    const url = `${CATEGORIES}/${categoryId}`;
+    const res = await axios.delete<Category>(url);
+    return res.data;
+}
+
 
 
 export {
