@@ -32,10 +32,17 @@ export type TaskPostArg = {
     priority?: string | null
 }
 
+export type EditTaskPostArg = {
+    category_id:number;
+    task_id:number;
+    name: string;
+    description?: string | null;
+    due_date?:string | null 
+    priority?: string | null
+}
+
 export const addTask = createAsyncThunk('tasks/addTask', async(arg: TaskPostArg) => {
     const {category_id, ...body} = arg;
-    console.log("CategoryId", category_id);
-    console.log("Body: ", body);
     return addTaskToAPI(category_id, body);
 });
 

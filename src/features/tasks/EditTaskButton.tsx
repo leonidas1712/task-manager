@@ -1,29 +1,25 @@
 import React, { useState } from 'react';
-import { Button, Modal, Form, Row, FloatingLabel } from 'react-bootstrap';
-import { PlusLg } from 'react-bootstrap-icons';
-import { useAppDispatch } from '../../app/hooks';
-import * as yup from 'yup';
-import { useFormik } from 'formik';
-import DatePicker from '@mui/lab/DatePicker';
-import { TextField } from '@mui/material';
-import { TaskValidationProps, validateTaskFields } from './Validation';
+import { Button, Row, Modal, Form } from 'react-bootstrap';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { selectTaskById, EditTaskPostArg } from './tasksSlice';
+import { TaskValidationProps, validateTaskFields } from './Validation'
 import { convertTaskFormToPostObject } from './ConvertTaskPayload';
-import { addTask, TaskPostArg } from './tasksSlice';
+import { useFormik } from 'formik';
 
-// props: category id to automatically set
-type AddTaskButtonProps = {
-    categoryId: number
+type EditTaskProps = {
+    disabled: boolean;
+    taskId: number
 }
-function AddTaskButton({ categoryId }: AddTaskButtonProps) {
-    const [show, setShow] = useState<boolean>(false);
-    const [canClose, setCanClose] = useState<boolean>(true);
-    const id = "add-task-form"
-    
-    
+// use a selector to get task by id instead of relying on task from two levels down (might be stale)
+function EditTaskButton(props: EditTaskProps) {
+    const { disabled, taskId } = props;
+    const task = useAppSelector(state => selectTaskById(state, taskId));
     const dispatch = useAppDispatch();
 
+    const [show, setShow] = useState<boolean>(false);
+    const [canClose, setCanClose] = useState<boolean>(true);
+    const id = "edit-task-form";
     const handleShow = () => setShow(true);
-
 
     const formik = useFormik({
         initialValues: {
@@ -35,34 +31,29 @@ function AddTaskButton({ categoryId }: AddTaskButtonProps) {
         
         onSubmit: async (values:TaskValidationProps, {resetForm}) => {
             setCanClose(false);
-            const postObj = convertTaskFormToPostObject(values)
-            const taskPostArg:TaskPostArg = {category_id: categoryId, ...postObj};
-            await dispatch(addTask(taskPostArg));
+            const postObj = convertTaskFormToPostObject(values);
+            console.log(postObj);
+            //const taskPostArg:TaskPostArg = {category_id: categoryId, ...postObj};
+            //await dispatch(addTask(taskPostArg));
             setCanClose(true);
             handleClose();
         },
         validate: validateTaskFields
     });
-
     const { handleSubmit, handleChange, handleBlur, values, touched, errors, resetForm, setFieldValue } = formik;
 
     const handleClose = () => { resetForm(); setShow(false); };
 
 
+
+
     return (
-        <div>
-        <Button 
-            variant="secondary" 
-            className="mx-0 mt-2 mb-3 d-flex justify-content-center align-items-center"
-            onClick ={() => handleShow()}
-        >
-            <PlusLg size={20} style={{marginRight: "0.5rem"}}/>
-            <span style={{fontSize: "1.1rem"}}>Add Task </span>
-        </Button>
+        <>
+        <Button variant="success" disabled={disabled} onClick={handleShow}>Edit</Button>
 
         <Modal show={show} onHide={handleClose} backdrop={canClose || 'static'} keyboard={canClose}>
             <Modal.Header closeButton={canClose}>
-                <Modal.Title>Add Task</Modal.Title>
+                <Modal.Title>Edit Task</Modal.Title>
             </Modal.Header>
 
             <Modal.Body> 
@@ -128,12 +119,12 @@ function AddTaskButton({ categoryId }: AddTaskButtonProps) {
 
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose} disabled={!canClose}>Cancel</Button>
-                <Button variant="primary" type="submit" disabled={!canClose} form={id}> Add task </Button>
+                <Button variant="primary" type="submit" disabled={!canClose} form={id}> Edit task </Button>
             </Modal.Footer>
             {/* <pre>{JSON.stringify(values)}</pre> */}
         </Modal>
-        </div>
-    );
+        </>
+    )
 }
 
-export default AddTaskButton;
+export default EditTaskButton;

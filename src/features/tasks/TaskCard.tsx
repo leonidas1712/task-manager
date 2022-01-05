@@ -8,6 +8,8 @@ import { deleteTask } from './tasksSlice';
 import { useAppDispatch } from '../../app/hooks';
 import { format } from 'date-fns';
 import { DueDateStr } from '../../Constants';
+import EditTaskButton from './EditTaskButton';
+
 
 
 type DescProps = {
@@ -82,7 +84,7 @@ function TaskCard({ task }:TaskCardProps) {
 
                         <Col md={6} className="d-flex align-items-start flex-column justify-content-center">
                             <DisplayDueDate dueDate={task.due_date}/>
-                            <Button variant="success" disabled={buttonsDisabled}>Edit</Button>
+                            <EditTaskButton disabled={buttonsDisabled} taskId={task.id}/>
                         </Col>
                     </Row>
                 </Card.Body>
