@@ -16,11 +16,6 @@ import { getTasks } from './features/tasks/tasksSlice';
 store.dispatch(getCategories());
 store.dispatch(getTasks());
 
-function Inbox() {
-  return (
-    <h1>Inbox</h1>
-  )
-}
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

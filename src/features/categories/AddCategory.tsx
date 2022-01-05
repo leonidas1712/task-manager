@@ -16,7 +16,6 @@ function AddCategory() {
 
     const handleShow = () => { dispatch(getCategories()); setShow(true); };
 
-    //TODO: move the validation functions into a new file so can be re-used for rename category
     // TODO: find a way to re-use modal logic
     const validation = useCategoryYup();
     // I can have a submit button outside the form by setting button form prop to id, and form id to id

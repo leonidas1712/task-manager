@@ -10,6 +10,7 @@ import DateAdapter from '@mui/lab/AdapterDateFns';
 import { LocalizationProvider } from '@mui/lab';
 import PageWrapper from './PageWrapper';
 
+// TODO: add aria-label and other aria props to all inputs
 function App() {
   return (
     <LocalizationProvider dateAdapter={DateAdapter}>

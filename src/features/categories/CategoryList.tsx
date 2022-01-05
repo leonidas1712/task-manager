@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from "react";
 import { ListGroup, Nav, Navbar, Spinner } from "react-bootstrap";
+import { useAppSelector } from "../../app/hooks";
 import { Category } from "../../Types";
-
-
+import { Loading, selectCategoryStatus } from "./categoriesSlice";
 
 type SetActive = React.Dispatch<React.SetStateAction<string>>;
 
@@ -46,29 +46,40 @@ interface CategoryListProps {
     setActive:SetActive;
 }
 
-// TODO: use category status in category slice to show 'No categories' if there are none
 function CategoryList(props: CategoryListProps) {
    const { categories, setActive } = props; 
+   const categoryStatus = useAppSelector(selectCategoryStatus);
 
    const categoryToNav = ({ name, id }:Category) => {
        return <CategoryNav name={name} route={id+""} setActive={setActive} key={id}/>
    };
 
    const categoryList = () => {
-       if (categories.length == 0) {
-           return <StandardSpin/> 
-       } 
+       const fulfilledCase = () => {
+           return categories.length == 0 ? <p className="text-muted text-start mx-3">No categories</p> :
+               categories.map(categoryToNav);  
+       }
 
-       return categories.map(categoryToNav);
+       // pending: show spinner. fulfilled: either no categories or display as normal. error: error msg
+        switch(categoryStatus) {
+            case Loading.PENDING:
+                return <StandardSpin/>;
+            case Loading.FULFILLED:
+            case Loading.IDLE: 
+                return fulfilledCase();
+            case Loading.REJECTED:
+                return <p className="text-danger mx-3"> Error loading categories</p>                 
+        }
+    }
+
+    return (
+        <>
+            <Upcoming setActive={setActive}/>
+            <hr className="mt-0"></hr>
+            {categoryList()}
+        </>
+       ); 
    }
 
-   return (
-    <>
-        <Upcoming setActive={setActive}/>
-        <hr className="mt-0"></hr>
-        {categoryList()}
-    </>
-   );
-}
 
 export default CategoryList;

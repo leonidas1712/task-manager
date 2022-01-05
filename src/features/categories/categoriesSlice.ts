@@ -97,3 +97,6 @@ export const {
     selectById: selectCategoryById,
     selectIds: selectAllCategoryIds
 } = categoriesAdapter.getSelectors((state: RootState) => state.categories);
+
+// selector on root state for status
+export const selectCategoryStatus = (state:RootState) => state.categories.status;

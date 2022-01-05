@@ -42,11 +42,6 @@ export const validateTaskFields = ({title, description, date, time}:TaskValidati
     // return errors object
     let errors:{title?:string, description?:string, date?: string, time?:string} = {} 
 
-    // optional desc char limit. if added, show char counter in error field 
-    // if (description.length >= 100) {
-    //     errors.description = "Can't be more than 100 characters";
-    // }
-
     if (!title) {
         errors.title = "Title can't be blank";
     } 
@@ -62,8 +57,6 @@ export const validateTaskFields = ({title, description, date, time}:TaskValidati
 
     // date and time: invalid if datetime provided is in the past or right now
     if (date && time && dateTimeNotFuture(date, time)) {
-        // const dateObj = dateTimeInputsToDate(date, time);
-        // console.log("Date made: ", dateObj);
         errors.time = "Date and time must be in the future"
     }
 
