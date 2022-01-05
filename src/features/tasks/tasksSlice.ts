@@ -75,15 +75,15 @@ const tasksSlice = createSlice({
             tasksAdapter.updateOne(state, update);
         })
         .addCase(deleteCategory.fulfilled, (state, action) => {
-            console.log(action);
             const { id: idDeleted } = action.payload;
             const tasks = selectAllTasksLocal(state);
-
+            
+            // remove tasks with category id same as that of category just deleted
             const tasksToDelete = tasks
-            .filter((task) => task.category_id == idDeleted)
-            .map((task) => task.id);
-            console.log(tasksToDelete);
+                .filter((task) => task.category_id == idDeleted)
+                .map((task) => task.id);
 
+            // removeMany expects ids of tasks to remove
             tasksAdapter.removeMany(state, tasksToDelete);
         });
     }
