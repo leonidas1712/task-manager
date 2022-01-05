@@ -2,7 +2,13 @@ import { createSlice, createEntityAdapter, createAsyncThunk } from "@reduxjs/too
 import { RootState } from "../../app/store";
 import axios from 'axios';
 import { Category } from "../../Types";
-import { getCategories as getCategoriesFromAPI, addCategory } from "../../api/APIService";
+import { getCategories as getCategoriesFromAPI,
+     addCategory, 
+     EditCategoryParams, 
+     CategoryPostObject,
+     editCategory as editCategoryInAPI
+
+} from "../../api/APIService";
 import { sortComparer } from "../../Constants";
 
 const categoriesAdapter = createEntityAdapter<Category>({
@@ -21,6 +27,15 @@ export const getCategories  = createAsyncThunk('categories/getCategories', async
 
 export const addNewCategory = createAsyncThunk('categories/addNewCategory', async(name:string) => {
     return addCategory(name);
+});
+
+export type EditCategoryArg = {
+    params: EditCategoryParams,
+    body: CategoryPostObject
+}
+
+export const editCategory = createAsyncThunk('categories/editCategory', async(arg: EditCategoryArg) => {
+    return editCategoryInAPI(arg.params, arg.body);
 });
 
 const categoriesSlice = createSlice({

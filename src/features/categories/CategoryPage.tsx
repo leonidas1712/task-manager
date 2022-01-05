@@ -7,6 +7,7 @@ import { selectAllTasks } from "../tasks/tasksSlice";
 import { errorCategory, selectCategoryById } from "./categoriesSlice";
 import TasksList from  '../tasks/TasksList';
 import AddTaskButton from "../tasks/AddTaskButton";
+import RenameCategory from "./RenameCategory";
 
 // TODO: everytime I switch categories, it should make a network request to update all tasks
 
@@ -35,7 +36,8 @@ function CategoryPage(props:{}) {
             <div>
                 <div className="d-flex align-items-center mb-2">
                     <h2>Category: {category.name}</h2>
-                    <Button variant="primary mx-3" onClick={() => setShow(true)}> Rename </Button>
+                    {/* <Button variant="primary mx-3" onClick={() => setShow(true)}> Rename </Button> */}
+                    <RenameCategory category={category}/>
                     <Button variant="danger"> Delete </Button>
                 </div>
 

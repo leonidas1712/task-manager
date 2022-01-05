@@ -1,6 +1,18 @@
 import { Category, Task } from "../Types";
 import axios from 'axios';
 
+// object for use in POST request to add task
+export type TaskPostObject = {
+    name: string;
+    description?: string | null;
+    due_date?:string | null // ISO string !important TODO: find out if TS has ISO String type
+    priority?: string | null
+}
+
+export type CategoryPostObject = {
+    name: string
+}
+
 // Assume all inputs have been sanitised at this point
 // TODO: refactor all inputs to have only one arg (or none), with type: { params?:..., body?:...}
 const { REACT_APP_API_URL:API_URL } = process.env;
@@ -58,13 +70,16 @@ async function editTask(params:EditTaskParams, body: TaskPostObject): Promise<Ta
     return res.data;
 }
 
-// object for use in POST request to add task
-export type TaskPostObject = {
-    name: string;
-    description?: string | null;
-    due_date?:string | null // ISO string !important TODO: find out if TS has ISO String type
-    priority?: string | null
+// PATCH /categories/:id
+export type EditCategoryParams = { categoryId: number}
+async function editCategory(params: EditCategoryParams, body: CategoryPostObject): Promise<Category> {
+    const { categoryId } = params;
+    const url = `${CATEGORIES}/${categoryId}`;
+    const res = await axios.patch<Category>(url, body);
+    return res.data;
 }
+
+
 
 export {
     getCategories,
@@ -72,7 +87,8 @@ export {
     getTasks,
     deleteTask,
     addTask,
-    editTask
+    editTask,
+    editCategory
 }
 
 

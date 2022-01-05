@@ -34,3 +34,9 @@ export function useCategoryYup() {
         name: customYup.string().required("Category name can't be blank").isValidCategory()
     });
 }
+
+// type of supplied values from Formik form - e.g might change if category has more props to update
+// so it is different from final post object props specified by API Service
+export type CategoryUpdateBody = {
+    name: string
+}
