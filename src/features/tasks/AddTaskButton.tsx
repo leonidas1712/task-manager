@@ -106,7 +106,7 @@ function AddTaskButton({ categoryId }: AddTaskButtonProps) {
 
                     <Row className="mb-3">
                         <Form.Group>
-                            <Form.Label>Date(optional):</Form.Label>
+                            <Form.Label>Date<span className="text-muted">(optional):</span></Form.Label>
                             <Form.Control type="date" {...formik.getFieldProps("date")} 
                                 isValid={touched.date && !errors.date }
                                 isInvalid={!!errors.date}
@@ -116,9 +116,10 @@ function AddTaskButton({ categoryId }: AddTaskButtonProps) {
                         </Form.Group>
                     </Row>
 
+                    {/* Firefox has no dropdown for picking the time  */}
                     <Row className="mb-3">
                         <Form.Group>
-                            <Form.Label>Time</Form.Label>
+                            <Form.Label>Time<span className="text-muted">(e.g 08:10am)</span> </Form.Label>
                             <Form.Control type="time"
                                 isValid={touched.time && !errors.time}
                                 isInvalid={!!errors.time}
