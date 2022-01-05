@@ -10,26 +10,13 @@ import { format } from 'date-fns';
 import { DueDateStr } from '../../Constants';
 import EditTaskButton from './EditTaskButton';
 import './TaskCard.css'
-import styled from '@emotion/styled';
-
-const WithHover = styled.div`
-    & {
-        transition: all 2s;
-    }
-
-    &:hover {
-        background-color:red !important;
-    }
-`;
-
-
 
 type DescProps = {
     desc: string
 }
 
 type DueDateProps = {
-    dueDate: string
+    dueDate: string | undefined
 }
 
 function Description({ desc }: DescProps) {
@@ -44,12 +31,20 @@ function EmptyDescription() {
     return <Card.Text className="text-muted m-0">No description</Card.Text>
 };
 
+// display correct description component based on desc empty or not
 function DisplayDescription({ desc }:DescProps) {
     return desc ? < Description desc={desc}/> : <EmptyDescription/>
 }
 
+// to handle showing the due date in a card text. must do a type guard as DueDateStr expects a string
+// DueDateStr handles displaying the date string with appropriate formatting
 function DueDate(props: DueDateProps) {
     const { dueDate } = props;
+
+    if (!dueDate) {
+        return <p>Error</p>
+    }
+
     return (
         <Card.Text>
             <DueDateStr dateStr={dueDate}/>
@@ -57,6 +52,7 @@ function DueDate(props: DueDateProps) {
     );
 }
 
+// takes in a due date that might be undefined and returns the correct component to show
 function DisplayDueDate({ dueDate }: DueDateProps) {
     return dueDate ? <DueDate dueDate={dueDate} /> : <p className="text-muted">No due date</p>;
 }

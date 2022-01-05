@@ -13,7 +13,7 @@ export type Task = {
     id: number,
     name: string,
     description: string,
-    due_date: string,
+    due_date?: string,
     priority?: string,
     category_id: number,
     created_at: string,
