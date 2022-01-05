@@ -22,3 +22,15 @@ export const generate12AMDateFromDateStr = (dateStr:string):Date => {
    return dateTimeInputsToDate(dateStr, DEFAULT_TIME);
 }
 
+// input: date ISO string 
+// output: dateStr according to DATE_PICKER_FORMAT
+export const dateISOToDateStr = (dateISO:string):string => {
+    return format(new Date(dateISO), DATE_PICKER_FORMAT);
+}
+
+// input: dateISO string
+// output: timeStr according to TIME_PICKER_FORMAT
+export const dateISOToTimeStr = (dateISO:string):string => {
+  return format(new Date(dateISO), TIME_PICKER_FORMAT);
+}
+

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Button, Row, Modal, Form } from 'react-bootstrap';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { selectTaskById, EditTaskPostArg } from './tasksSlice';
+import { selectTaskById, EditTaskPostArg, errorTask } from './tasksSlice';
 import { TaskValidationProps, validateTaskFields } from './Validation'
 import { convertTaskFormToPostObject } from './ConvertTaskPayload';
 import { useFormik } from 'formik';
+import { dateISOToDateStr, dateISOToTimeStr } from './taskValidationCommon';
 
 type EditTaskProps = {
     disabled: boolean;
@@ -13,7 +14,9 @@ type EditTaskProps = {
 // use a selector to get task by id instead of relying on task from two levels down (might be stale)
 function EditTaskButton(props: EditTaskProps) {
     const { disabled, taskId } = props;
-    const task = useAppSelector(state => selectTaskById(state, taskId));
+    let optionalTask = useAppSelector(state => selectTaskById(state, taskId));
+    const task = optionalTask || errorTask();
+
     const dispatch = useAppDispatch();
 
     const [show, setShow] = useState<boolean>(false);
@@ -23,10 +26,13 @@ function EditTaskButton(props: EditTaskProps) {
 
     const formik = useFormik({
         initialValues: {
-            title: '',
-            description: '',
-            date: '',
-            time: ''
+            // task.name would never be blank
+            title: task.name,
+            // text area description should not be null. if desc is false already it will go to ''
+            description: task.description || '',
+            // if due date not present use empty fields
+            date: task.due_date ? dateISOToDateStr(task.due_date) : '',
+            time: task.due_date ? dateISOToTimeStr(task.due_date) : ''
         },
         
         onSubmit: async (values:TaskValidationProps, {resetForm}) => {
@@ -43,9 +49,6 @@ function EditTaskButton(props: EditTaskProps) {
     const { handleSubmit, handleChange, handleBlur, values, touched, errors, resetForm, setFieldValue } = formik;
 
     const handleClose = () => { resetForm(); setShow(false); };
-
-
-
 
     return (
         <>
