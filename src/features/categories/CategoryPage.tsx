@@ -9,7 +9,7 @@ import TasksList from  '../tasks/TasksList';
 import AddTaskButton from "../tasks/AddTaskButton";
 import RenameCategory from "./RenameCategory";
 import DeleteCategory from "./DeleteCategory";
-import { OPTION_NAMES, sortTasks } from "../tasks/taskSorter";
+import { OPTION_NAMES, DEFAULT_OPTION } from "../tasks/taskSorter";
 
 // TODO: everytime I switch categories, it should make a network request to update all tasks
 
@@ -22,7 +22,7 @@ function CategoryPage(props:{}) {
 
     //TODO: change to use selectCount since only used for checking length = 0
     const categoryTasks = useAppSelector(state => selectTasksByCategory(state, id));
-    const [sortOption, setSortOption] = useState(OPTION_NAMES[0] || "Error");
+    const [sortOption, setSortOption] = useState(DEFAULT_OPTION || "Error");
     
     // category page in charge of default msg
     const displayTasks = () => {
@@ -41,7 +41,7 @@ function CategoryPage(props:{}) {
 
     const optionSelectFn = (val:string | null) => {
         if (!val) {
-            setSortOption(OPTION_NAMES[0] || "Error");
+            setSortOption(DEFAULT_OPTION || "Error");
             return;
         }
 
