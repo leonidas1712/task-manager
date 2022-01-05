@@ -12,7 +12,8 @@ import {
     TaskPostObject
 } from "../../api/APIService";
 import { convertTaskFormToPostObject } from "./ConvertTaskPayload";
-
+import { EntityState, EntityId } from "@reduxjs/toolkit";
+import { Category } from "../../Types";
 
 const tasksAdapter = createEntityAdapter<Task>({
     sortComparer
@@ -58,10 +59,21 @@ const tasksSlice = createSlice({
         builder.addCase(getTasks.fulfilled, tasksAdapter.upsertMany)
         .addCase(deleteTask.fulfilled, tasksAdapter.removeOne)
         .addCase(addTask.fulfilled, tasksAdapter.addOne)
+        .addCase(editTask.fulfilled, (state, action) => {
+            const { id, ...changes } = action.payload;
+            // updateOne expects Update<Task> which is obj = { id, changes }
+            const update = {
+                id,
+                changes
+            };
+
+            tasksAdapter.updateOne(state, update);
+        });
     }
 })
 
 export default tasksSlice.reducer;
+
 
 export const {
     selectAll: selectAllTasks,

@@ -15,7 +15,7 @@ type EditTaskProps = {
 // use a selector to get task by id instead of relying on task from two levels down (might be stale)
 function EditTaskButton(props: EditTaskProps) {
     const { disabled, taskId } = props;
-    let optionalTask = useAppSelector(state => selectTaskById(state, taskId));
+    let optionalTask = useAppSelector(state => selectTaskById(state, taskId), () => true);
     const task = optionalTask || errorTask();
 
     const dispatch = useAppDispatch();
