@@ -6,7 +6,8 @@ import { getCategories as getCategoriesFromAPI,
      addCategory, 
      EditCategoryParams, 
      CategoryPostObject,
-     editCategory as editCategoryInAPI
+     editCategory as editCategoryInAPI,
+     deleteCategory as deleteCategoryFromAPI
 
 } from "../../api/APIService";
 import { sortComparer } from "../../Constants";
@@ -20,6 +21,8 @@ const categoriesAdapter = createEntityAdapter<Category>({
 
     sortComparer
 });
+
+// Async Thunks //
 
 export const getCategories  = createAsyncThunk('categories/getCategories', async() => {
     return getCategoriesFromAPI();
@@ -38,6 +41,12 @@ export const editCategory = createAsyncThunk('categories/editCategory', async(ar
     return editCategoryInAPI(arg.params, arg.body);
 });
 
+export const deleteCategory = createAsyncThunk('categories/deleteCategory', async(arg: EditCategoryParams) => {
+    return deleteCategoryFromAPI(arg);
+})
+
+// Slice and reducers //
+
 const categoriesSlice = createSlice({
     name: 'categories',
     initialState: categoriesAdapter.getInitialState(),
@@ -51,12 +60,16 @@ const categoriesSlice = createSlice({
             const { id, ...changes} = action.payload;
             const update = { id, changes };
             categoriesAdapter.updateOne(state, update);
+        })
+        .addCase(deleteCategory.fulfilled, (state, action) => {
+            categoriesAdapter.removeOne(state, action.payload.id);
         });
     }
 })
 
 export default categoriesSlice.reducer;
 
+// error category to show as a default instead of failing 
 export const errorCategory = (): Category => {
     return {
         id: -1,
@@ -66,7 +79,7 @@ export const errorCategory = (): Category => {
     }
 }
 
-// Selectors
+// Selectors //
 export const {
     selectAll: selectAllCategories,
     selectById: selectCategoryById,

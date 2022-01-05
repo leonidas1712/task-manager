@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap'
+import { useAppDispatch } from '../../app/hooks';
 import { Category } from '../../Types';
+import { deleteCategory } from './categoriesSlice';
+
 
 type DeleteCategoryProps = {
     category: Category
@@ -9,12 +12,15 @@ type DeleteCategoryProps = {
 function DeleteCategory({ category }: DeleteCategoryProps) {
     const [show, setShow] = useState<boolean>(false);
     const [canClose, setCanClose] = useState<boolean>(true);
+    const dispatch = useAppDispatch();
 
     const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
 
-    const handleDelete = () => {
-
+    const handleDelete = async () => {
+        setCanClose(false);
+        await dispatch(deleteCategory({ categoryId: category.id }))
+        setCanClose(true);
         handleClose();
     }
 

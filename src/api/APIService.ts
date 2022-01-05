@@ -14,7 +14,8 @@ export type CategoryPostObject = {
 }
 
 // Assume all inputs have been sanitised at this point
-// TODO: refactor all inputs to have only one arg (or none), with type: { params?:..., body?:...}
+// TODO: refactor all inputs to have only one arg (or none), with type: { params?:..., body?:...} 
+    // in order to match async thunks
 const { REACT_APP_API_URL:API_URL } = process.env;
 const CATEGORIES_NAME = "categories";
 const TASKS_NAME = "tasks";
@@ -81,7 +82,7 @@ async function editCategory(params: EditCategoryParams, body: CategoryPostObject
 
 // DELETE /categories/:id
 // return category that was deleted
-async function deleteCategory(params: EditCategoryParams):Promise<Category> {
+export async function deleteCategory(params: EditCategoryParams):Promise<Category> {
     const { categoryId } = params;
     const url = `${CATEGORIES}/${categoryId}`;
     const res = await axios.delete<Category>(url);
@@ -99,7 +100,3 @@ export {
     editTask,
     editCategory
 }
-
-
-
-//export default APIService();
