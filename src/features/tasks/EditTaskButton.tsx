@@ -6,6 +6,7 @@ import { TaskValidationProps, validateTaskFields } from './Validation'
 import { convertTaskFormToPostObject } from './ConvertTaskPayload';
 import { useFormik } from 'formik';
 import { dateISOToDateStr, dateISOToTimeStr } from './taskValidationCommon';
+import { editTask } from '../../api/APIService';
 
 type EditTaskProps = {
     disabled: boolean;
@@ -39,6 +40,10 @@ function EditTaskButton(props: EditTaskProps) {
             setCanClose(false);
             const postObj = convertTaskFormToPostObject(values);
             console.log(postObj);
+            const params = { categoryId: task.category_id, taskId: task.id};
+            console.log("Params: ", params);
+            //await editTask(params, postObj);
+            console.log("Edit done");
             //const taskPostArg:TaskPostArg = {category_id: categoryId, ...postObj};
             //await dispatch(addTask(taskPostArg));
             setCanClose(true);
