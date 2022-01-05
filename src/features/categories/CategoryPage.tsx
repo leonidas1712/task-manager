@@ -35,7 +35,7 @@ function CategoryPage(props:{}) {
         <div className="w-75 px-3 py-3">
             <div>
                 <div className="d-flex align-items-center mb-2">
-                    <h2>Category: {category.name}</h2>
+                    <h2>{category.name}</h2>
                     {/* <Button variant="primary mx-3" onClick={() => setShow(true)}> Rename </Button> */}
                     <RenameCategory category={category}/>
                     <Button variant="danger"> Delete </Button>

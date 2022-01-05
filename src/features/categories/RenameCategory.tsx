@@ -35,12 +35,9 @@ function RenameCategory({ category }: { category: Category }) {
             name: ''
         },
         onSubmit: async (values, {resetForm}) => {
-            console.log(JSON.stringify(values));
             setCanClose(false);
             const editArg = updateCategoryArgsOf(category, values);
-            console.log("Edit arg: ", editArg);
             await dispatch(editCategory(editArg));
-            //await dispatch(addNewCategory(values.name));
             setCanClose(true);
             resetForm();
             handleClose();
@@ -60,7 +57,7 @@ function RenameCategory({ category }: { category: Category }) {
 
         <Modal show={show} onHide={handleClose} backdrop={canClose || 'static'} keyboard={canClose}>
             <Modal.Header closeButton={canClose}>
-                <Modal.Title>Rename Category</Modal.Title>
+                <Modal.Title>Rename category: {category.name}</Modal.Title>
             </Modal.Header>
 
             <Modal.Body> 
