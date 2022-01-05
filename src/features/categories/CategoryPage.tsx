@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { Container, Button, Row, Col, Modal, DropdownButton, Dropdown} from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useAppSelector } from "../../app/hooks";
@@ -14,21 +14,23 @@ import { OPTION_NAMES, sortTasks } from "../tasks/taskSorter";
 // TODO: everytime I switch categories, it should make a network request to update all tasks
 
 function CategoryPage(props:{}) {
+
     const params = useParams();
     const [show, setShow] = useState<boolean>(false);
     
     const id = Number(params.categoryId);
 
+    //TODO: change to use selectCount since only used for checking length = 0
     const categoryTasks = useAppSelector(state => selectTasksByCategory(state, id));
     const [sortOption, setSortOption] = useState(OPTION_NAMES[0] || "Error");
-
+    
     // category page in charge of default msg
     const displayTasks = () => {
         if (categoryTasks.length == 0) {
             return <div className="lead"> No tasks in this category! Well done. </div>
         } 
         
-        return <TasksList categoryId={id}/>
+        return <TasksList categoryId={id} sortBy={sortOption}/>
     }
 
     const dropDownOptions = () => {

@@ -33,8 +33,10 @@ const SORT_OPTIONS: Record<string, TaskSorter> = {
 
 export const OPTION_NAMES = Object.keys(SORT_OPTIONS);
 
-export const sortTasks = (tasks: Task[], sortBy: string):Task[] => {
-    return [];
+export const sortTasks = (tasks: Task[], sortBy: string | undefined | null):Task[] => {
+    sortBy = sortBy || OPTION_NAMES[0];
+    const sorter = SORT_OPTIONS[sortBy];
+    return tasks.map((task) => task).sort(sorter);
 } 
 
 let arr:Task[] = [];

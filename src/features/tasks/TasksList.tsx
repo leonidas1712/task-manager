@@ -3,6 +3,7 @@ import { Button } from 'react-bootstrap';
 import { useAppSelector } from '../../app/hooks';
 import { selectTasksByCategory } from '../common/joinSelectors';
 import TaskCard from './TaskCard';
+import { sortTasks } from './taskSorter';
 
 
 // use selectAllTasks instead of ids so that we can change sorting easily
@@ -15,10 +16,10 @@ function TasksList(props: TaskListProps) {
 
     const tasks = useAppSelector(state => selectTasksByCategory(state, categoryId));
     // tasks = sortTasks(tasks, sortBy);
-
+    const sortedTasks = sortTasks(tasks, sortBy);
     return (
         <div>
-            { tasks.map((task) => <TaskCard key={task.id} task={task}/>) }
+            { sortedTasks.map((task) => <TaskCard key={task.id} task={task}/>) }
         </div>
     )
 }
