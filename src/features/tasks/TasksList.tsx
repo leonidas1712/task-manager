@@ -4,7 +4,6 @@ import { useAppSelector } from '../../app/hooks';
 import { selectTasksByCategory } from '../common/joinSelectors';
 import TaskCard from './TaskCard';
 import { sortTasks } from './taskSorter';
-import './TaskList.css';
 
 
 // use selectAllTasks instead of ids so that we can change sorting easily
@@ -19,7 +18,7 @@ function TasksList(props: TaskListProps) {
     // tasks = sortTasks(tasks, sortBy);
     const sortedTasks = sortTasks(tasks, sortBy);
     return (
-        <div className="task-list">
+        <div>
             { sortedTasks.map((task) => <TaskCard key={task.id} task={task}/>) }
         </div>
     )

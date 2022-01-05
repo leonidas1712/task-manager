@@ -8,6 +8,8 @@ import "./Sidebar.css";
 import { Category } from '../../Types';
 import CategoryList from "../categories/CategoryList";
 import AddCategory from "../categories/AddCategory";
+import Spacer from "../../Spacer";
+
 
 
 function CategoryNav(props: {name: string; route: string, setActive:React.Dispatch<React.SetStateAction<string>> }) {
@@ -58,6 +60,7 @@ function Sidebar() {
 
             </Nav>
             <AddCategory />
+            <Spacer />
         </div>
     )
 }

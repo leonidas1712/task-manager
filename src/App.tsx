@@ -9,6 +9,8 @@ import { Outlet } from 'react-router-dom';
 import DateAdapter from '@mui/lab/AdapterDateFns';
 import { LocalizationProvider } from '@mui/lab';
 import PageWrapper from './PageWrapper';
+import Spacer from './Spacer';
+
 
 // TODO: add aria-label and other aria props to all inputs
 function App() {
@@ -19,6 +21,7 @@ function App() {
         <Container style={{marginLeft: sidebarWidth}}>
           <PageWrapper>
             <Outlet />
+            <Spacer />
           </PageWrapper>
         </Container>
       </div>
