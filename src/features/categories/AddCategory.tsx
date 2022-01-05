@@ -6,8 +6,8 @@ import { useFormik } from 'formik';
 //import * as Yup from 'yup';
 import useYup from './Validation';
 
-import { addNewCategory, selectAllCategories } from './categoriesSlice';
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { addNewCategory, getCategories } from './categoriesSlice';
+import { useAppDispatch } from '../../app/hooks';
 
 function AddCategory() {
     const [show, setShow] = useState<boolean>(false);
@@ -17,7 +17,7 @@ function AddCategory() {
     
     const dispatch = useAppDispatch();
 
-    const handleShow = () => setShow(true);
+    const handleShow = () => { dispatch(getCategories()); setShow(true); };
 
     // const disableClose = () => {
     //     setCanClose(false);
@@ -27,19 +27,7 @@ function AddCategory() {
 
     //TODO: move the validation functions into a new file so can be re-used for rename category
     // TODO: find a way to re-use modal logic
-    
-    // working
-    // const validation = Yup.object({
-    //     name: Yup.string().required("Category name can't be blank")
-    //         .test('is valid category', 'Category must have a name that does not exist ', (val) => {
-    //             //return val !== "Error";
-    //             if (val === undefined) {
-    //                 return false;
-    //             }
-
-    //             return isNewCategory(val, categories);
-    //         })
-    // });
+  
     const yup:any = useYup();
     const validation = yup.object({
         name: yup.string().required("Category name can't be blank").isValidCategory()

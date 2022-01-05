@@ -53,17 +53,12 @@ function DisplayDueDate({ dueDate }: DueDateProps) {
 // TODO: add MUI spinner in place of or next to checkbox when await dispatch
 type TaskCardProps = { task:Task }
 function TaskCard({ task }:TaskCardProps) {
-    useEffect(() => {
-        console.log("I am re-rendering\n-------------")
-    });
-
     const [buttonsDisabled, setButtonsDisabled] = useState<boolean>(false);
     const dispatch = useAppDispatch();
 
     const checkboxDelete = async () => {
         setButtonsDisabled(true);
         await dispatch(deleteTask(task.id));
-        console.log("Task deleted")
     }
 
     return (

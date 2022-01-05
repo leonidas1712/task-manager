@@ -42,7 +42,6 @@ export type EditTaskArg = {
 }
 
 export const editTask = createAsyncThunk('tasks/editTask', async(arg: EditTaskArg) => {
-    console.log("Edit task arg: " , arg.body);
     return editTaskInAPI(arg.params, arg.body);
 });
 

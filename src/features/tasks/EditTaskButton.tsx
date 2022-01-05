@@ -16,13 +16,6 @@ type EditTaskProps = {
 }
 // use a selector to get task by id instead of relying on task from two levels down (might be stale)
 function EditTaskButton(props: EditTaskProps) {
-    useEffect(() => {
-        console.log("---Edit task button render start-----");
-        console.log(props.task);
-        console.log("Edit Task button render end\n--------------")
-    
-    });
-
 
     const { disabled } = props;
     //let optionalTask = useAppSelector(state => selectTaskById(state, taskId), () => true);
@@ -52,7 +45,6 @@ function EditTaskButton(props: EditTaskProps) {
             const editTaskArg = convertTaskValuesForEdit(task, values);
             await dispatch(editTask(editTaskArg));
             //await editTask(params, postObj);
-            console.log("Edit done");
             //const taskPostArg:TaskPostArg = {category_id: categoryId, ...postObj};
             //await dispatch(addTask(taskPostArg));
             setCanClose(true);
