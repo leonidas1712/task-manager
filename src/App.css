@@ -1,3 +1,7 @@
+.App {
+  overflow: scroll !important;
+}
+
 /* .App {
   text-align: inherit;
 }
