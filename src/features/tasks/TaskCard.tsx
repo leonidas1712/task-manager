@@ -1,5 +1,5 @@
 //import { useAppSelector } from '../../app/hooks';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, Row, Col, Button } from 'react-bootstrap';
 import { Task } from '../../Types';
 import Checkbox from '@mui/material/Checkbox';
@@ -53,6 +53,10 @@ function DisplayDueDate({ dueDate }: DueDateProps) {
 // TODO: add MUI spinner in place of or next to checkbox when await dispatch
 type TaskCardProps = { task:Task }
 function TaskCard({ task }:TaskCardProps) {
+    useEffect(() => {
+        console.log("I am re-rendering\n-------------")
+    });
+
     const [buttonsDisabled, setButtonsDisabled] = useState<boolean>(false);
     const dispatch = useAppDispatch();
 
@@ -84,7 +88,7 @@ function TaskCard({ task }:TaskCardProps) {
 
                         <Col md={6} className="d-flex align-items-start flex-column justify-content-center">
                             <DisplayDueDate dueDate={task.due_date}/>
-                            <EditTaskButton disabled={buttonsDisabled} taskId={task.id}/>
+                            <EditTaskButton disabled={buttonsDisabled} task={task}/>
                         </Col>
                     </Row>
                 </Card.Body>

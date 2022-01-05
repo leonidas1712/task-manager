@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Row, Modal, Form } from 'react-bootstrap';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { selectTaskById, errorTask } from './tasksSlice';
@@ -7,16 +7,27 @@ import { convertTaskFormToPostObject, convertTaskValuesForEdit } from './Convert
 import { useFormik } from 'formik';
 import { dateISOToDateStr, dateISOToTimeStr } from './taskValidationCommon';
 import { editTask } from '../tasks/tasksSlice';
+import { Task } from '../../Types';
 
 type EditTaskProps = {
     disabled: boolean;
-    taskId: number
+    // taskId: number
+    task: Task
 }
 // use a selector to get task by id instead of relying on task from two levels down (might be stale)
 function EditTaskButton(props: EditTaskProps) {
-    const { disabled, taskId } = props;
-    let optionalTask = useAppSelector(state => selectTaskById(state, taskId), () => true);
-    const task = optionalTask || errorTask();
+    useEffect(() => {
+        console.log("---Edit task button render start-----");
+        console.log(props.task);
+        console.log("Edit Task button render end\n--------------")
+    
+    });
+
+
+    const { disabled } = props;
+    //let optionalTask = useAppSelector(state => selectTaskById(state, taskId), () => true);
+    // const task = optionalTask || errorTask();
+    const { task } = props;
 
     const dispatch = useAppDispatch();
 
@@ -46,12 +57,20 @@ function EditTaskButton(props: EditTaskProps) {
             //await dispatch(addTask(taskPostArg));
             setCanClose(true);
             handleClose();
+       
         },
-        validate: validateTaskFields
+        validate: validateTaskFields,
+        // enableReininit is necc. because by default formik does not re-render when init values change which caused
+        // issue where after editing task, opening again would use only the old values from the first render of the 
+        // edit modal. 
+        // https://stackoverflow.com/questions/60241872/how-to-re-render-formik-values-after-updated-it-react-native
+        enableReinitialize:true
     });
     const { handleSubmit, handleChange, handleBlur, values, touched, errors, resetForm, setFieldValue } = formik;
 
     const handleClose = () => { resetForm(); setShow(false); };
+
+    const [title, setTitle] = useState<string>(task.name);
 
     return (
         <>
