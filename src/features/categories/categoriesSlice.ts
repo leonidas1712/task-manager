@@ -47,6 +47,13 @@ const categoriesSlice = createSlice({
             categoriesAdapter.upsertMany(state, action.payload);
         })
         .addCase(addNewCategory.fulfilled, categoriesAdapter.addOne)
+        .addCase(editCategory.fulfilled, (state, action) => {
+            console.log("In edit categ reducer:");
+            console.log(action);
+            const { id, ...changes} = action.payload;
+            const update = { id, changes };
+            categoriesAdapter.updateOne(state, update);
+        });
     }
 })
 

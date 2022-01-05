@@ -84,7 +84,7 @@ function RenameCategory({ category }: { category: Category }) {
 
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose} disabled={!canClose}>Cancel</Button>
-                <Button variant="primary" type="submit" disabled={!canClose} form={id}> Add category </Button>
+                <Button variant="primary" type="submit" disabled={!canClose} form={id}> Rename category </Button>
                 {/* <Button variant="danger" onClick={disableClose}>Disable close</Button> */}
             </Modal.Footer>
         </Modal>
