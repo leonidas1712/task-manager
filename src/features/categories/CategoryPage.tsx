@@ -20,7 +20,7 @@ function CategoryPage(props:{}) {
     const id = Number(params.categoryId);
 
     const categoryTasks = useAppSelector(state => selectTasksByCategory(state, id));
-    const [sortOption, setSortOption] = useState<string>(OPTION_NAMES[0] || "Error");
+    const [sortOption, setSortOption] = useState(OPTION_NAMES[0] || "Error");
 
     // category page in charge of default msg
     const displayTasks = () => {
@@ -37,6 +37,15 @@ function CategoryPage(props:{}) {
         });
     }
 
+    const optionSelectFn = (val:string | null) => {
+        if (!val) {
+            setSortOption(OPTION_NAMES[0] || "Error");
+            return;
+        }
+
+        setSortOption(val);
+    }
+
     let category = useAppSelector((state) => selectCategoryById(state, id));
     category = category ? category : errorCategory();
  
@@ -48,7 +57,7 @@ function CategoryPage(props:{}) {
                     <DeleteCategory category={category} />
 
                     {/* marginleft: auto pushes completely to right in flexbox */}
-                    <DropdownButton style={{marginLeft:"auto"}} variant="info" title={`Sort by: ${sortOption}`} onSelect={(val) => console.log(val)}>
+                    <DropdownButton style={{marginLeft:"auto"}} variant="info" title={`Sort by: ${sortOption}`} onSelect={optionSelectFn}>
                         
                         { dropDownOptions() }
                     </DropdownButton>
