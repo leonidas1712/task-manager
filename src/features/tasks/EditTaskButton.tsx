@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Button, Row, Modal, Form } from 'react-bootstrap';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { selectTaskById, EditTaskPostArg, errorTask } from './tasksSlice';
+import { selectTaskById, errorTask } from './tasksSlice';
 import { TaskValidationProps, validateTaskFields } from './Validation'
-import { convertTaskFormToPostObject } from './ConvertTaskPayload';
+import { convertTaskFormToPostObject, convertTaskValuesForEdit } from './ConvertTaskPayload';
 import { useFormik } from 'formik';
 import { dateISOToDateStr, dateISOToTimeStr } from './taskValidationCommon';
-import { editTask } from '../../api/APIService';
+import { editTask } from '../tasks/tasksSlice';
 
 type EditTaskProps = {
     disabled: boolean;
@@ -38,10 +38,8 @@ function EditTaskButton(props: EditTaskProps) {
         
         onSubmit: async (values:TaskValidationProps, {resetForm}) => {
             setCanClose(false);
-            const postObj = convertTaskFormToPostObject(values);
-            console.log(postObj);
-            const params = { categoryId: task.category_id, taskId: task.id};
-            console.log("Params: ", params);
+            const editTaskArg = convertTaskValuesForEdit(task, values);
+            await dispatch(editTask(editTaskArg));
             //await editTask(params, postObj);
             console.log("Edit done");
             //const taskPostArg:TaskPostArg = {category_id: categoryId, ...postObj};

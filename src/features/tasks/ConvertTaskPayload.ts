@@ -6,7 +6,9 @@ import { TIME_PICKER_FORMAT,
     DATE_PICKER_FORMAT, 
     generate12AMDateFromDateStr,
 dateTimeInputsToDate } from "./taskValidationCommon"
-import { TaskPostObject } from "../../api/APIService"
+import { TaskPostObject, EditTaskParams } from "../../api/APIService"
+import { EditTaskArg } from "./tasksSlice";
+import { Task } from "../../Types";
 
 
 // assumptions:
@@ -75,4 +77,15 @@ export function convertTaskFormToPostObject(obj: TaskValidationProps):TaskPostOb
         description: convertDescription(obj.description),
         due_date: convertToDueDate(obj.date, obj.time)
     };
+}
+
+// input: Task obj and values as TaskValidationProps
+// output: object formatted for passing into async thunk dispatch
+export function convertTaskValuesForEdit(task: Task, values: TaskValidationProps): EditTaskArg {
+    const body = convertTaskFormToPostObject(values);
+    const params = { categoryId: task.category_id, taskId: task.id};
+    return {
+        params,
+        body
+    }
 }

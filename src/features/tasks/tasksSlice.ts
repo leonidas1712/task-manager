@@ -6,7 +6,10 @@ import { sortComparer } from "../../Constants";
 import { 
     getTasks as getTasksFromAPI, 
     deleteTask as deleteTaskFromAPI,
-    addTask as addTaskToAPI
+    addTask as addTaskToAPI,
+    editTask as editTaskInAPI,
+    EditTaskParams,
+    TaskPostObject
 } from "../../api/APIService";
 import { convertTaskFormToPostObject } from "./ConvertTaskPayload";
 
@@ -32,14 +35,15 @@ export type TaskPostArg = {
     priority?: string | null
 }
 
-export type EditTaskPostArg = {
-    category_id:number;
-    task_id:number;
-    name: string;
-    description?: string | null;
-    due_date?:string | null 
-    priority?: string | null
+export type EditTaskArg = {
+    params: EditTaskParams,
+    body: TaskPostObject
 }
+
+export const editTask = createAsyncThunk('tasks/editTask', async(arg: EditTaskArg) => {
+    console.log("Edit task arg: " , arg.body);
+    return editTaskInAPI(arg.params, arg.body);
+});
 
 export const addTask = createAsyncThunk('tasks/addTask', async(arg: TaskPostArg) => {
     const {category_id, ...body} = arg;

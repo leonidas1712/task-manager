@@ -2,7 +2,7 @@ import { Category, Task } from "../Types";
 import axios from 'axios';
 
 // Assume all inputs have been sanitised at this point
-
+// TODO: refactor all inputs to have only one arg (or none), with type: { params?:..., body?:...}
 const { REACT_APP_API_URL:API_URL } = process.env;
 const CATEGORIES_NAME = "categories";
 const TASKS_NAME = "tasks";
@@ -50,7 +50,7 @@ async function addTask(categoryId:number, body: TaskPostObject): Promise<Task> {
 
 // PATCH /categories/:category_id/tasks/:taskid
 // receive params in sep. object so can re-use TaskPostObject type
-type EditTaskParams = { categoryId:number, taskId: number }
+export type EditTaskParams = { categoryId:number, taskId: number }
 async function editTask(params:EditTaskParams, body: TaskPostObject): Promise<Task> {
     const { categoryId, taskId } = params;
     const url = `${CATEGORIES}/${categoryId}/${TASKS_NAME}/${taskId}`;
