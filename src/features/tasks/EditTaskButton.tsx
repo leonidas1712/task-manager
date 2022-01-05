@@ -52,7 +52,7 @@ function EditTaskButton(props: EditTaskProps) {
        
         },
         validate: validateTaskFields,
-        // enableReininit is necc. because by default formik does not re-render when init values change which caused
+        // enableReinit is necc. because by default formik does not re-render when init values change which caused
         // issue where after editing task, opening again would use only the old values from the first render of the 
         // edit modal. 
         // https://stackoverflow.com/questions/60241872/how-to-re-render-formik-values-after-updated-it-react-native
