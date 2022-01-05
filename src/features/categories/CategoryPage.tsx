@@ -33,7 +33,7 @@ function CategoryPage(props:{}) {
     category = category ? category : errorCategory();
  
     return (
-        <div className="w-75 px-3 py-3">
+        // <div className="w-75 px-3 py-3">
             <div>
                 <div className="d-flex align-items-center mb-2">
                     <h2>{category.name}</h2>
@@ -50,7 +50,7 @@ function CategoryPage(props:{}) {
             </div>
 
             
-        </div>
+        // </div>
     )
 }
 

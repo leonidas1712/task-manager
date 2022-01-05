@@ -7,18 +7,18 @@ import { Container } from 'react-bootstrap';
 import { sidebarWidth } from './Constants';
 import { Outlet } from 'react-router-dom';
 import DateAdapter from '@mui/lab/AdapterDateFns';
-
 import { LocalizationProvider } from '@mui/lab';
-
+import PageWrapper from './PageWrapper';
 
 function App() {
   return (
     <LocalizationProvider dateAdapter={DateAdapter}>
       <div className="App">
         <Sidebar/>
-        {/* TODO: standardise style to the one for category page */}
         <Container style={{marginLeft: sidebarWidth}}>
-          <Outlet />
+          <PageWrapper>
+            <Outlet />
+          </PageWrapper>
         </Container>
       </div>
     </LocalizationProvider>
