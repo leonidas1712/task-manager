@@ -13,12 +13,6 @@ import { getCategories as getCategoriesFromAPI,
 import { sortComparer } from "../../Constants";
 
 const categoriesAdapter = createEntityAdapter<Category>({
-    // sortComparer: (fst, snd) => {
-    //     // earliest created comes first
-    //     // JS allows date subtraction but typescript needs numeric values
-    //     return new Date(fst.created_at).getTime() - new Date(snd.created_at).getTime()
-    // }
-
     sortComparer
 });
 
@@ -45,15 +39,32 @@ export const deleteCategory = createAsyncThunk('categories/deleteCategory', asyn
     return deleteCategoryFromAPI(arg);
 })
 
+
 // Slice and reducers //
+
+export enum Loading {
+    IDLE = "idle",
+    PENDING = "pending",
+    FULFILLED = "fulfilled",
+    REJECTED = "rejected"
+}
 
 const categoriesSlice = createSlice({
     name: 'categories',
-    initialState: categoriesAdapter.getInitialState(),
+    initialState: categoriesAdapter.getInitialState({
+        status: Loading.IDLE
+    }),
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(getCategories.fulfilled, (state, action) => {
+        builder.addCase(getCategories.pending, (state, action) => {
+            state.status = Loading.PENDING
+        })
+        .addCase(getCategories.fulfilled, (state, action) => {
+            state.status = Loading.FULFILLED
             categoriesAdapter.upsertMany(state, action.payload);
+        })
+        .addCase(getCategories.rejected, (state, action) => {
+            state.status = Loading.REJECTED
         })
         .addCase(addNewCategory.fulfilled, categoriesAdapter.addOne)
         .addCase(editCategory.fulfilled, (state, action) => {
