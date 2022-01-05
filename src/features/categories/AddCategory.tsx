@@ -2,10 +2,7 @@ import React, { useState } from 'react';
 import { Button, Form, Modal, Row } from 'react-bootstrap';
 import { PlusLg } from 'react-bootstrap-icons'
 import { useFormik } from 'formik';
-
-//import * as Yup from 'yup';
-import useYup from './Validation';
-
+import { useCategoryYup } from './Validation';
 import { addNewCategory, getCategories } from './categoriesSlice';
 import { useAppDispatch } from '../../app/hooks';
 
@@ -19,20 +16,9 @@ function AddCategory() {
 
     const handleShow = () => { dispatch(getCategories()); setShow(true); };
 
-    // const disableClose = () => {
-    //     setCanClose(false);
-
-    //     setTimeout(() => setCanClose(true), 2000);
-    // }
-
     //TODO: move the validation functions into a new file so can be re-used for rename category
     // TODO: find a way to re-use modal logic
-  
-    const yup:any = useYup();
-    const validation = yup.object({
-        name: yup.string().required("Category name can't be blank").isValidCategory()
-    });
-
+    const validation = useCategoryYup();
     // I can have a submit button outside the form by setting button form prop to id, and form id to id
     // This does not work on IE11: https://stackoverflow.com/questions/49525057/react-formik-use-submitform-outside-formik
     const id = "add-category-form";

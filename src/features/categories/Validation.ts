@@ -15,7 +15,9 @@ function categoryNames(categories:Category[]): string[] {
 } 
 
 //https://stackoverflow.com/questions/60525429/how-to-write-a-custom-schema-validation-using-yup-addmethod-for-country-name-a
-export default function useYup(): typeof yup {
+// custom yup object that can validate against category names
+// can use in any place where yup is used so category specific yup object schema is defined below for use
+export function useYup():any {
     const categories = useAppSelector(selectAllCategories);
     const names = categoryNames(categories);
 
@@ -23,6 +25,12 @@ export default function useYup(): typeof yup {
         // custom error message as second arg
         return this.notOneOf(names, "Category name must not already exist")
     })
-
     return yup;
+}
+
+export function useCategoryYup() {
+    const customYup = useYup();
+    return customYup.object({
+        name: customYup.string().required("Category name can't be blank").isValidCategory()
+    });
 }
