@@ -9,6 +9,18 @@ import { useAppDispatch } from '../../app/hooks';
 import { format } from 'date-fns';
 import { DueDateStr } from '../../Constants';
 import EditTaskButton from './EditTaskButton';
+import './TaskCard.css'
+import styled from '@emotion/styled';
+
+const WithHover = styled.div`
+    & {
+        transition: all 2s;
+    }
+
+    &:hover {
+        background-color:red !important;
+    }
+`;
 
 
 
@@ -63,7 +75,7 @@ function TaskCard({ task }:TaskCardProps) {
 
     return (
         <div>
-            <Card className= "mb-3 p-1 border border-secondary shadow-sm">
+            <Card className= "mb-3 p-1 border border-dark hover-effect">
                 <Card.Body>
                     <Row>
                         <Col md={6}>
