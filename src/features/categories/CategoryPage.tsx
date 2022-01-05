@@ -9,6 +9,7 @@ import TasksList from  '../tasks/TasksList';
 import AddTaskButton from "../tasks/AddTaskButton";
 import RenameCategory from "./RenameCategory";
 import DeleteCategory from "./DeleteCategory";
+import { OPTION_NAMES } from "../tasks/taskSorter";
 
 // TODO: everytime I switch categories, it should make a network request to update all tasks
 
@@ -39,12 +40,13 @@ function CategoryPage(props:{}) {
                     <RenameCategory category={category}/>    
                     <DeleteCategory category={category} />
 
-                    <DropdownButton style={{marginLeft:"auto"}} variant="info" title="Sort by" onSelect={(val) => console.log(val)}>
+                    {/* marginleft: auto pushes completely to right in flexbox */}
+                    <DropdownButton style={{marginLeft:"auto"}} variant="info" title="Sort by: Newest" onSelect={(val) => console.log(val)}>
                         <Dropdown.Item eventKey="alpha">A-Z</Dropdown.Item>
                     </DropdownButton>
                 </div>
 
-                <hr className="mt-0 mb-0"></hr>
+                <hr className="mt-0 mb-3"></hr>
 
                 <AddTaskButton categoryId={id} />
                 { displayTasks() }

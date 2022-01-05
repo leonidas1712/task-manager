@@ -14,6 +14,7 @@ function TasksList(props: TaskListProps) {
     const { categoryId, sortBy } = props;
 
     const tasks = useAppSelector(state => selectTasksByCategory(state, categoryId));
+    // tasks = sortTasks(tasks, sortBy);
 
     return (
         <div>
