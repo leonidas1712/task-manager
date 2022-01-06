@@ -12,6 +12,8 @@ import Category from "./features/categories/CategoryPage";
 import { getCategories } from './features/categories/categoriesSlice';
 import { getTasks } from './features/tasks/tasksSlice';
 import IndexPage from './features/IndexPage';
+import Upcoming from './upcoming/Upcoming';
+
 
 
 
@@ -26,7 +28,7 @@ ReactDOM.render(
         <Routes>
           <Route path="/" element={<App/>}>
             <Route index element={<IndexPage/>}></Route>
-            <Route path="upcoming" element={<h1>Upcoming page</h1>} />
+            <Route path="upcoming" element={<Upcoming/>} />
             <Route path="*" element= {<Navigate to= "/"/>}/>
 
             <Route path="categories">
