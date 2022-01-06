@@ -45,8 +45,6 @@ function IndexPage() {
         <div>
             <p className="lead display-6">{displayWelcome()}</p>
             <hr></hr>
-            {/* <Link to="/categories/upcoming">Upcoming</Link> */}
-            <p onClick={() => navigate("/categories/")}>Upcoming</p>
         </div>
     )
 }
