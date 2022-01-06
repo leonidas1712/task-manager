@@ -49,7 +49,7 @@ function Sidebar() {
     // every refresh it navigates to the active URL
     // TODO: change navigation logic to be through updating active category ID in redux store
     // useEffect(() => {
-    //     navigate("categories");
+    //     navigate(138);
 
     // }, [])
 

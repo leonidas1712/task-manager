@@ -29,12 +29,14 @@ export function useNavigateHelper() {
     const navigate = useNavigate();
 
     function customNavigate(path: string | number | null) {
+        console.log(path);
         if (path == null) {
             return navigate("");
         }
 
         if (isId(path)) {
             const url = `${CATEGORIES_PATH}/${path}`;
+            console.log(url);
             return navigate(url);
         }
 

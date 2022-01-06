@@ -9,7 +9,7 @@ import { useAppDispatch } from '../../app/hooks';
 import { format } from 'date-fns';
 import { DueDateStr } from '../../Constants';
 import EditTaskButton from './EditTaskButton';
-import CategoryName from './CategoryName';
+import CategoryLink from './CategoryName';
 
 import './TaskCard.css'
 
@@ -96,7 +96,7 @@ function TaskCard({ task, showCategory }:TaskCardProps) {
                             <div>
                                 <EditTaskButton disabled={buttonsDisabled} task={task}/>
                                 {/* <p className="d-inline text-end mx-3">Category: efegnrnjrngjngernggngnr</p> */}
-                                { showCategory ? <CategoryName id={task.category_id}/> : '' }
+                                { showCategory ? <CategoryLink id={task.category_id}/> : '' }
                             </div>
                         </Col>
                     </Row>
