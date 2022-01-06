@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAppSelector } from '../app/hooks';
 import { selectCategoryCount, selectCategoryStatus, Loading} from './categories/categoriesSlice';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 function WelcomeMsg(props: { msg: string }) {
@@ -13,6 +14,7 @@ function WelcomeMsg(props: { msg: string }) {
 function IndexPage() {
     const categoryCount = useAppSelector(selectCategoryCount);
     const status = useAppSelector(selectCategoryStatus);
+    const navigate = useNavigate();
 
 
     // categories length 0:
@@ -25,7 +27,7 @@ function IndexPage() {
             switch(status) {
                 case Loading.IDLE:
                 case Loading.FULFILLED:
-                    msg = "Please add a category to get started"
+                    msg = "Add a category to get started"
                     break;
                 case Loading.PENDING:
                     return "Loading categories..."
@@ -43,6 +45,8 @@ function IndexPage() {
         <div>
             <p className="lead display-6">{displayWelcome()}</p>
             <hr></hr>
+            {/* <Link to="/categories/upcoming">Upcoming</Link> */}
+            <p onClick={() => navigate("/categories/")}>Upcoming</p>
         </div>
     )
 }

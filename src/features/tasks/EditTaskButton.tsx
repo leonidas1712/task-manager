@@ -60,6 +60,7 @@ function EditTaskButton(props: EditTaskProps) {
         // https://stackoverflow.com/questions/60241872/how-to-re-render-formik-values-after-updated-it-react-native
         enableReinitialize:true
     });
+
     const { handleSubmit, handleChange, handleBlur, values, touched, errors, resetForm, setFieldValue } = formik;
 
     const handleClose = () => { resetForm(); setShow(false); };

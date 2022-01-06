@@ -2,21 +2,31 @@ import React, {useState, useEffect} from "react";
 import { ListGroup, Nav, Navbar, Spinner } from "react-bootstrap";
 import { useAppSelector } from "../../app/hooks";
 import { Category } from "../../Types";
+import { usePageId } from "../../urlHelper";
 import { Loading, selectCategoryStatus } from "./categoriesSlice";
 
+
+// CategoryList for use in navigation in sidebar only 
 type SetActive = React.Dispatch<React.SetStateAction<string>>;
 
 interface CategoryNavProps {
     name: string; 
     route: string;
-    setActive:SetActive
+    //setActive:SetActive
 }
 
 function CategoryNav(props: CategoryNavProps) {
+    const pageId = usePageId();
+
+    const isActive = () => {
+        return pageId == props.route;
+    };
+
     return (
         <div className="d-inline-flex align-items-center justify-content-between">
-            <Nav.Item onClick={() => props.setActive(props.route)} style={{width:"100%"}} > 
-                <Nav.Link eventKey={props.route} className="text-white">
+            {/* onClick={() => props.setActive(props.route)} */}
+            <Nav.Item style={{width:"100%"}} > 
+                <Nav.Link active= {isActive()} eventKey={props.route} className="text-white">
                     {props.name}
                 </Nav.Link>
                 
@@ -27,10 +37,10 @@ function CategoryNav(props: CategoryNavProps) {
 }
 
 
-function Upcoming(props: {setActive:SetActive}) {
+function Upcoming() {
     const name = "Upcoming";
     const route = "upcoming";
-    return <CategoryNav name="Upcoming" route="upcoming" setActive={props.setActive}/>;
+    return <CategoryNav name="Upcoming" route="upcoming"/>;
 }
 
 // TODO: move to common
@@ -43,15 +53,15 @@ function StandardSpin() {
 
 interface CategoryListProps {
     categories: Category[];
-    setActive:SetActive;
+    //setActive:SetActive;
 }
 
 function CategoryList(props: CategoryListProps) {
-   const { categories, setActive } = props; 
+   const { categories } = props; 
    const categoryStatus = useAppSelector(selectCategoryStatus);
 
    const categoryToNav = ({ name, id }:Category) => {
-       return <CategoryNav name={name} route={id+""} setActive={setActive} key={id}/>
+       return <CategoryNav name={name} route={id+""} key={id}/>
    };
 
    const categoryList = () => {
@@ -74,7 +84,7 @@ function CategoryList(props: CategoryListProps) {
 
     return (
         <>
-            <Upcoming setActive={setActive}/>
+            <Upcoming />
             <hr className="mt-0"></hr>
             {categoryList()}
         </>

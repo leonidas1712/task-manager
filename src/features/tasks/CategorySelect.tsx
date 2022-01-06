@@ -4,6 +4,9 @@ import { useAppSelector } from '../../app/hooks';
 import { selectAllCategories } from '../categories/categoriesSlice';
 
 
+// formik prop to access form related values from edit task button
+// type is of the formik object specifically created inside edit task, but too complex to set type properly here
+// since the obj is created at runtime (can't export type from inside a function)
 function CategorySelect(props: { formik:any }) {
     const { formik } = props;
     const { touched } = formik;
