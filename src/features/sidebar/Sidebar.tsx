@@ -30,6 +30,7 @@ function datumToCategoryNav(datum: Category, setActive:React.Dispatch<React.SetS
     return <CategoryNav key={datum.id} name={datum.name} route={datum.id+""} setActive={setActive}/>
 }
 
+// TODO: make sidebar responsive for smaller screen widths
 
 function Sidebar() {
     const navigate = useNavigate();
