@@ -12,8 +12,7 @@ import { OPTION_NAMES, DEFAULT_OPTION } from "../tasks/taskSorter";
 import './CategoryPage.css';
 import { selectCategoryStatus } from "./categoriesSlice";
 import { StandardSpin } from "../common/Spinners";
-
-
+import useSortBy from "./useSortBy";
 
 // TODO: everytime I switch categories, it should make a network request to update all tasks
     // (or just the clicked category's tasks?)
@@ -27,9 +26,10 @@ function CategoryPage(props:{}) {
     
     const categoryTasks = useAppSelector(state => selectTasksByCategory(state, id));
     let category = useAppSelector((state) => selectCategoryById(state, id));
-    category = category ? category : errorCategory();
 
-    const [sortOption, setSortOption] = useState(DEFAULT_OPTION || "Error");
+    const { sortOption, SortByButton } = useSortBy();
+
+    category = category ? category : errorCategory();
     
     if (!categoryIds.includes(id)) {
         switch(status) {
@@ -49,37 +49,13 @@ function CategoryPage(props:{}) {
         return <TasksList tasks={categoryTasks} sortBy={sortOption}/>
     }
 
-    const dropDownOptions = () => {
-        return OPTION_NAMES.map((name) => {
-            return <Dropdown.Item key={name} eventKey={name}>{name}</Dropdown.Item>
-        });
-    }
-
-    const optionSelectFn = (val:string | null) => {
-        if (!val) {
-            setSortOption(DEFAULT_OPTION || "Error");
-            return;
-        }
-
-        setSortOption(val);
-    }
-
-    
     return (
             <div className="category-page">
                 <div className="d-flex align-items-center mb-2">
                     <h2>{category.name}</h2>
                     <RenameCategory category={category}/>    
-                    <DeleteCategory category={category} />
-
-                    {/* marginleft: auto pushes completely to right in flexbox */}
-                    {/* TODO: move Sort By button into its own hook (expose sortBy value) */}
-                    <DropdownButton style={{marginLeft:"auto"}} variant="info" title={`Sort by: ${sortOption}`} onSelect={optionSelectFn}
-                        className="my-dropdown"
-                    >
-                        
-                        { dropDownOptions() }
-                    </DropdownButton>
+                    <DeleteCategory category={category} />                    
+                    <SortByButton />
                 </div>
 
                 <hr className="mt-0 mb-3"></hr>

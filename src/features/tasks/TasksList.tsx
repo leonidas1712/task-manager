@@ -7,7 +7,7 @@ import TaskCard from './TaskCard';
 import { sortTasks } from './taskSorter';
 
 
-// use selectAllTasks instead of ids so that we can change sorting easily
+// take in array of tasks to enable re-use in upcoming page
 type TaskListProps = {
     tasks: Task[],
     sortBy?: string | undefined
