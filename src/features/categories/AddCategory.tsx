@@ -31,11 +31,8 @@ function AddCategory() {
             name: ''
         },
         onSubmit: async (values, {resetForm}) => {
-            console.log(JSON.stringify(values));
             setCanClose(false);
             const newCat = await dispatch(addNewCategory(values.name)).unwrap();
-            console.log(newCat);
-            //await dispatch(addNewCategory(values.name));
             setCanClose(true);
             resetForm();
             handleClose();

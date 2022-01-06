@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 //import { BASE_URL } from "./Constants";
-const CATEGORIES_PATH = "categories";
-const UPCOMING_PATH = "upcoming";
+export const CATEGORIES_PATH = "categories";
+export const UPCOMING_PATH = "upcoming";
 
 // assumption: id is numeric
 const isId = (url:string | number):boolean => {
@@ -19,7 +19,6 @@ const pageIdFromUrl = (url:string):string => {
 
 export function usePageId() {
     const location = useLocation();
-    console.log(location.pathname);
     return pageIdFromUrl(location.pathname);
 }
 
@@ -44,3 +43,4 @@ export function useNavigateHelper() {
 
     return customNavigate;
 }
+
