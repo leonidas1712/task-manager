@@ -2,6 +2,8 @@ import React from 'react';
 import { useAppSelector } from '../app/hooks';
 import { selectCategoryCount, selectCategoryStatus, Loading} from './categories/categoriesSlice';
 import { Link, useNavigate } from 'react-router-dom';
+import { StandardSpin } from './common/Spinners';
+
 
 
 function WelcomeMsg(props: { msg: string }) {
@@ -14,7 +16,6 @@ function WelcomeMsg(props: { msg: string }) {
 function IndexPage() {
     const categoryCount = useAppSelector(selectCategoryCount);
     const status = useAppSelector(selectCategoryStatus);
-    const navigate = useNavigate();
 
 
     // categories length 0:
@@ -30,7 +31,7 @@ function IndexPage() {
                     msg = "Add a category to get started"
                     break;
                 case Loading.PENDING:
-                    return "Loading categories..."
+                    return <StandardSpin />
                 case Loading.REJECTED:
                     return <span className="text-danger">Error loading categories</span>
             }

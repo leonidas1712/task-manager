@@ -3,8 +3,8 @@ import { ListGroup, Nav, Navbar, Spinner } from "react-bootstrap";
 import { useAppSelector } from "../../app/hooks";
 import { Category } from "../../Types";
 import { usePageId } from "../../urlHelper";
+import { StandardSpin } from "../common/Spinners";
 import { Loading, selectCategoryStatus } from "./categoriesSlice";
-
 
 // CategoryList for use in navigation in sidebar only 
 type SetActive = React.Dispatch<React.SetStateAction<string>>;
@@ -43,13 +43,6 @@ function Upcoming() {
     return <CategoryNav name="Upcoming" route="upcoming"/>;
 }
 
-// TODO: move to common
-function StandardSpin() {
-    return (
-    <Spinner animation="border" role="status">
-        <span className="visually-hidden">Loading...</span>
-    </Spinner>)
-}
 
 interface CategoryListProps {
     categories: Category[];

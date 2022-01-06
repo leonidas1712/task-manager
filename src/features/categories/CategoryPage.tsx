@@ -13,6 +13,8 @@ import { OPTION_NAMES, DEFAULT_OPTION } from "../tasks/taskSorter";
 import './CategoryPage.css';
 import { useNavigateHelper, CATEGORIES_PATH  } from "../../urlHelper";
 import { selectCategoryStatus } from "./categoriesSlice";
+import { StandardSpin } from "../common/Spinners";
+
 
 
 // TODO: everytime I switch categories, it should make a network request to update all tasks
@@ -34,7 +36,7 @@ function CategoryPage(props:{}) {
     if (!categoryIds.includes(id)) {
         switch(status) {
             case Loading.PENDING:
-                return <div className="lead display-6">Loading...</div>
+                return <StandardSpin />
             default:
                 return (<div className="lead">Category does not exist</div>)
         }
