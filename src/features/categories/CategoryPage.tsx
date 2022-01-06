@@ -3,7 +3,6 @@ import { DropdownButton, Dropdown} from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useAppSelector } from "../../app/hooks";
 import { selectTasksByCategory } from "../common/joinSelectors";
-import { selectAllTasks } from "../tasks/tasksSlice";
 import { errorCategory, Loading, selectAllCategoryIds, selectCategoryById } from "./categoriesSlice";
 import TasksList from  '../tasks/TasksList';
 import AddTaskButton from "../tasks/AddTaskButton";
@@ -48,7 +47,7 @@ function CategoryPage(props:{}) {
             return <div className="lead"> No tasks in this category! Well done. </div>
         } 
         
-        return <TasksList categoryId={id} sortBy={sortOption}/>
+        return <TasksList tasks={categoryTasks} sortBy={sortOption}/>
     }
 
     const dropDownOptions = () => {
