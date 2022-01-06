@@ -37,10 +37,11 @@ function EditTaskButton(props: EditTaskProps) {
             description: task.description || '',
             // if due date not present use empty fields
             date: task.due_date ? dateISOToDateStr(task.due_date) : '',
-            time: task.due_date ? dateISOToTimeStr(task.due_date) : ''
+            time: task.due_date ? dateISOToTimeStr(task.due_date) : '',
+            categoryId: task.category_id
         },
         
-        onSubmit: async (values:TaskValidationProps, {resetForm}) => {
+        onSubmit: async (values, {resetForm}) => {
             setCanClose(false);
             const editTaskArg = convertTaskValuesForEdit(task, values);
             await dispatch(editTask(editTaskArg));

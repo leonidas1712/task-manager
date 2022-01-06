@@ -37,8 +37,9 @@ const dateStringIsToday = (dateStr: string) => {
 
 // when date,time inputs are incomplete e.g by keyboard 05:--:-- values are automatically '',
 // no way to access the incomplete values unless using DOM
-export type TaskValidationProps = {title:string, description:string, date: string, time:string}
-export const validateTaskFields = ({title, description, date, time}:TaskValidationProps ) => {
+export type TaskValidationProps = {title:string, description:string, date: string, time:string }
+export type TaskEditProps = {title:string, description:string, date: string, time:string, categoryId: number }
+export const validateTaskFields = ({title, description, date, time}:TaskValidationProps | TaskEditProps ) => {
     // return errors object
     let errors:{title?:string, description?:string, date?: string, time?:string} = {} 
 

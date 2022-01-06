@@ -9,7 +9,8 @@ import {
     addTask as addTaskToAPI,
     editTask as editTaskInAPI,
     EditTaskParams,
-    TaskPostObject
+    TaskPostObject,
+    TaskPatchObject
 } from "../../api/APIService";
 import { convertTaskFormToPostObject } from "./ConvertTaskPayload";
 import { EntityState, EntityId } from "@reduxjs/toolkit";
@@ -40,7 +41,7 @@ export type TaskPostArg = {
 
 export type EditTaskArg = {
     params: EditTaskParams,
-    body: TaskPostObject
+    body: TaskPatchObject
 }
 
 export const editTask = createAsyncThunk('tasks/editTask', async(arg: EditTaskArg) => {
@@ -77,7 +78,7 @@ const tasksSlice = createSlice({
         .addCase(deleteCategory.fulfilled, (state, action) => {
             const { id: idDeleted } = action.payload;
             const tasks = selectAllTasksLocal(state);
-            
+
             // remove tasks with category id same as that of category just deleted
             const tasksToDelete = tasks
                 .filter((task) => task.category_id == idDeleted)

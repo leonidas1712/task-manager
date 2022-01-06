@@ -63,7 +63,6 @@ export const OPTION_NAMES = Object.keys(SORT_OPTIONS);
 export const DEFAULT_OPTION = OPTION_NAMES[0];
 
 export const sortTasks = (tasks: Task[], sortBy: string | undefined | null):Task[] => {
-    console.log("Sort by: ", sortBy);
     sortBy = sortBy || DEFAULT_OPTION;
     const sorter = SORT_OPTIONS[sortBy];
     return tasks.map((task) => task).sort(sorter);

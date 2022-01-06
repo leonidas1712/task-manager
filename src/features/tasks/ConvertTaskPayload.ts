@@ -1,12 +1,12 @@
 // File for functions used in receiving raw inputs from form and converting into data 
 // ready for POST to server
 // to use in Add Task and Edit Task
-import { TaskValidationProps } from "./Validation" // input format from form
+import { TaskEditProps, TaskValidationProps } from "./Validation" // input format from form
 import { TIME_PICKER_FORMAT, 
     DATE_PICKER_FORMAT, 
     generate12AMDateFromDateStr,
 dateTimeInputsToDate } from "./taskValidationCommon"
-import { TaskPostObject, EditTaskParams } from "../../api/APIService"
+import { TaskPostObject, EditTaskParams , TaskPatchObject} from "../../api/APIService"
 import { EditTaskArg } from "./tasksSlice";
 import { Task } from "../../Types";
 
@@ -23,8 +23,11 @@ import { Task } from "../../Types";
 function convertAll(obj: TaskValidationProps):TaskValidationProps {
     let newObj:any = {};
 
-    function convertOne(data:string) {
-        return data.trim();
+    function convertOne(data:any) {
+        if (typeof data === 'string') {
+            return data.trim();
+        }
+        return data;
     }
 
     for (const [key,val] of Object.entries(obj)) {
@@ -69,6 +72,7 @@ function convertToDueDate(dateStr:string, timeStr:string):string | null {
 }
 
 // function that takes task form obj, converts to object ready for posting to server
+// for /POST (create task)
 export function convertTaskFormToPostObject(obj: TaskValidationProps):TaskPostObject {
     obj = convertAll(obj);
 
@@ -81,11 +85,12 @@ export function convertTaskFormToPostObject(obj: TaskValidationProps):TaskPostOb
 
 // input: Task obj and values as TaskValidationProps
 // output: object formatted for passing into async thunk dispatch
-export function convertTaskValuesForEdit(task: Task, values: TaskValidationProps): EditTaskArg {
-    const body = convertTaskFormToPostObject(values);
+export function convertTaskValuesForEdit(task: Task, values: TaskEditProps): EditTaskArg {
+    let body = convertTaskFormToPostObject(values);
+    let newBody: TaskPatchObject = { ...body, category_id: Number(values.categoryId)}
     const params = { categoryId: task.category_id, taskId: task.id};
     return {
         params,
-        body
+        body: newBody
     }
 }

@@ -64,10 +64,17 @@ async function addTask(categoryId:number, body: TaskPostObject): Promise<Task> {
 
 // PATCH /categories/:category_id/tasks/:taskid
 // receive params in sep. object so can re-use TaskPostObject type
-export type EditTaskParams = { categoryId:number, taskId: number }
-async function editTask(params:EditTaskParams, body: TaskPostObject): Promise<Task> {
-    const { categoryId, taskId } = params;
-    const url = `${CATEGORIES}/${categoryId}/${TASKS_NAME}/${taskId}`;
+export type EditTaskParams = { taskId: number }
+export type TaskPatchObject = {
+    name: string;
+    category_id: number
+    description?: string | null;
+    due_date?:string | null // ISO string !important TODO: find out if TS has ISO String type
+    priority?: string | null
+ }
+async function editTask(params:EditTaskParams, body: TaskPatchObject): Promise<Task> {
+    const { taskId } = params;
+    const url = `${TASKS}/${taskId}`;
     const res = await axios.patch<Task>(url, body);
     return res.data;
 }

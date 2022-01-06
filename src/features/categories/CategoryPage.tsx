@@ -13,6 +13,7 @@ import { OPTION_NAMES, DEFAULT_OPTION } from "../tasks/taskSorter";
 import './CategoryPage.css';
 
 // TODO: everytime I switch categories, it should make a network request to update all tasks
+    // (or just the clicked category's tasks?)
 
 function CategoryPage(props:{}) {
 
