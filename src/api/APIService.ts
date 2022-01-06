@@ -30,6 +30,7 @@ function delay(ms: number) {
 
 // GET categories/
 async function getCategories(): Promise<Category[]> {
+    await delay(2000);
     const res = await axios.get<Category[]>(CATEGORIES);
     return res.data;
 }

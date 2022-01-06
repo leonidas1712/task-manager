@@ -11,6 +11,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Category from "./features/categories/CategoryPage";
 import { getCategories } from './features/categories/categoriesSlice';
 import { getTasks } from './features/tasks/tasksSlice';
+import IndexPage from './features/IndexPage';
+
 
 
 store.dispatch(getCategories());
@@ -24,7 +26,7 @@ ReactDOM.render(
         <Routes>
           <Route path="/" element={<App/>}>
             <Route path="categories">
-              <Route index element={<h2>Please select a category</h2>}></Route>
+              <Route index element={<IndexPage/>}></Route>
               {/* Ideally upcoming route would be outside categories but this makes it
               easier to work with bootstrap navigation */}
               <Route path="upcoming" element={<h1>Upcoming page</h1>} />

@@ -95,7 +95,8 @@ export const errorCategory = (): Category => {
 export const {
     selectAll: selectAllCategories,
     selectById: selectCategoryById,
-    selectIds: selectAllCategoryIds
+    selectIds: selectAllCategoryIds,
+    selectTotal: selectCategoryCount,
 } = categoriesAdapter.getSelectors((state: RootState) => state.categories);
 
 // selector on root state for status
