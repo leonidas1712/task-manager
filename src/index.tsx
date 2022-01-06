@@ -25,15 +25,16 @@ ReactDOM.render(
 
         <Routes>
           <Route path="/" element={<App/>}>
-          <Route index element={<IndexPage/>}></Route>
-          <Route path="*" element= {<Navigate to= "/categories"/>}/>
+            <Route index element={<IndexPage/>}></Route>
+            <Route path="upcoming" element={<h1>Upcoming page</h1>} />
+            <Route path="*" element= {<Navigate to= "/"/>}/>
 
             <Route path="categories">
               <Route index element={<IndexPage/>}></Route>
               {/* <Route path="*" element= {<Navigate to= "/categories"/>}/> */}
               {/* Ideally upcoming route would be outside categories but this makes it
               easier to work with bootstrap navigation */}
-              <Route path="upcoming" element={<h1>Upcoming page</h1>} />
+              {/* <Route path="upcoming" element={<h1>Upcoming page</h1>} /> */}
               <Route path=":categoryId" element={<Category/>} />
               
 

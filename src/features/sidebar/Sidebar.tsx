@@ -47,9 +47,9 @@ function Sidebar() {
     // every refresh it navigates to the active URL
     // TODO: change navigation logic to be through updating active category ID in redux store
     // useEffect(() => {
-    //     navigate("categories/" + pageId);
+    //     navigate("categories/113");
 
-    // }, [active])
+    // }, [])
 
     return (
         <div className="sidebar pt-2" style={{width: sidebarWidth}}> 
@@ -57,7 +57,7 @@ function Sidebar() {
             <Nav 
                 variant="pills" 
                 // defaultActiveKey="upcoming"
-                onSelect={(key) => navigate("categories/" + key)}
+                onSelect={(key) => { console.log(key);navigate("categories/" + key)}}
                 className="flex-column px-2" 
                 >
                     <h3 className="text-center mt-2">Task Manager</h3>
