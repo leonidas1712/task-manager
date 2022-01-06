@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 //import { BASE_URL } from "./Constants";
 const CATEGORIES_PATH = "categories";
 const UPCOMING_PATH = "upcoming";
@@ -21,4 +21,22 @@ export function usePageId() {
     const location = useLocation();
     console.log(location.pathname);
     return pageIdFromUrl(location.pathname);
+}
+
+// custom use navigate that takes in only the desired path (last part of url) and routes based on
+// whether it is a category id (numeric) or something else
+// so that we don't have to keep calling /categories/ etc. inside components
+export function useNavigateHelper() {
+    const navigate = useNavigate();
+
+    function customNavigate(path: string) {
+        if (isId(path)) {
+            const url = `${CATEGORIES_PATH}/${path}`;
+            return navigate(url);
+        }
+
+        return navigate(path);
+    }
+
+    return customNavigate;
 }
