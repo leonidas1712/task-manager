@@ -9,7 +9,10 @@ import { useAppDispatch } from '../../app/hooks';
 import { format } from 'date-fns';
 import { DueDateStr } from '../../Constants';
 import EditTaskButton from './EditTaskButton';
+import CategoryName from './CategoryName';
+
 import './TaskCard.css'
+
 
 type DescProps = {
     desc: string
@@ -58,8 +61,8 @@ function DisplayDueDate({ dueDate }: DueDateProps) {
 }
 
 // TODO: add MUI spinner in place of or next to checkbox when await dispatch
-type TaskCardProps = { task:Task }
-function TaskCard({ task }:TaskCardProps) {
+type TaskCardProps = { task:Task, showCategory?:boolean }
+function TaskCard({ task, showCategory }:TaskCardProps) {
     const [buttonsDisabled, setButtonsDisabled] = useState<boolean>(false);
     const dispatch = useAppDispatch();
 
@@ -90,7 +93,11 @@ function TaskCard({ task }:TaskCardProps) {
 
                         <Col md={6} className="d-flex align-items-start flex-column justify-content-center">
                             <DisplayDueDate dueDate={task.due_date}/>
-                            <EditTaskButton disabled={buttonsDisabled} task={task}/>
+                            <div>
+                                <EditTaskButton disabled={buttonsDisabled} task={task}/>
+                                {/* <p className="d-inline text-end mx-3">Category: efegnrnjrngjngernggngnr</p> */}
+                                { showCategory ? <CategoryName id={task.category_id}/> : '' }
+                            </div>
                         </Col>
                     </Row>
                 </Card.Body>
