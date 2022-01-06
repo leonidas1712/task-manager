@@ -8,6 +8,8 @@ import { useFormik } from 'formik';
 import { dateISOToDateStr, dateISOToTimeStr } from './taskValidationCommon';
 import { editTask } from '../tasks/tasksSlice';
 import { Task } from '../../Types';
+import CategorySelect from './CategorySelect';
+
 
 type EditTaskProps = {
     disabled: boolean;
@@ -42,12 +44,11 @@ function EditTaskButton(props: EditTaskProps) {
         },
         
         onSubmit: async (values, {resetForm}) => {
-            setCanClose(false);
+            //setCanClose(false);
             const editTaskArg = convertTaskValuesForEdit(task, values);
+            //console.log("Values: " , values);
+            //console.log(editTaskArg);
             await dispatch(editTask(editTaskArg));
-            //await editTask(params, postObj);
-            //const taskPostArg:TaskPostArg = {category_id: categoryId, ...postObj};
-            //await dispatch(addTask(taskPostArg));
             setCanClose(true);
             handleClose();
        
@@ -132,6 +133,24 @@ function EditTaskButton(props: EditTaskProps) {
                             <Form.Control.Feedback type="invalid">{errors.time}</Form.Control.Feedback>
                         </Form.Group>
                     </Row>
+
+                    <CategorySelect formik={formik}/>
+{/* 
+                    <Row className="mb-3">
+                        <Form.Group>
+                            <Form.Label>Category:</Form.Label>
+                            <Form.Select
+                                // isValid={touched.time && !errors.time}
+                                // isInvalid={!!errors.time}
+                                {...formik.getFieldProps("categoryId")}
+                            >   
+
+                                </Form.Select>
+                            <Form.Control.Feedback>Note: incomplete times are ignored</Form.Control.Feedback>
+                            <Form.Control.Feedback type="invalid">{errors.time}</Form.Control.Feedback>
+                        </Form.Group>
+                    </Row> */}
+
                 </Form>
             </Modal.Body>
 
