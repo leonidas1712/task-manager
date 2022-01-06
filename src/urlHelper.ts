@@ -4,7 +4,7 @@ const CATEGORIES_PATH = "categories";
 const UPCOMING_PATH = "upcoming";
 
 // assumption: id is numeric
-const isId = (url:string):boolean => {
+const isId = (url:string | number):boolean => {
     return !isNaN(Number(url));
 }
 
@@ -29,13 +29,17 @@ export function usePageId() {
 export function useNavigateHelper() {
     const navigate = useNavigate();
 
-    function customNavigate(path: string) {
+    function customNavigate(path: string | number | null) {
+        if (path == null) {
+            return navigate("");
+        }
+
         if (isId(path)) {
             const url = `${CATEGORIES_PATH}/${path}`;
             return navigate(url);
         }
 
-        return navigate(path);
+        return navigate(path + "");
     }
 
     return customNavigate;

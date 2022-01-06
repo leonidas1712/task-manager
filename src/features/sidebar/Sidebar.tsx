@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {  Nav } from "react-bootstrap";
 import { Link, useNavigate, useLocation} from "react-router-dom";
+import { useNavigateHelper } from "../../urlHelper";
 import { useAppSelector } from "../../app/hooks";
 import { sidebarWidth } from "../../Constants";
 import { selectAllCategories } from "../categories/categoriesSlice";
@@ -35,7 +36,8 @@ function datumToCategoryNav(datum: Category, setActive:React.Dispatch<React.SetS
 // TODO: make sidebar responsive for smaller screen widths,
 
 function Sidebar() {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
+    const navigate = useNavigateHelper();
     const [active, setActive] = useState<string>("");
     const pageId = usePageId();
 
@@ -57,7 +59,7 @@ function Sidebar() {
             <Nav 
                 variant="pills" 
                 // defaultActiveKey="upcoming"
-                onSelect={(key) => { console.log(key);navigate("categories/" + key)}}
+                onSelect={(key) => { navigate(key)} }
                 className="flex-column px-2" 
                 >
                     <h3 className="text-center mt-2">Task Manager</h3>

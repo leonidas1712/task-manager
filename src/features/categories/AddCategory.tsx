@@ -5,6 +5,7 @@ import { useFormik } from 'formik';
 import { useCategoryYup } from './Validation';
 import { addNewCategory, getCategories } from './categoriesSlice';
 import { useAppDispatch } from '../../app/hooks';
+import { useNavigateHelper } from '../../urlHelper';
 
 function AddCategory() {
     const [show, setShow] = useState<boolean>(false);
@@ -16,6 +17,7 @@ function AddCategory() {
 
     const handleShow = () => { dispatch(getCategories()); setShow(true); };
 
+    const navigate = useNavigateHelper();
     // TODO: find a way to re-use modal logic
     const validation = useCategoryYup();
     // I can have a submit button outside the form by setting button form prop to id, and form id to id
@@ -31,10 +33,14 @@ function AddCategory() {
         onSubmit: async (values, {resetForm}) => {
             console.log(JSON.stringify(values));
             setCanClose(false);
-            await dispatch(addNewCategory(values.name));
+            const newCat = await dispatch(addNewCategory(values.name)).unwrap();
+            console.log(newCat);
+            //await dispatch(addNewCategory(values.name));
             setCanClose(true);
             resetForm();
             handleClose();
+            navigate(newCat.id);
+
         },
         validationSchema: validation
     });
