@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState } from "react";
 import { DropdownButton, Dropdown} from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useAppSelector } from "../../app/hooks";
@@ -10,7 +10,6 @@ import RenameCategory from "./RenameCategory";
 import DeleteCategory from "./DeleteCategory";
 import { OPTION_NAMES, DEFAULT_OPTION } from "../tasks/taskSorter";
 import './CategoryPage.css';
-import { useNavigateHelper, CATEGORIES_PATH  } from "../../urlHelper";
 import { selectCategoryStatus } from "./categoriesSlice";
 import { StandardSpin } from "../common/Spinners";
 
