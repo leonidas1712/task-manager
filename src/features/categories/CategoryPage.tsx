@@ -46,7 +46,7 @@ function CategoryPage(props:{}) {
             return <div className="lead"> No tasks in this category! Well done. </div>
         } 
         
-        return <TasksList tasks={categoryTasks} sortBy={sortOption}/>
+        return <TasksList tasks={categoryTasks} sortBy={sortOption} />
     }
 
     return (

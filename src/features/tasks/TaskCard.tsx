@@ -9,7 +9,7 @@ import { useAppDispatch } from '../../app/hooks';
 import { format } from 'date-fns';
 import { DueDateStr } from '../../Constants';
 import EditTaskButton from './EditTaskButton';
-import CategoryLink from './CategoryName';
+import CategoryLink from './CategoryLink';
 
 import './TaskCard.css'
 
