@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 //import { BASE_URL } from "./Constants";
 export const CATEGORIES_PATH = "categories";
 export const UPCOMING_PATH = "upcoming";
+export const ALL_TASKS_PATH = "all";
 
 // assumption: id is numeric
 const isId = (url:string | number):boolean => {

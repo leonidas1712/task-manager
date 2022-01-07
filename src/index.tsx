@@ -13,6 +13,9 @@ import { getCategories } from './features/categories/categoriesSlice';
 import { getTasks } from './features/tasks/tasksSlice';
 import IndexPage from './features/IndexPage';
 import Upcoming from './upcoming/Upcoming';
+import AllTasks from './features/tasks/AllTasks';
+import { CATEGORIES_PATH, UPCOMING_PATH, ALL_TASKS_PATH } from './urlHelper';
+
 
 
 
@@ -28,10 +31,11 @@ ReactDOM.render(
         <Routes>
           <Route path="/" element={<App/>}>
             <Route index element={<IndexPage/>}></Route>
-            <Route path="upcoming" element={<Upcoming/>} />
+            <Route path = {ALL_TASKS_PATH} element={<AllTasks />}/>
+            <Route path= {UPCOMING_PATH} element={<Upcoming/>} />
             <Route path="*" element= {<Navigate to= "/"/>}/>
 
-            <Route path="categories">
+            <Route path={CATEGORIES_PATH}>
               <Route index element={<IndexPage/>}></Route>
               {/* <Route path="*" element= {<Navigate to= "/categories"/>}/> */}
               {/* Ideally upcoming route would be outside categories but this makes it
