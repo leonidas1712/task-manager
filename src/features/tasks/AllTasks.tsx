@@ -1,11 +1,46 @@
 import React from 'react';
+import { useAppSelector } from '../../app/hooks';
 import useSortBy from '../categories/useSortBy';
 import TasksList from './TasksList';
+import { selectAllTasks } from './tasksSlice';
+import { Row } from 'react-bootstrap';
+import { StandardSpin } from '../common/Spinners';
+import { selectCategoryStatus, Loading } from '../categories/categoriesSlice';
+
+
+
 
 function AllTasks() {
+    const tasks = useAppSelector(selectAllTasks)
+    const status = useAppSelector(selectCategoryStatus);
+
+    const displayTasks = () => {
+        if (tasks.length == 0) {
+            switch (status) {
+                case Loading.PENDING:
+                    return <StandardSpin />;
+                case Loading.IDLE:
+                case Loading.FULFILLED:
+                    return  <p className="lead">No tasks to show</p>;
+                case Loading.REJECTED:
+                    return <p className="lead text-danger">Error loading tasks</p>
+
+            }
+        }
+
+        return <TasksList tasks={tasks} showCategory sortBy={sortOption}/>;        
+    }
+
+    const { sortOption, SortByButton } = useSortBy();
+
     return (
         <div>
-            <h1>All Tasks</h1>
+            <div className="d-flex align-items-center">
+                <h2 className="lead fs-2">All Tasks</h2> 
+                <div className="mx-5"><SortByButton /></div>
+            </div>
+            <hr></hr>
+            { displayTasks() }
         </div>
 
     )
