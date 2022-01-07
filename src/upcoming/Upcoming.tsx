@@ -9,7 +9,9 @@ function Upcoming() {
     const tasks = useAppSelector(selectAllTasks);
     return (
         <div>
-            <h1>Upcoming</h1>
+            <h2 className="lead fs-2">Upcoming</h2> 
+            <p className="text-muted mx-1 fs-6">Only tasks with a due date appear here </p>
+            <hr></hr>
             <TasksList tasks={tasks} showCategory={true} />
         </div>
     );
