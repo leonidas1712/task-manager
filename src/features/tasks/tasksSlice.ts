@@ -2,7 +2,7 @@ import { createSlice, createEntityAdapter, createAsyncThunk } from "@reduxjs/too
 import { RootState } from "../../app/store";
 import axios from 'axios';
 import { Task } from "../../Types";
-import { sortComparer } from "../../Constants";
+import { Loading, sortComparer } from "../../Constants";
 import { 
     getTasks as getTasksFromAPI, 
     deleteTask as deleteTaskFromAPI,
@@ -59,10 +59,21 @@ const { selectAll:selectAllTasksLocal } = tasksAdapter.getSelectors();
 
 const tasksSlice = createSlice({
     name: 'tasks',
-    initialState: tasksAdapter.getInitialState(),
+    initialState: tasksAdapter.getInitialState({
+        status: Loading.IDLE
+    }),
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(getTasks.fulfilled, tasksAdapter.upsertMany)
+        builder.addCase(getTasks.pending, (state) => {
+            state.status = Loading.PENDING;
+        })
+        .addCase(getTasks.fulfilled, (state, action) => {
+            state.status = Loading.FULFILLED;
+            tasksAdapter.upsertMany(state, action.payload);
+        })
+        .addCase(getTasks.rejected, (state) => {
+            state.status = Loading.REJECTED
+        })
         .addCase(deleteTask.fulfilled, tasksAdapter.removeOne)
         .addCase(addTask.fulfilled, tasksAdapter.addOne)
         .addCase(editTask.fulfilled, (state, action) => {
@@ -97,6 +108,9 @@ export const {
     selectAll: selectAllTasks,
     selectById: selectTaskById,
 } = tasksAdapter.getSelectors((state:RootState) => state.tasks)
+
+export const selectTasksStatus = (state:RootState) => state.tasks.status;
+
 
 export const errorTask = ():Task => {
     return {

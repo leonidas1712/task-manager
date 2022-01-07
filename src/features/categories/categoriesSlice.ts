@@ -10,7 +10,8 @@ import { getCategories as getCategoriesFromAPI,
      deleteCategory as deleteCategoryFromAPI
 
 } from "../../api/APIService";
-import { sortComparer } from "../../Constants";
+import { Loading, sortComparer } from "../../Constants";
+
 
 const categoriesAdapter = createEntityAdapter<Category>({
     sortComparer
@@ -42,12 +43,6 @@ export const deleteCategory = createAsyncThunk('categories/deleteCategory', asyn
 
 // Slice and reducers //
 
-export enum Loading {
-    IDLE = "idle",
-    PENDING = "pending",
-    FULFILLED = "fulfilled",
-    REJECTED = "rejected"
-}
 
 const categoriesSlice = createSlice({
     name: 'categories',

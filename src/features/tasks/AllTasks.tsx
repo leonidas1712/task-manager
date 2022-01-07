@@ -2,17 +2,18 @@ import React from 'react';
 import { useAppSelector } from '../../app/hooks';
 import useSortBy from '../categories/useSortBy';
 import TasksList from './TasksList';
-import { selectAllTasks } from './tasksSlice';
+import { selectAllTasks, selectTasksStatus } from './tasksSlice';
 import { Row } from 'react-bootstrap';
 import { StandardSpin } from '../common/Spinners';
-import { selectCategoryStatus, Loading } from '../categories/categoriesSlice';
+import { Loading } from '../../Constants';
+
 
 
 
 
 function AllTasks() {
     const tasks = useAppSelector(selectAllTasks)
-    const status = useAppSelector(selectCategoryStatus);
+    const status = useAppSelector(selectTasksStatus);
 
     const displayTasks = () => {
         if (tasks.length == 0) {
