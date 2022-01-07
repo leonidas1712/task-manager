@@ -52,7 +52,7 @@ function CategoryPage(props:{}) {
     return (
             <div className="category-page">
                 <div className="d-flex align-items-center mb-2">
-                    <h2>{category.name}</h2>
+                    <h2 className="display-6 fs-2">{category.name}</h2>
                     <RenameCategory category={category}/>    
                     <DeleteCategory category={category} />                    
                     <SortByButton />

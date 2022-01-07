@@ -24,11 +24,10 @@ function useSortBy() {
     // marginleft: auto pushes completely to right in flexbox 
     const SortByButton = () =>
         (<DropdownButton 
-            style={{marginLeft:"auto"}} 
+            style={{marginLeft: "auto"}} 
             variant="info" 
             title={`Sort by: ${sortOption}`} 
             onSelect={optionSelectFn}
-            className="my-dropdown"
         >                   
             { dropDownOptions() }
         </DropdownButton>);

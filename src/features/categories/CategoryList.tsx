@@ -2,9 +2,12 @@ import React, {useState, useEffect} from "react";
 import { ListGroup, Nav, Navbar, Spinner } from "react-bootstrap";
 import { useAppSelector } from "../../app/hooks";
 import { Category } from "../../Types";
-import { usePageId } from "../../urlHelper";
+import { ALL_TASKS_PATH, UPCOMING_PATH, usePageId } from "../../urlHelper";
 import { StandardSpin } from "../common/Spinners";
+import AllTasks from "../tasks/AllTasks";
 import { Loading, selectCategoryStatus } from "./categoriesSlice";
+
+
 
 // CategoryList for use in navigation in sidebar only 
 type SetActive = React.Dispatch<React.SetStateAction<string>>;
@@ -37,12 +40,13 @@ function CategoryNav(props: CategoryNavProps) {
 }
 
 
-function Upcoming() {
-    const name = "Upcoming";
-    const route = "upcoming";
-    return <CategoryNav name="Upcoming" route="upcoming"/>;
+function UpcomingNav() {
+    return <CategoryNav name="Upcoming" route={UPCOMING_PATH}/>;
 }
 
+function AllTasksNav() {
+    return <CategoryNav name="All tasks" route={ALL_TASKS_PATH} />;
+}
 
 interface CategoryListProps {
     categories: Category[];
@@ -77,7 +81,8 @@ function CategoryList(props: CategoryListProps) {
 
     return (
         <>
-            <Upcoming />
+            <AllTasksNav />
+            <UpcomingNav />
             <hr className="mt-0"></hr>
             {categoryList()}
         </>
