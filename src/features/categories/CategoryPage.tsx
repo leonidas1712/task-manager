@@ -3,7 +3,7 @@ import { DropdownButton, Dropdown} from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useAppSelector } from "../../app/hooks";
 import { selectTasksByCategory } from "../common/joinSelectors";
-import { errorCategory, Loading, selectAllCategoryIds, selectCategoryById } from "./categoriesSlice";
+import { errorCategory, selectAllCategoryIds, selectCategoryById } from "./categoriesSlice";
 import TasksList from  '../tasks/TasksList';
 import AddTaskButton from "../tasks/AddTaskButton";
 import RenameCategory from "./RenameCategory";
@@ -13,6 +13,8 @@ import './CategoryPage.css';
 import { selectCategoryStatus } from "./categoriesSlice";
 import { StandardSpin } from "../common/Spinners";
 import useSortBy from "./useSortBy";
+import { Loading } from "../../Constants";
+
 
 // TODO: everytime I switch categories, it should make a network request to update all tasks
     // (or just the clicked category's tasks?)

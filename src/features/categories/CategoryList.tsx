@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from "react";
 import { ListGroup, Nav, Navbar, Spinner } from "react-bootstrap";
 import { useAppSelector } from "../../app/hooks";
+import { Loading } from "../../Constants";
 import { Category } from "../../Types";
 import { ALL_TASKS_PATH, UPCOMING_PATH, usePageId } from "../../urlHelper";
 import { StandardSpin } from "../common/Spinners";
 import AllTasks from "../tasks/AllTasks";
-import { Loading, selectCategoryStatus } from "./categoriesSlice";
+import { selectCategoryStatus } from "./categoriesSlice";
+
 
 
 
