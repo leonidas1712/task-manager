@@ -1,5 +1,5 @@
 import React from "react"
-import { dateISOToDateStr } from "../features/tasks/taskValidationCommon";
+import { dateISOToDateStr } from "../features/common/dateObjects";
 import { Task } from "../Types"
 
 // pass in due date ISO string and filtered tasks array to use for TasksList

@@ -5,7 +5,7 @@ import { selectTaskById, errorTask } from './tasksSlice';
 import { TaskValidationProps, validateTaskFields } from './Validation'
 import { convertTaskFormToPostObject, convertTaskValuesForEdit } from './ConvertTaskPayload';
 import { useFormik } from 'formik';
-import { dateISOToDateStr, dateISOToTimeStr } from './taskValidationCommon';
+import { dateISOToDateStr, dateISOToTimeStr } from '../common/taskValidationCommon';
 import { editTask } from '../tasks/tasksSlice';
 import { Task } from '../../Types';
 import CategorySelect from './CategorySelect';

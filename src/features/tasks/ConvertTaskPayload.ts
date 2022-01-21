@@ -5,7 +5,7 @@ import { TaskEditProps, TaskValidationProps } from "./Validation" // input forma
 import { TIME_PICKER_FORMAT, 
     DATE_PICKER_FORMAT, 
     generate12AMDateFromDateStr,
-dateTimeInputsToDate } from "./taskValidationCommon"
+dateTimeInputsToDate } from "../common/dateObjects"
 import { TaskPostObject, EditTaskParams , TaskPatchObject} from "../../api/APIService"
 import { EditTaskArg } from "./tasksSlice";
 import { Task } from "../../Types";
