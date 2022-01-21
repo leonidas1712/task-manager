@@ -72,9 +72,5 @@ export const validateTaskFields = ({title, description, date, time}:TaskValidati
         errors.time = "Please provide a time since the date given is today (default is 12am)";
     }
 
-    
-
     return errors;
 }
-
-export {}

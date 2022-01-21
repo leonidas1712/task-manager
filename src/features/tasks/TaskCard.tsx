@@ -7,7 +7,7 @@ import { Tooltip } from '@mui/material';
 import { deleteTask } from './tasksSlice';
 import { useAppDispatch } from '../../app/hooks';
 import { format } from 'date-fns';
-import { DueDateStr } from '../../Constants';
+import { DueDateStr } from '../common/dateObjects';
 import EditTaskButton from './EditTaskButton';
 import CategoryLink from './CategoryLink';
 

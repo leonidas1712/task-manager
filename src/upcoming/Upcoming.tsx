@@ -17,10 +17,7 @@ function Upcoming() {
             {/* <hr></hr> */}
             {/* <TasksList tasks={tasks} showCategory={true} /> */}
 
-            {/* <div>
-                <h3 className="fs-4">28 Dec, 2022</h3>
-                <hr></hr>
-            </div> */}
+            
 
             <UpcomingList tasks={tasks}/>
 
