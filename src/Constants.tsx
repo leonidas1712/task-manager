@@ -4,7 +4,6 @@ import React from 'react';
 
 
 export const sidebarWidth = "15rem";
-export const BASE_URL = "categories"
 
 export enum Loading {
     IDLE = "idle",
