@@ -5,7 +5,7 @@ import { selectTaskById, errorTask } from './tasksSlice';
 import { TaskValidationProps, validateTaskFields } from './Validation'
 import { convertTaskFormToPostObject, convertTaskValuesForEdit } from './ConvertTaskPayload';
 import { useFormik } from 'formik';
-import { dateISOToDateStr, dateISOToTimeStr } from '../common/taskValidationCommon';
+import { dateISOToDateStr, dateISOToTimeStr } from '../common/dateObjects';
 import { editTask } from '../tasks/tasksSlice';
 import { Task } from '../../Types';
 import CategorySelect from './CategorySelect';
@@ -13,15 +13,12 @@ import CategorySelect from './CategorySelect';
 
 type EditTaskProps = {
     disabled: boolean;
-    // taskId: number
     task: Task
 }
 // use a selector to get task by id instead of relying on task from two levels down (might be stale)
 function EditTaskButton(props: EditTaskProps) {
 
     const { disabled } = props;
-    //let optionalTask = useAppSelector(state => selectTaskById(state, taskId), () => true);
-    // const task = optionalTask || errorTask();
     const { task } = props;
 
     const dispatch = useAppDispatch();
