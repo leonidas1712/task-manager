@@ -1,8 +1,10 @@
 import React from "react"
 import useSortBy from "../features/categories/useSortBy";
-import { dateISOToDateDisplay } from "../features/common/dateObjects";
+import { dateISOToDateDisplay, compareDateISOStr } from "../features/common/dateObjects";
 import TasksList from "../features/tasks/TasksList";
+import { sortByDueDate } from "../features/tasks/taskSorter";
 import { Task } from "../Types"
+
 
 // pass in date string to display and filtered tasks array to use for TasksList
 // pre filter tasks to avoid unnecc. repeated filtering
@@ -25,11 +27,15 @@ function UpcomingCard(props: { dateDisplay:string, tasks: Task[]}) {
     );
 }
 
-// input: non-empty task with due dates array
+// input: non-empty task array where all tasks have due_date
 // output: object with key as due date ISO, value as array of tasks with that date
 type TaskGroupByDate = Record<string, Task[]>;
 function groupTasksByDueDate(tasks: Task[]): TaskGroupByDate {
-    const dateToTasks: TaskGroupByDate = tasks.reduce((acc:TaskGroupByDate, curr:Task) => {
+    // sort by due date at first so that order maintained during groupBy
+    // map is to prevent unintended effects of mutating original arg
+    tasks = tasks.map(x => x).sort(sortByDueDate);
+
+    return tasks.reduce((acc:TaskGroupByDate, curr:Task) => {
         let key = curr.due_date;
         // convert to date display str to get tasks with same date regardless of time
         // use it directly for displaying, no extra conversion req.
@@ -48,10 +54,6 @@ function groupTasksByDueDate(tasks: Task[]): TaskGroupByDate {
         return acc;
 
     }, {});
-
-    console.log(dateToTasks);
-
-    return dateToTasks;
 }
 
 // pass in array of tasks to filter (enables re-use if needed)

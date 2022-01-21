@@ -28,7 +28,7 @@ const sortByOldestFirst:TaskSorter = (a,b) => {
 // a due, b no due: a comes first
 // a no due, b due: b comes first
 // a,b both have due: compare date, earlier comes first
-const sortByDueDate:TaskSorter = (a,b) => {
+export const sortByDueDate:TaskSorter = (a,b) => {
     const aDue = a.due_date;
     const bDue = b.due_date;
 
@@ -43,10 +43,7 @@ const sortByDueDate:TaskSorter = (a,b) => {
     else if (!aDue && bDue) {
         return 1;
     }
-
-    // WARN: this might lead to recursive loop if default is set to this fn
-    return SORT_OPTIONS[DEFAULT_OPTION](a, b);
-
+    return 0; // keep original order if both no due date
 }
 
 const SORT_OPTIONS: Record<string, TaskSorter> = {
@@ -59,7 +56,6 @@ const SORT_OPTIONS: Record<string, TaskSorter> = {
 
 export const OPTION_NAMES = Object.keys(SORT_OPTIONS);
 
-// set default sorting option: might cause issue if default is sort by due date
 export const DEFAULT_OPTION = OPTION_NAMES[0];
 
 export const sortTasks = (tasks: Task[], sortBy: string | undefined | null):Task[] => {
