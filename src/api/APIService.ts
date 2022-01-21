@@ -5,7 +5,7 @@ import axios from 'axios';
 export type TaskPostObject = {
     name: string;
     description?: string | null;
-    due_date?:string | null // ISO string !important TODO: find out if TS has ISO String type
+    due_date?:string | null 
     priority?: string | null
 }
 
@@ -68,7 +68,7 @@ export type TaskPatchObject = {
     name: string;
     category_id: number
     description?: string | null;
-    due_date?:string | null // ISO string !important TODO: find out if TS has ISO String type
+    due_date?:string | null 
     priority?: string | null
  }
 async function editTask(params:EditTaskParams, body: TaskPatchObject): Promise<Task> {

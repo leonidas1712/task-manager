@@ -55,6 +55,8 @@ interface CategoryListProps {
     //setActive:SetActive;
 }
 
+
+
 function CategoryList(props: CategoryListProps) {
    const { categories } = props; 
    const categoryStatus = useAppSelector(selectCategoryStatus);

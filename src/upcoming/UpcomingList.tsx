@@ -1,8 +1,12 @@
 import React from "react"
+import { useAppSelector } from "../app/hooks";
+import { Loading } from "../Constants";
 import useSortBy from "../features/categories/useSortBy";
 import { dateISOToDateDisplay, compareDateISOStr } from "../features/common/dateObjects";
+import { StandardSpin } from "../features/common/Spinners";
 import TasksList from "../features/tasks/TasksList";
 import { sortByDueDate } from "../features/tasks/taskSorter";
+import { selectTasksStatus } from "../features/tasks/tasksSlice";
 import { Task } from "../Types"
 
 
@@ -59,6 +63,7 @@ function groupTasksByDueDate(tasks: Task[]): TaskGroupByDate {
 // pass in array of tasks to filter (enables re-use if needed)
 function UpcomingList({ tasks }: { tasks: Task[] }) {
     const tasksWithDueDate:Task[] = tasks.filter(t => t.due_date != null);
+    const taskStatus = useAppSelector(selectTasksStatus);
 
 
     const groupToCards = () => {
@@ -69,21 +74,39 @@ function UpcomingList({ tasks }: { tasks: Task[] }) {
         );
     }
 
-
-    if (tasksWithDueDate.length === 0) {
-        return (
-            <> 
-                <hr></hr>
-                <p className="lead"> No tasks with due date </p>
-            </>
-        )
+    if (tasksWithDueDate.length !== 0) {
+        return <> { groupToCards() } </>;
     } else {
-        return (
-            <div>
-                {groupToCards()}
-            </div>
-        )
+        switch (taskStatus) {
+            case Loading.FULFILLED:
+                return (
+                    <> 
+                        <hr></hr>
+                        <p className="lead"> No tasks with due date </p>
+                    </>
+                );
+            case Loading.REJECTED:
+                return <p className="text-danger lead"> Error loading tasks </p>;
+            default:
+                return <StandardSpin />;
+        }
     }
+
+
+    // if (tasksWithDueDate.length === 0) {
+    //     return (
+            // <> 
+            //     <hr></hr>
+            //     <p className="lead"> No tasks with due date </p>
+            // </>
+    //     )
+    // } else {
+    //     return (
+    //         <div>
+    //             { groupToCards() }
+    //         </div>
+    //     )
+    // }
 }
 
 export default UpcomingList;
