@@ -8,7 +8,7 @@ import React from 'react';
 export const DATE_PICKER_FORMAT = "yyyy-MM-dd"; //e.g 2022-01-05
 export const TIME_PICKER_FORMAT = "HH:mm" // e.g 21:06
 const DEFAULT_TIME = "00:00"
-const FORMAT_DATE = "d MMM R"; // 30 Jan 2022
+const FORMAT_DATE = "eee, d MMM R"; // 30 Jan 2022
 const FORMAT_TIME = "h:mmaaa"; // 6:30pm/am
 
 // parse(inputStr, formatStr, referenceDate to fill in missing parts)

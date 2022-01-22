@@ -82,7 +82,7 @@ function UpcomingList({ tasks }: { tasks: Task[] }) {
                 return (
                     <> 
                         <hr></hr>
-                        <p className="lead"> No tasks with due date </p>
+                        <p className="lead"> No tasks with a due date </p>
                     </>
                 );
             case Loading.REJECTED:
