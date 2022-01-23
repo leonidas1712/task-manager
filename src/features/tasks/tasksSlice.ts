@@ -111,6 +111,10 @@ export const {
 
 export const selectTasksStatus = (state:RootState) => state.tasks.status;
 
+export const selectFilteredTasks = (state:RootState, filterFn:(task:Task) => boolean) => {
+    const tasks = selectAllTasks(state);
+    return tasks.filter(filterFn);
+}
 
 export const errorTask = ():Task => {
     return {

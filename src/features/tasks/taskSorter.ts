@@ -56,7 +56,7 @@ const SORT_OPTIONS: Record<string, TaskSorter> = {
 
 export const OPTION_NAMES = Object.keys(SORT_OPTIONS);
 
-export const DEFAULT_OPTION = OPTION_NAMES[0];
+export const DEFAULT_OPTION = OPTION_NAMES[2];
 
 export const sortTasks = (tasks: Task[], sortBy: string | undefined | null):Task[] => {
     sortBy = sortBy || DEFAULT_OPTION;

@@ -12,7 +12,7 @@ import { OPTION_NAMES, DEFAULT_OPTION } from "../tasks/taskSorter";
 import './CategoryPage.css';
 import { selectCategoryStatus } from "./categoriesSlice";
 import { StandardSpin } from "../common/Spinners";
-import useSortBy from "./useSortBy";
+import useSortBy from "../common/useSortBy";
 import { Loading } from "../../Constants";
 
 

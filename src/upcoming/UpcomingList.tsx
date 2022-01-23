@@ -1,7 +1,7 @@
 import React from "react"
 import { useAppSelector } from "../app/hooks";
 import { Loading } from "../Constants";
-import useSortBy from "../features/categories/useSortBy";
+import useSortBy from "../features/common/useSortBy";
 import { dateISOToDateDisplay, compareDateISOStr } from "../features/common/dateObjects";
 import { StandardSpin } from "../features/common/Spinners";
 import TasksList from "../features/tasks/TasksList";
