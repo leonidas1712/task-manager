@@ -16,10 +16,8 @@ function Upcoming() {
             <div className="mt-4"></div>
      
 
-            <UpcomingList tasks={tasks}/>
+            <UpcomingList tasks={tasks} />
 
-           
-            
         </div>
     );
 }

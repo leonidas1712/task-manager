@@ -47,6 +47,7 @@ async function getTasks(): Promise<Task[]> {
 }
 
 // DELETE tasks/:id
+// return id of task that was deleted
 async function deleteTask(id: number): Promise<number> {
     const url = `${TASKS}/${id}`;
     const res = await axios.delete<Task>(url);
@@ -54,15 +55,16 @@ async function deleteTask(id: number): Promise<number> {
 }
 
 // POST /categories/:id/tasks
-// TODO: refactor API to expose POST /tasks with body including category id, same for edit task
+// return added task
 async function addTask(categoryId:number, body: TaskPostObject): Promise<Task> {
     const url = `${CATEGORIES}/${categoryId}/${TASKS_NAME}`;
     const res = await axios.post<Task>(url, body);
     return res.data;
 }
 
-// PATCH /categories/:category_id/tasks/:taskid
+// PATCH /tasks/:taskid
 // receive params in sep. object so can re-use TaskPostObject type
+// return edited task
 export type EditTaskParams = { taskId: number }
 export type TaskPatchObject = {
     name: string;
@@ -79,6 +81,7 @@ async function editTask(params:EditTaskParams, body: TaskPatchObject): Promise<T
 }
 
 // PATCH /categories/:id
+// return category that was edited
 export type EditCategoryParams = { categoryId: number}
 async function editCategory(params: EditCategoryParams, body: CategoryPostObject): Promise<Category> {
     const { categoryId } = params;

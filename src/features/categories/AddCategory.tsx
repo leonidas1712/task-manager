@@ -25,7 +25,6 @@ function AddCategory() {
     const id = "add-category-form";
 
     // useFormik instead of Formik component so I can access resetForm in handleClose
-    // TODO: after add category, navigate to the new category and set the active nav somehow
     const formik = useFormik({
         initialValues: {
             name: ''
@@ -42,8 +41,10 @@ function AddCategory() {
         validationSchema: validation
     });
 
-    const { handleSubmit, handleChange, handleBlur, values, touched, errors, resetForm } = formik;
+    const { handleSubmit, touched, errors, resetForm } = formik;
 
+    // because form needs to be reset no matter how the modal is closed, makes it hard to separate modal and form
+    // into re-usable components
     const handleClose = () => { resetForm(); setShow(false); };
     
 
@@ -82,7 +83,6 @@ function AddCategory() {
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose} disabled={!canClose}>Cancel</Button>
                 <Button variant="primary" type="submit" disabled={!canClose} form={id}> Add category </Button>
-                {/* <Button variant="danger" onClick={disableClose}>Disable close</Button> */}
             </Modal.Footer>
         </Modal>
         </>

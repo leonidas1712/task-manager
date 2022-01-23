@@ -45,10 +45,10 @@ function CategoryPage(props:{}) {
     // category page in charge of default msg
     const displayTasks = () => {
         if (categoryTasks.length == 0) {
-            return <div className="lead"> No tasks in this category! Well done. </div>
+            return <div className="lead"> No tasks in this category. Well done! </div>
         } 
         
-        return <TasksList tasks={categoryTasks} sortBy={sortOption} />
+        return <TasksList tasks={categoryTasks} sortBy={sortOption} showSearch />
     }
 
     return (
@@ -63,6 +63,7 @@ function CategoryPage(props:{}) {
                 <hr className="mt-0 mb-3"></hr>
 
                 <AddTaskButton categoryId={id} />
+                <div className="mb-4"></div>
                 { displayTasks() }
             
             </div>

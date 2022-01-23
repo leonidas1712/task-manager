@@ -25,7 +25,7 @@ function UpcomingCard(props: { dateDisplay:string, tasks: Task[]}) {
             </div>
             
             <hr></hr>
-            <TasksList tasks={tasks} showCategory sortBy={sortOption}/>
+            <TasksList tasks={tasks} showCategory showSearch sortBy={sortOption}/>
             <div className="mb-5"></div>
         </div>
     );
@@ -82,7 +82,7 @@ function UpcomingList({ tasks }: { tasks: Task[] }) {
                 return (
                     <> 
                         <hr></hr>
-                        <p className="lead"> No tasks with a due date </p>
+                        <p className="lead"> No tasks with a due date. </p>
                     </>
                 );
             case Loading.REJECTED:
@@ -91,22 +91,6 @@ function UpcomingList({ tasks }: { tasks: Task[] }) {
                 return <StandardSpin />;
         }
     }
-
-
-    // if (tasksWithDueDate.length === 0) {
-    //     return (
-            // <> 
-            //     <hr></hr>
-            //     <p className="lead"> No tasks with due date </p>
-            // </>
-    //     )
-    // } else {
-    //     return (
-    //         <div>
-    //             { groupToCards() }
-    //         </div>
-    //     )
-    // }
 }
 
 export default UpcomingList;

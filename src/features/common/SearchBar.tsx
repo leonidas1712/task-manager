@@ -21,9 +21,6 @@ function SearchBar(props: { handleSearchValue: Function }) {
                             </InputAdornment>
                         )
                     }}
-                    sx = {{
-                        marginLeft:"2rem"
-                    }}
                 />
     )
 }
