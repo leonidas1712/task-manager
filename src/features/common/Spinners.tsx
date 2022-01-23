@@ -1,6 +1,7 @@
 import React from 'react';
 import { Spinner } from 'react-bootstrap';
 
+// to standardise spinner across components
 export function StandardSpin() {
     return (
         <div>

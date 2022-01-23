@@ -9,20 +9,21 @@ import AddTaskButton from "../tasks/AddTaskButton";
 import RenameCategory from "./RenameCategory";
 import DeleteCategory from "./DeleteCategory";
 import { OPTION_NAMES, DEFAULT_OPTION } from "../tasks/taskSorter";
-import './CategoryPage.css';
 import { selectCategoryStatus } from "./categoriesSlice";
 import { StandardSpin } from "../common/Spinners";
 import useSortBy from "../common/useSortBy";
 import { Loading } from "../../Constants";
 
 
+
 // TODO: everytime I switch categories, it should make a network request to update all tasks
     // (or just the clicked category's tasks?)
 
+// Display page for a category. If category does not exist, show corresponding message.
 function CategoryPage(props:{}) {
-    const params = useParams();
-    const id = Number(params.categoryId);
-    const status = useAppSelector(selectCategoryStatus);
+    const params = useParams(); 
+    const id = Number(params.categoryId); // to check if the category exists
+    const status = useAppSelector(selectCategoryStatus); // handle Loading status: spinner, error
     
     const categoryIds = useAppSelector(selectAllCategoryIds);
     
@@ -33,6 +34,7 @@ function CategoryPage(props:{}) {
 
     category = category ? category : errorCategory();
     
+    // if !includes is because of rejected, show the same message (sidebar will show error loading categories)
     if (!categoryIds.includes(id)) {
         switch(status) {
             case Loading.PENDING:

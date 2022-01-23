@@ -12,24 +12,23 @@ import { selectCategoryStatus } from "./categoriesSlice";
 
 
 // CategoryList for use in navigation in sidebar only 
-type SetActive = React.Dispatch<React.SetStateAction<string>>;
 
 interface CategoryNavProps {
     name: string; 
     route: string;
-    //setActive:SetActive
 }
 
+// To show one navigation element corresponding to a category or page
 function CategoryNav(props: CategoryNavProps) {
     const pageId = usePageId();
 
+    // used to ensure styling is set correctly, no matter how I navigate to the category (based on pageId)
     const isActive = () => {
         return pageId == props.route;
     };
 
     return (
         <div className="d-inline-flex align-items-center justify-content-between">
-            {/* onClick={() => props.setActive(props.route)} */}
             <Nav.Item style={{width:"100%"}} > 
                 <Nav.Link active= {isActive()} eventKey={props.route} className="text-white">
                     {props.name}
@@ -42,6 +41,7 @@ function CategoryNav(props: CategoryNavProps) {
 }
 
 
+// Navs that are not dynamically generated, re-use CategoryNav for it since it is same but curried
 function UpcomingNav() {
     return <CategoryNav name="Upcoming" route={UPCOMING_PATH}/>;
 }
@@ -52,11 +52,10 @@ function AllTasksNav() {
 
 interface CategoryListProps {
     categories: Category[];
-    //setActive:SetActive;
 }
 
 
-
+// Consists of CategoryNav each with name and a route that corresponds to last part of url path
 function CategoryList(props: CategoryListProps) {
    const { categories } = props; 
    const categoryStatus = useAppSelector(selectCategoryStatus);
@@ -75,11 +74,12 @@ function CategoryList(props: CategoryListProps) {
         switch(categoryStatus) {
             case Loading.PENDING:
                 return <StandardSpin/>;
+            case Loading.REJECTED:
+                return <p className="text-danger mx-3"> Error loading categories</p>  
             case Loading.FULFILLED:
             case Loading.IDLE: 
                 return fulfilledCase();
-            case Loading.REJECTED:
-                return <p className="text-danger mx-3"> Error loading categories</p>                 
+                           
         }
     }
 

@@ -1,6 +1,8 @@
 import { Modal } from "react-bootstrap"
 import { useState } from 'react';
 
+// Failed attempt at making modal logic re-usable. Difficult due to circular dependencies with form and modal
+// Keep for future attempts
 interface CustomModalProps {
     title?: any;
     body?: any;

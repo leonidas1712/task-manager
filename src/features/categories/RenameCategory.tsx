@@ -2,10 +2,8 @@ import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import { editCategory, getCategories } from '../categories/categoriesSlice';
 import { useAppDispatch } from '../../app/hooks';
-import { addNewCategory } from './categoriesSlice';
 import { useCategoryYup } from './Validation';
 import { Button, Modal, Form, Row } from 'react-bootstrap';
-import { PlusLg } from 'react-bootstrap-icons';
 import { Category } from '../../Types';
 import { updateCategoryArgsOf } from './updateCategory';
 
@@ -21,7 +19,8 @@ function RenameCategory({ category }: { category: Category }) {
 
     const handleShow = () => { dispatch(getCategories()); setShow(true); };
 
-    const validation = useCategoryYup();
+    const validation = useCategoryYup(); // re-use Yup object from Add Category
+
     // I can have a submit button outside the form by setting button form prop to id, and form id to id
     // This does not work on IE11: https://stackoverflow.com/questions/49525057/react-formik-use-submitform-outside-formik
     const id = "add-category-form";
@@ -43,7 +42,7 @@ function RenameCategory({ category }: { category: Category }) {
         validationSchema: validation,
     });
 
-    const { handleSubmit, handleChange, handleBlur, values, touched, errors, resetForm } = formik;
+    const { handleSubmit, touched, errors, resetForm } = formik;
 
     const handleClose = () => { resetForm(); setShow(false); };
     
@@ -80,7 +79,6 @@ function RenameCategory({ category }: { category: Category }) {
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose} disabled={!canClose}>Cancel</Button>
                 <Button variant="primary" type="submit" disabled={!canClose} form={id}> Rename category </Button>
-                {/* <Button variant="danger" onClick={disableClose}>Disable close</Button> */}
             </Modal.Footer>
         </Modal>
         </>

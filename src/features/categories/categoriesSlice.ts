@@ -12,7 +12,7 @@ import { getCategories as getCategoriesFromAPI,
 } from "../../api/APIService";
 import { Loading, sortComparer } from "../../Constants";
 
-
+// structure: ids: [..], entities: [..]
 const categoriesAdapter = createEntityAdapter<Category>({
     sortComparer
 });
@@ -63,6 +63,7 @@ const categoriesSlice = createSlice({
         })
         .addCase(addNewCategory.fulfilled, categoriesAdapter.addOne)
         .addCase(editCategory.fulfilled, (state, action) => {
+            // payload can only be one object, so need to separate required params for updateOne
             const { id, ...changes} = action.payload;
             const update = { id, changes };
             categoriesAdapter.updateOne(state, update);

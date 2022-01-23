@@ -9,6 +9,7 @@ type DeleteCategoryProps = {
     category: Category
 }
 
+// Modal and button for Delete category 
 function DeleteCategory({ category }: DeleteCategoryProps) {
     const [show, setShow] = useState<boolean>(false);
     const [canClose, setCanClose] = useState<boolean>(true);
@@ -18,9 +19,8 @@ function DeleteCategory({ category }: DeleteCategoryProps) {
     const handleClose = () => setShow(false);
     const navigate = useNavigateHelper();
 
-    // TODO: navigate to first category or /categories if there are none left
     const handleDelete = async () => {
-        setCanClose(false);
+        setCanClose(false); // while dispatching API req, can't close the modal or re-submit
         await dispatch(deleteCategory({ categoryId: category.id }))
         setCanClose(true);
         handleClose();

@@ -3,7 +3,10 @@ import React, { useState } from 'react';
 import { OPTION_NAMES, DEFAULT_OPTION } from "../tasks/taskSorter";
 import { DropdownButton, Dropdown } from 'react-bootstrap';
 
-function useSortBy() {
+// Hook that returns sortOption as a string and sort by button component
+// Could have separated button and state into separate functions, but sort by button is closely coupled with
+// sort options due to the dropdown and default value, so it is easier to put them together.
+function useSortBy(): { sortOption: string, SortByButton: React.FC } {
     const [sortOption, setSortOption] = useState(DEFAULT_OPTION || "Error");
 
     const dropDownOptions = () => {
