@@ -49,7 +49,6 @@ async function getTasks(): Promise<Task[]> {
 // DELETE tasks/:id
 // return id of task that was deleted
 async function deleteTask(id: number): Promise<number> {
-    await delay(3000);
     const url = `${TASKS}/${id}`;
     const res = await axios.delete<Task>(url);
     return res.data.id;
