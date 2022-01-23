@@ -37,7 +37,7 @@ function AllTasks() {
     return (
         <div>
             <div className="d-flex align-items-center">
-                <h2 className="lead fs-2">All Tasks</h2> 
+                <h2 className="lead fs-2">All tasks</h2> 
                 <div className="mx-5"><SortByButton /></div>
             </div>
             <hr></hr>
