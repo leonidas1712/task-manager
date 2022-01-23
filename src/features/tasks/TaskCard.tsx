@@ -38,7 +38,7 @@ function DisplayDescription({ desc }:DescProps) {
     return desc ? < Description desc={desc}/> : <EmptyDescription/>
 }
 
-// to handle showing the due date in a card text. must do a type guard as DueDateStr expects a string
+// to handle showing the due date in a card text.
 // DueDateStr handles displaying the date string with appropriate formatting
 function DueDate(props: { dueDate: string }) {
     const { dueDate } = props;
@@ -51,6 +51,7 @@ function DueDate(props: { dueDate: string }) {
 }
 
 // takes in a due date that might be undefined and returns the correct component to show
+// due date might be undefined/empty, ternary also acts as a type guard
 function DisplayDueDate({ dueDate }: DueDateProps) {
     return dueDate ? <DueDate dueDate={dueDate} /> : <p className="text-muted">No due date</p>;
 }

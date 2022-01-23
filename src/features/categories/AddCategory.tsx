@@ -7,6 +7,7 @@ import { addNewCategory, getCategories } from './categoriesSlice';
 import { useAppDispatch } from '../../app/hooks';
 import { useNavigateHelper } from '../../urlHelper';
 
+// Button and modal for Add Category
 function AddCategory() {
     const [show, setShow] = useState<boolean>(false);
     // modal backdrop=true keyboard=true, closeButton=true, other closable btns disabled = false when modal is closable
@@ -50,41 +51,41 @@ function AddCategory() {
 
     return (
         <>
-        <Button variant="secondary" className="mx-2 mt-3 d-flex justify-content-center align-items-center"
-        onClick={handleShow}>
-            <PlusLg size={20} style={{marginRight: "0.5rem"}}/>
-            <span className="lead">Add Category</span>
-        </Button>
+            <Button variant="secondary" className="mx-2 mt-3 d-flex justify-content-center align-items-center"
+            onClick={handleShow}>
+                <PlusLg size={20} style={{marginRight: "0.5rem"}}/>
+                <span className="lead">Add Category</span>
+            </Button>
 
-        <Modal show={show} onHide={handleClose} backdrop={canClose || 'static'} keyboard={canClose}>
-            <Modal.Header closeButton={canClose}>
-                <Modal.Title>Add Category</Modal.Title>
-            </Modal.Header>
+            <Modal show={show} onHide={handleClose} backdrop={canClose || 'static'} keyboard={canClose}>
+                <Modal.Header closeButton={canClose}>
+                    <Modal.Title>Add Category</Modal.Title>
+                </Modal.Header>
 
-            <Modal.Body> 
-                <Form id={id} noValidate onSubmit={handleSubmit}>
-                    <Row>
-                        <Form.Group>
-                            <Form.Label>Name: </Form.Label>
-                            <Form.Control
-                                type="text"
-                                isValid={touched.name && !errors.name}
-                                isInvalid={!!errors.name}
-                                // this passes in: value, name, onChange, onBlur
-                                {...formik.getFieldProps("name")}
-                            />
-                            <Form.Control.Feedback>Looks good</Form.Control.Feedback>
-                            <Form.Control.Feedback type="invalid">{errors.name}</Form.Control.Feedback>
-                        </Form.Group>
-                    </Row>
-                </Form>
-            </Modal.Body>
+                <Modal.Body> 
+                    <Form id={id} noValidate onSubmit={handleSubmit}>
+                        <Row>
+                            <Form.Group>
+                                <Form.Label>Name: </Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    isValid={touched.name && !errors.name}
+                                    isInvalid={!!errors.name}
+                                    // this passes in: value, name, onChange, onBlur
+                                    {...formik.getFieldProps("name")}
+                                />
+                                <Form.Control.Feedback>Looks good</Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid">{errors.name}</Form.Control.Feedback>
+                            </Form.Group>
+                        </Row>
+                    </Form>
+                </Modal.Body>
 
-            <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose} disabled={!canClose}>Cancel</Button>
-                <Button variant="primary" type="submit" disabled={!canClose} form={id}> Add category </Button>
-            </Modal.Footer>
-        </Modal>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose} disabled={!canClose}>Cancel</Button>
+                    <Button variant="primary" type="submit" disabled={!canClose} form={id}> Add category </Button>
+                </Modal.Footer>
+            </Modal>
         </>
     )
 }

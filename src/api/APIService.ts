@@ -99,8 +99,6 @@ export async function deleteCategory(params: EditCategoryParams):Promise<Categor
     return res.data;
 }
 
-
-
 export {
     getCategories,
     addCategory,

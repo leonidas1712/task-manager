@@ -44,7 +44,7 @@ function IndexPage() {
 
     return (
         <div>
-            <p className="lead display-6">{displayWelcome()}</p>
+            <p className="lead display-6">{ displayWelcome() }</p>
             <hr></hr>
         </div>
     )

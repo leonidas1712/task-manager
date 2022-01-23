@@ -12,6 +12,7 @@ import { Task } from "../Types"
 
 // pass in date string to display and filtered tasks array to use for TasksList
 // pre filter tasks to avoid unnecc. repeated filtering
+// put in same file since main use is with UpcomingList and is not very big
 function UpcomingCard(props: { dateDisplay:string, tasks: Task[]}) {
     const { dateDisplay, tasks } = props;
     const { sortOption, SortByButton } = useSortBy();
@@ -32,7 +33,8 @@ function UpcomingCard(props: { dateDisplay:string, tasks: Task[]}) {
 }
 
 // input: non-empty task array where all tasks have due_date
-// output: object with key as due date ISO, value as array of tasks with that date
+// output: object with key as date display string, value as array of tasks with that date
+// put in same file since main use with UpcomingList
 type TaskGroupByDate = Record<string, Task[]>;
 function groupTasksByDueDate(tasks: Task[]): TaskGroupByDate {
     // sort by due date at first so that order maintained during groupBy

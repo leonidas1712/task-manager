@@ -6,7 +6,7 @@ import { DropdownButton, Dropdown } from 'react-bootstrap';
 // Hook that returns sortOption as a string and sort by button component
 // Could have separated button and state into separate functions, but sort by button is closely coupled with
 // sort options due to the dropdown and default value, so it is easier to put them together.
-function useSortBy(): { sortOption: string, SortByButton: React.FC } {
+function useSortBy(): { sortOption: string, SortByButton: () => JSX.Element} {
     const [sortOption, setSortOption] = useState(DEFAULT_OPTION || "Error");
 
     const dropDownOptions = () => {
@@ -15,6 +15,8 @@ function useSortBy(): { sortOption: string, SortByButton: React.FC } {
         });
     }
 
+    // to update sortOption state when a new option is selected. propagates to sortOption in parent component,
+    // which would refresh the TasksList being used
     const optionSelectFn = (val:string | null) => {
         if (!val) {
             setSortOption(DEFAULT_OPTION || "Error");

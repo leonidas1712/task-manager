@@ -24,6 +24,7 @@ function DeleteCategory({ category }: DeleteCategoryProps) {
         await dispatch(deleteCategory({ categoryId: category.id }))
         setCanClose(true);
         handleClose();
+        // navigate to /categories after delete is done (Welcome, please select/create a category)
         navigate(CATEGORIES_PATH);
     }
 

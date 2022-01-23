@@ -19,7 +19,7 @@ type AddTaskButtonProps = {
 function AddTaskButton({ categoryId }: AddTaskButtonProps) {
     const [show, setShow] = useState<boolean>(false);
     const [canClose, setCanClose] = useState<boolean>(true);
-    const id = "add-task-form"
+    const id = "add-task-form";
     
     
     const dispatch = useAppDispatch();
@@ -134,7 +134,6 @@ function AddTaskButton({ categoryId }: AddTaskButtonProps) {
                 <Button variant="secondary" onClick={handleClose} disabled={!canClose}>Cancel</Button>
                 <Button variant="primary" type="submit" disabled={!canClose} form={id}> Add task </Button>
             </Modal.Footer>
-            {/* <pre>{JSON.stringify(values)}</pre> */}
         </Modal>
         </div>
     );

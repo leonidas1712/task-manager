@@ -5,8 +5,6 @@ import { dateTimeInputsToDate,
     DATE_PICKER_FORMAT, 
  } from '../common/dateObjects';
 
-
-
 // if chosen date is earlier than current date, error
     // compare by converting to date only string as indicated by format for BOTH, otherwise
     // new Date() on its own will have inconsistent associated time

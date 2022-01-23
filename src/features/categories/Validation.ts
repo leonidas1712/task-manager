@@ -28,6 +28,7 @@ export function useYup():any {
     return yup;
 }
 
+// yup validation object specific to use for category validation (Add and Rename)
 export function useCategoryYup() {
     const customYup = useYup();
     return customYup.object({

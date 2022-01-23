@@ -8,9 +8,6 @@ import { StandardSpin } from "../common/Spinners";
 import AllTasks from "../tasks/AllTasks";
 import { selectCategoryStatus } from "./categoriesSlice";
 
-
-
-
 // CategoryList for use in navigation in sidebar only 
 
 interface CategoryNavProps {

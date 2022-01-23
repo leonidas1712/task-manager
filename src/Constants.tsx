@@ -1,9 +1,9 @@
 import { CreatedAt } from "./Types";
-import { format } from 'date-fns';
 
-
+// sidebar is position: fixed, need explicit width
 export const sidebarWidth = "15rem";
 
+// Loading status for tasks, categories
 export enum Loading {
     IDLE = "idle",
     PENDING = "pending",

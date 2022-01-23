@@ -1,9 +1,11 @@
+// for url related constants, functions, hooks
+
 import { useLocation, useNavigate } from "react-router-dom";
 export const CATEGORIES_PATH = "categories";
 export const UPCOMING_PATH = "upcoming";
 export const ALL_TASKS_PATH = "all";
 
-// assumption: id is numeric
+// assumption: id is numeric, and non-category related page paths are not numeric
 const isId = (url:string | number):boolean => {
     return !isNaN(Number(url));
 }
@@ -16,6 +18,8 @@ const pageIdFromUrl = (url:string):string => {
     return arr[arr.length - 1];
 }
 
+// to access the path at the very end of the url
+// e.g /categories/123 -> pageId = 123, /upcoming => pageId = upcoming
 export function usePageId() {
     const location = useLocation();
     return pageIdFromUrl(location.pathname);

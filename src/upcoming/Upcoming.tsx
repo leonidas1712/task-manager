@@ -6,7 +6,7 @@ import Spacer from '../Spacer';
 import UpcomingList from './UpcomingList';
 
 
-
+// Component to display for Upcoming page (presentational)
 function Upcoming() {
     const tasks = useAppSelector(selectAllTasks);
     return (

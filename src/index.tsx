@@ -16,10 +16,7 @@ import Upcoming from './upcoming/Upcoming';
 import AllTasks from './features/tasks/AllTasks';
 import { CATEGORIES_PATH, UPCOMING_PATH, ALL_TASKS_PATH } from './urlHelper';
 
-
-
-
-
+// get tasks and categories on load
 store.dispatch(getCategories());
 store.dispatch(getTasks());
 
@@ -31,27 +28,16 @@ ReactDOM.render(
         <Routes>
           <Route path="/" element={<App/>}>
             <Route index element={<IndexPage/>}></Route>
-            <Route path = {ALL_TASKS_PATH} element={<AllTasks />}/>
+            <Route path = {ALL_TASKS_PATH} element={<AllTasks />}/> 
             <Route path= {UPCOMING_PATH} element={<Upcoming/>} />
             <Route path="*" element= {<Navigate to= "/"/>}/>
 
             <Route path={CATEGORIES_PATH}>
               <Route index element={<IndexPage/>}></Route>
-              {/* <Route path="*" element= {<Navigate to= "/categories"/>}/> */}
-              {/* Ideally upcoming route would be outside categories but this makes it
-              easier to work with bootstrap navigation */}
-              {/* <Route path="upcoming" element={<h1>Upcoming page</h1>} /> */}
               <Route path=":categoryId" element={<Category/>} />
-              
-
             </Route>
-            
-
           </Route>
-
-
         </Routes>
-
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,

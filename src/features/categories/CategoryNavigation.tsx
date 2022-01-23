@@ -7,6 +7,7 @@ import { selectAllCategories } from "./categoriesSlice";
 import AddCategory from "./AddCategory";
 import Spacer from "../../Spacer";
 
+// Wrapper around entire Nav tree (including All tasks, Upcoming)
 export default function CategoryNavigation() {
     const navigate = useNavigateHelper();
     const allCategories = useAppSelector(selectAllCategories);
@@ -14,6 +15,8 @@ export default function CategoryNavigation() {
         <>
             <Nav 
                 variant="pills" 
+                // when a nav elem. is selected, fires onSelect with route, passes to navigate
+                // which navigates to a page or a specific category based on the key
                 onSelect={(key) => { navigate(key)} }
                 className="flex-column px-2" 
                 >

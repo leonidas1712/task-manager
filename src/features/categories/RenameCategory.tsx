@@ -7,8 +7,6 @@ import { Button, Modal, Form, Row } from 'react-bootstrap';
 import { Category } from '../../Types';
 import { updateCategoryArgsOf } from './updateCategory';
 
-
-
 function RenameCategory({ category }: { category: Category }) { 
     const [show, setShow] = useState<boolean>(false);
     // modal backdrop=true keyboard=true, closeButton=true, other closable btns disabled = false when modal is closable
@@ -17,6 +15,8 @@ function RenameCategory({ category }: { category: Category }) {
     
     const dispatch = useAppDispatch();
 
+    // get categories to prevent naming conflict in case updated in different tab
+    // not essential to block editing, async dispatch is usually fast enough
     const handleShow = () => { dispatch(getCategories()); setShow(true); };
 
     const validation = useCategoryYup(); // re-use Yup object from Add Category
