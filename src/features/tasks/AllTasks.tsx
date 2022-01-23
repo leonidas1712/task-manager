@@ -71,19 +71,7 @@ function AllTasks() {
                 <h2 className="lead fs-2 mr-5">All tasks</h2> 
                 <SearchBar handleSearchValue={handleSearchValue} />
                 <div className="mx-5"><SortByButton /></div>
-                {/* <TextField 
-                    variant="standard" 
-                    value={value}
-                    placeholder="Search for a task"
-                    // MUI search icon and text field look nicer
-                    InputProps = {{
-                        startAdornment: (
-                            <InputAdornment position="start">
-                                <Search />
-                            </InputAdornment>
-                        )
-                    }}
-                /> */}
+     
                 
             </div>
             <hr></hr>
