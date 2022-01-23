@@ -1,5 +1,5 @@
 // Validation logic related to tasks (forms)
-// use custom logic instead of yup because it is easier to write custom logic manually
+// use custom logic instead of yup because it is easier to write custom logic manually for tasks
 import { format } from 'date-fns';
 import { dateTimeInputsToDate, 
     DATE_PICKER_FORMAT, 

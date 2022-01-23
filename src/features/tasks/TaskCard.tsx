@@ -55,8 +55,8 @@ function DisplayDueDate({ dueDate }: DueDateProps) {
     return dueDate ? <DueDate dueDate={dueDate} /> : <p className="text-muted">No due date</p>;
 }
 
-// TODO: add MUI spinner in place of or next to checkbox when await dispatch
 // Component to display an individual task along with delete (checkbox) and edit buttons
+// if showCategory is true, show a link to the task category as well which redirects to resp. cat page
 type TaskCardProps = { task:Task, showCategory?:boolean }
 function TaskCard({ task, showCategory }:TaskCardProps) {
     const [buttonsDisabled, setButtonsDisabled] = useState<boolean>(false);
@@ -82,7 +82,7 @@ function TaskCard({ task, showCategory }:TaskCardProps) {
                                         <Checkbox onClick={checkboxDelete} disabled={buttonsDisabled}
                                             sx={{width:0, height:0, marginRight: "0.7rem"}}
                                          /> }
-                                         
+
                                 </Tooltip>
                                 <span> {task.name} </span>
                             </Card.Title>

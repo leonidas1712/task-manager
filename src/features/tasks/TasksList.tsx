@@ -15,11 +15,17 @@ type TaskListProps = {
     showCategory?: boolean | undefined,
     showSearch?:boolean | undefined
 }
+
+// Display tasks passed in with TaskCard. sortBy defines sort order, use default if not available
+// showSearch if true shows search bar. Decided to put showSearch into TasksList instead of in respective components
+// as it is easier to keep the bar with the list than separate like sort by button (both in terms of styling, logic)
 function TasksList(props: TaskListProps) {
     const { tasks, sortBy, showCategory, showSearch } = props;
     const [value, setValue] = useState<string>("");
 
+    // filter then sort
     const filteredTasks = tasks.filter(makeTaskFilter(value));
+    // create new array to avoid unwanted mutation (JS sort is in place)
     const sortedTasks = sortTasks(filteredTasks, sortBy);    
 
     const showTasks = (tasks:Task[]) => {
@@ -36,7 +42,6 @@ function TasksList(props: TaskListProps) {
         </div>
     )
 }
-
 
 
 export default TasksList;

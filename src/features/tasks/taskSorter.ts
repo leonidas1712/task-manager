@@ -1,9 +1,10 @@
 // A-Z, Z-A, Newest first, Oldest first, Due date (most urgent)
-import { sortComparer } from '../../Constants';
+// For sorting related logic and constants. Sort by button uses option names to display drop down.
 import { Task } from '../../Types';
 
 type TaskSorter = (a: Task, b:Task) => number
 
+// sort functions that can be passed into array.sort
 const sortByAlphaAsc:TaskSorter = (a,b) => {
     return a.name.localeCompare(b.name);
 }
@@ -46,6 +47,7 @@ export const sortByDueDate:TaskSorter = (a,b) => {
     return 0; // keep original order if both no due date
 }
 
+// easy to add new sort option: just make new key and function
 const SORT_OPTIONS: Record<string, TaskSorter> = {
     "A-Z": sortByAlphaAsc,
     "Z-A": sortByAlphaDesc,

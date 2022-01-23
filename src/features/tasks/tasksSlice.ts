@@ -1,6 +1,5 @@
 import { createSlice, createEntityAdapter, createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
-import axios from 'axios';
 import { Task } from "../../Types";
 import { Loading, sortComparer } from "../../Constants";
 import { 
@@ -9,14 +8,12 @@ import {
     addTask as addTaskToAPI,
     editTask as editTaskInAPI,
     EditTaskParams,
-    TaskPostObject,
     TaskPatchObject
 } from "../../api/APIService";
-import { convertTaskFormToPostObject } from "./ConvertTaskPayload";
-import { EntityState, EntityId } from "@reduxjs/toolkit";
-import { Category } from "../../Types";
+
 import { deleteCategory } from "../categories/categoriesSlice";
 
+// For tasks reducer and async logic
 
 const tasksAdapter = createEntityAdapter<Task>({
     sortComparer
@@ -39,6 +36,7 @@ export type TaskPostArg = {
     priority?: string | null
 }
 
+// params is task id, body is task related information
 export type EditTaskArg = {
     params: EditTaskParams,
     body: TaskPatchObject
@@ -86,6 +84,7 @@ const tasksSlice = createSlice({
 
             tasksAdapter.updateOne(state, update);
         })
+        // to handle deleting tasks in a category when a category is deleted
         .addCase(deleteCategory.fulfilled, (state, action) => {
             const { id: idDeleted } = action.payload;
             const tasks = selectAllTasksLocal(state);
@@ -104,6 +103,7 @@ const tasksSlice = createSlice({
 export default tasksSlice.reducer;
 
 
+// Root state selectors
 export const {
     selectAll: selectAllTasks,
     selectById: selectTaskById,
@@ -118,6 +118,7 @@ export const selectFilteredTasks = (state:RootState, filterFn:(task:Task) => boo
 
 // input: searchValue as string
 // output: function that takes a Task and returns true if we want to include it, false if exclude
+// filter by case-insensitive match with name or description
 export function makeTaskFilter(searchValue: string): (task:Task) => boolean {
     const value: string = searchValue.trim().toLowerCase();
 
