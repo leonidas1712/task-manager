@@ -116,6 +116,26 @@ export const selectFilteredTasks = (state:RootState, filterFn:(task:Task) => boo
     return tasks.filter(filterFn);
 }
 
+// input: searchValue as string
+// output: function that takes a Task and returns true if we want to include it, false if exclude
+export function makeTaskFilter(searchValue: string): (task:Task) => boolean {
+    const value: string = searchValue.trim().toLowerCase();
+
+    function taskFilter(task: Task) {
+        if (value != '') {
+            const name: string = task.name || '';
+            const desc: string = task.description || '';
+
+            return name.toLowerCase().includes(value) || 
+                desc.toLowerCase().includes(value);
+        }
+
+        return true;
+    }
+
+    return taskFilter;
+}
+
 export const errorTask = ():Task => {
     return {
         id: -1,
