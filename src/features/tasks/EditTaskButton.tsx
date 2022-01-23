@@ -58,11 +58,9 @@ function EditTaskButton(props: EditTaskProps) {
         enableReinitialize:true
     });
 
-    const { handleSubmit, handleChange, handleBlur, values, touched, errors, resetForm, setFieldValue } = formik;
+    const { handleSubmit, touched, errors, resetForm } = formik;
 
     const handleClose = () => { resetForm(); setShow(false); };
-
-    const [title, setTitle] = useState<string>(task.name);
 
     return (
         <>
@@ -133,22 +131,6 @@ function EditTaskButton(props: EditTaskProps) {
                     </Row>
 
                     <CategorySelect formik={formik}/>
-{/* 
-                    <Row className="mb-3">
-                        <Form.Group>
-                            <Form.Label>Category:</Form.Label>
-                            <Form.Select
-                                // isValid={touched.time && !errors.time}
-                                // isInvalid={!!errors.time}
-                                {...formik.getFieldProps("categoryId")}
-                            >   
-
-                                </Form.Select>
-                            <Form.Control.Feedback>Note: incomplete times are ignored</Form.Control.Feedback>
-                            <Form.Control.Feedback type="invalid">{errors.time}</Form.Control.Feedback>
-                        </Form.Group>
-                    </Row> */}
-
                 </Form>
             </Modal.Body>
 
@@ -156,7 +138,6 @@ function EditTaskButton(props: EditTaskProps) {
                 <Button variant="secondary" onClick={handleClose} disabled={!canClose}>Cancel</Button>
                 <Button variant="primary" type="submit" disabled={!canClose} form={id}> Edit task </Button>
             </Modal.Footer>
-            {/* <pre>{JSON.stringify(values)}</pre> */}
         </Modal>
         </>
     )

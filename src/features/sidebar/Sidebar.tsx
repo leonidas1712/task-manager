@@ -10,6 +10,8 @@ import CategoryNavigation from "../categories/CategoryNavigation";
 function Sidebar() {
     return (
         <div className="sidebar pt-2" style={{width: sidebarWidth}}> 
+            <h3 className="text-center mt-2">Task Manager</h3>
+            <div className="mt-3"></div>    
             <CategoryNavigation />
         </div>
     )

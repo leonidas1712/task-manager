@@ -7,14 +7,15 @@ import { StandardSpin } from '../common/Spinners';
 import { Loading } from '../../Constants';
 import SearchBar from '../common/SearchBar';
 
+// Component for displaying all tasks across categories
 function AllTasks() {
-    const [value, setValue] = useState<string>(""); // search value, in order to refresh selector below
     const tasks = useAppSelector(selectAllTasks);
     const status = useAppSelector(selectTasksStatus); 
     
     const { sortOption, SortByButton } = useSortBy();
 
 
+    // handle loading status if no tasks (no tasks could be because actually 0 tasks, still loading or error)
     const displayTasks = () => {
         if (tasks.length == 0) {
             switch (status) {

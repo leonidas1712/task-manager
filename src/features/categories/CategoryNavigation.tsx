@@ -17,9 +17,8 @@ export default function CategoryNavigation() {
                 onSelect={(key) => { navigate(key)} }
                 className="flex-column px-2" 
                 >
-                    <h3 className="text-center mt-2">Task Manager</h3>
-                    <div className="mt-3"></div>    
                     
+
                 <CategoryList categories={allCategories} />
             </Nav>
 

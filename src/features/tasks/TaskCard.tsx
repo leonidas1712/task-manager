@@ -1,15 +1,14 @@
-//import { useAppSelector } from '../../app/hooks';
-import { useState, useEffect } from 'react';
-import { Card, Row, Col, Button } from 'react-bootstrap';
+import { useState } from 'react';
+import { Card, Row, Col } from 'react-bootstrap';
 import { Task } from '../../Types';
 import Checkbox from '@mui/material/Checkbox';
-import { Tooltip } from '@mui/material';
+import { CircularProgress, Tooltip } from '@mui/material';
 import { deleteTask } from './tasksSlice';
 import { useAppDispatch } from '../../app/hooks';
-import { format } from 'date-fns';
 import { DueDateStr } from '../common/dateObjects';
 import EditTaskButton from './EditTaskButton';
 import CategoryLink from './CategoryLink';
+
 
 import './TaskCard.css'
 
@@ -41,12 +40,8 @@ function DisplayDescription({ desc }:DescProps) {
 
 // to handle showing the due date in a card text. must do a type guard as DueDateStr expects a string
 // DueDateStr handles displaying the date string with appropriate formatting
-function DueDate(props: DueDateProps) {
+function DueDate(props: { dueDate: string }) {
     const { dueDate } = props;
-
-    if (!dueDate) {
-        return <p>Error</p>
-    }
 
     return (
         <Card.Text>
@@ -61,6 +56,7 @@ function DisplayDueDate({ dueDate }: DueDateProps) {
 }
 
 // TODO: add MUI spinner in place of or next to checkbox when await dispatch
+// Component to display an individual task along with delete (checkbox) and edit buttons
 type TaskCardProps = { task:Task, showCategory?:boolean }
 function TaskCard({ task, showCategory }:TaskCardProps) {
     const [buttonsDisabled, setButtonsDisabled] = useState<boolean>(false);
@@ -81,9 +77,12 @@ function TaskCard({ task, showCategory }:TaskCardProps) {
                                 
                                 <Tooltip title="Complete task" placement="top-start">
                                     {/* Checkbox default creates extra unecc. space, set w,h to 0 to take it out */}
-                                    <Checkbox onClick={checkboxDelete} disabled={buttonsDisabled}
-                                    sx={{width:0, height:0, marginRight: "0.7rem"}}
-                                    />
+                                    {/* Show progress spinner (MUI) instead if doing deletion */}
+                                    { buttonsDisabled ? <CircularProgress size={20} sx={{marginRight: "0.6rem"}}/> : 
+                                        <Checkbox onClick={checkboxDelete} disabled={buttonsDisabled}
+                                            sx={{width:0, height:0, marginRight: "0.7rem"}}
+                                         /> }
+                                         
                                 </Tooltip>
                                 <span> {task.name} </span>
                             </Card.Title>
@@ -95,7 +94,6 @@ function TaskCard({ task, showCategory }:TaskCardProps) {
                             <DisplayDueDate dueDate={task.due_date}/>
                             <div>
                                 <EditTaskButton disabled={buttonsDisabled} task={task}/>
-                                {/* <p className="d-inline text-end mx-3">Category: efegnrnjrngjngernggngnr</p> */}
                                 { showCategory ? <CategoryLink id={task.category_id}/> : '' }
                             </div>
                         </Col>

@@ -14,6 +14,8 @@ import { addTask, TaskPostArg } from './tasksSlice';
 type AddTaskButtonProps = {
     categoryId: number
 }
+
+// Button and modal-form for add task
 function AddTaskButton({ categoryId }: AddTaskButtonProps) {
     const [show, setShow] = useState<boolean>(false);
     const [canClose, setCanClose] = useState<boolean>(true);
@@ -35,16 +37,18 @@ function AddTaskButton({ categoryId }: AddTaskButtonProps) {
         
         onSubmit: async (values:TaskValidationProps, {resetForm}) => {
             setCanClose(false);
+            // convert values from form into sub-object for dispatch
             const postObj = convertTaskFormToPostObject(values)
+            // need to add categoryId since it does not come with Add Task form values
             const taskPostArg:TaskPostArg = {category_id: categoryId, ...postObj};
             await dispatch(addTask(taskPostArg));
             setCanClose(true);
             handleClose();
         },
-        validate: validateTaskFields
+        validate: validateTaskFields // re-use same validation for edit and add task 
     });
 
-    const { handleSubmit, handleChange, handleBlur, values, touched, errors, resetForm, setFieldValue } = formik;
+    const { handleSubmit, touched, errors, resetForm } = formik;
 
     const handleClose = () => { resetForm(); setShow(false); };
 

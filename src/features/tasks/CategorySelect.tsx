@@ -4,7 +4,9 @@ import { useAppSelector } from '../../app/hooks';
 import { selectAllCategories } from '../categories/categoriesSlice';
 
 
-// formik prop to access form related values from edit task button
+// For use in Edit Task form to enable switching categories
+
+// formik prop needed to access form related values from edit task  
 // type is of the formik object specifically created inside edit task, but too complex to set type properly here
 // since the obj is created at runtime (can't export type from inside a function)
 function CategorySelect(props: { formik:any }) {
@@ -22,10 +24,7 @@ function CategorySelect(props: { formik:any }) {
             <Form.Group>
                 <Form.Label>Category:</Form.Label>
                     <Form.Select
-                        // isValid={touched.time && !errors.time}
-                        // isInvalid={!!errors.time}
                         {...formik.getFieldProps("categoryId")}
-                        // {...props}
                         isValid= {touched.categoryId}
                     >   
                     

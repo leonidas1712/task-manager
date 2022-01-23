@@ -71,7 +71,7 @@ function convertToDueDate(dateStr:string, timeStr:string):string | null {
     return dueDate;
 }
 
-// function that takes task form obj, converts to object ready for posting to server
+// function that takes task form values obj, converts to object ready for posting to server
 // for /POST (create task)
 export function convertTaskFormToPostObject(obj: TaskValidationProps):TaskPostObject {
     obj = convertAll(obj);

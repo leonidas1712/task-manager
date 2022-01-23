@@ -44,6 +44,7 @@ export const validateTaskFields = ({title, description, date, time}:TaskValidati
     // return errors object
     let errors:{title?:string, description?:string, date?: string, time?:string} = {} 
 
+    // title is required
     if (!title) {
         errors.title = "Title can't be blank";
     } 

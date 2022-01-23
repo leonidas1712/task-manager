@@ -56,6 +56,8 @@ interface CategoryListProps {
 
 
 // Consists of CategoryNav each with name and a route that corresponds to last part of url path
+// TODO: Consider static navs (All tasks, upcoming) as "category navs", so they can work with the same Nav onSelect fn
+// but in the future may want to move into separate file
 function CategoryList(props: CategoryListProps) {
    const { categories } = props; 
    const categoryStatus = useAppSelector(selectCategoryStatus);
