@@ -8,7 +8,7 @@ import { StandardSpin } from '../common/Spinners';
 import { Loading } from '../../Constants';
 import { TextField, InputAdornment } from '@mui/material';
 import { Search } from '@mui/icons-material';
-import useSearchBar from '../common/useSearchBar';
+import SearchBar from '../common/SearchBar';
 
 import { Task } from '../../Types';
 
@@ -33,8 +33,7 @@ function makeTaskFilter(searchValue: string): (task:Task) => boolean {
 }
 
 function AllTasks() {
-    const { value, setValue, SearchBar } = useSearchBar();
-    //let tasks = useAppSelector(selectAllTasks)
+    const [value, setValue] = useState<string>("");
     const tasks = useAppSelector(state => selectFilteredTasks(state, makeTaskFilter(value)));
     const status = useAppSelector(selectTasksStatus); 
     

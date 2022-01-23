@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { TextField, InputAdornment } from '@mui/material';
 import { Search } from '@mui/icons-material';
 
-// value is the string text to display in the field
-type props = {
-    value: string,
-    setValue: React.Dispatch<React.SetStateAction<string>>
-}
+// since TextField handles the text value and updating in display, we only need to
+// pass in a function that handles what to do when value changes
+    // But useState<string> is still necc. in component using search bar because the value
+    // needs to update task selector everytime text field changes. Otherwise there is no (?)
+    // way to ensure parent component list refreshes the filtered tasks
 function SearchBar(props: { handleSearchValue: Function }) {
     return (
         <TextField 
@@ -27,15 +27,4 @@ function SearchBar(props: { handleSearchValue: Function }) {
                 />
     )
 }
-
-function useSearchBar() {
-    const [value, setValue] = useState("");
-
-    return {
-        value,
-        setValue,
-        SearchBar
-    };
-}
-
-export default useSearchBar;
+export default SearchBar;
