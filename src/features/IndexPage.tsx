@@ -1,7 +1,6 @@
 import React from 'react';
 import { useAppSelector } from '../app/hooks';
 import { selectCategoryCount, selectCategoryStatus } from './categories/categoriesSlice';
-import { Link, useNavigate } from 'react-router-dom';
 import { StandardSpin } from './common/Spinners';
 import { Loading } from '../Constants';
 

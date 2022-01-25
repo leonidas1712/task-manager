@@ -20,7 +20,7 @@ import { Loading } from "../../Constants";
     // (or just the clicked category's tasks?)
 
 // Display page for a category. If category does not exist, show corresponding message.
-function CategoryPage(props:{}) {
+function CategoryPage() {
     const params = useParams(); 
     const id = Number(params.categoryId); // to check if the category exists
     const status = useAppSelector(selectCategoryStatus); // handle Loading status: spinner, error
