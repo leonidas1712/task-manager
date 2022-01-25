@@ -1,6 +1,7 @@
 import { Category, Task } from "../Types";
 import axios from 'axios';
 
+// APIService functions to interface with API without knowing url, HTTP req details etc.
 // object for use in POST request to add task
 export type TaskPostObject = {
     name: string;
